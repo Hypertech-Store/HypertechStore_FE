@@ -49,6 +49,7 @@
     }
 }
 
+
 .row {
     margin-right: calc(var(--bs-gutter-x) * -.6);
     margin-left: calc(var(--bs-gutter-x) * -.6);
@@ -89,6 +90,7 @@
 html,
 body {
     height: 100%;
+
 }
 
 body {
@@ -7555,6 +7557,14 @@ a.default-btn {
 }
 
 /*-------- 4. Support style  -------*/
+.suppoer-area .pattern {
+    max-width: 1520px;
+}
+
+.support-wrap-3 {
+    margin-top: -170px;
+}
+
 .support-wrap {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8492,14 +8502,15 @@ a.default-btn {
     margin: 3px 0 3px;
 }
 
-.product-wrap .product-content .product-rating i {
-    font-size: 17px;
-    color: #5f5d5d;
+.product-wrap .product-content .product-rating .star-filled {
+    font-size: 20px;
+    color: #ffa900;
     margin: 0 3px;
 }
 
-.product-wrap .product-content .product-rating i.yellow {
-    color: #ffa900;
+.product-wrap .product-content .product-rating .star-empty {
+    font-size: 20px;
+    color: #5f5d5d;
 }
 
 .product-wrap .product-content .product-price span {
