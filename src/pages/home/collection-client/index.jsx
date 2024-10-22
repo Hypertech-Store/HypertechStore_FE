@@ -1,8 +1,8 @@
 import Slider from "react-slick";
-import product1 from "../../../../assets/img/product/hm20-pro-1.png";
-import product2 from "../../../../assets/img/product/hm20-pro-2.png";
-import product3 from "../../../../assets/img/product/hm20-pro-3.png";
-import product4 from "../../../../assets/img/product/hm20-pro-4.png";
+import product1 from "../../../assets/img/product/hm20-pro-1.png";
+import product2 from "../../../assets/img/product/hm20-pro-2.png";
+import product3 from "../../../assets/img/product/hm20-pro-3.png";
+import product4 from "../../../assets/img/product/hm20-pro-4.png";
 
 // Cấu hình cho slider
 const sliderSettings = {

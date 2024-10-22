@@ -1,7 +1,7 @@
 
-import blogImage1 from '../../../../assets/img/blog/blog-10.jpg';
-import blogImage2 from '../../../../assets/img/blog/blog-11.jpg';
-import blogImage3 from '../../../../assets/img/blog/blog-12.jpg';
+import blogImage1 from '../../../assets/img/blog/blog-10.jpg';
+import blogImage2 from '../../../assets/img/blog/blog-11.jpg';
+import blogImage3 from '../../../assets/img/blog/blog-12.jpg';
 
 
 const BlogArea = () => {

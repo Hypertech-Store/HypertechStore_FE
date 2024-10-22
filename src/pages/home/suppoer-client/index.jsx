@@ -1,10 +1,10 @@
-import supportIcon1 from "../../../../assets/img/icon-img/support-5.png";
-import supportIcon2 from "../../../../assets/img/icon-img/support-6.png";
-import supportIcon3 from "../../../../assets/img/icon-img/support-7.png";
-import supportContent1 from "../../../../assets/img/icon-img/support-8.png";
-import supportContent2 from "../../../../assets/img/icon-img/support-9.png";
-import supportContent3 from "../../../../assets/img/icon-img/support-10.png";
-import backgroundImage from "../../../../assets/img/bg/pattern-1.png";
+import supportIcon1 from "../../../assets/img/icon-img/support-5.png";
+import supportIcon2 from "../../../assets/img/icon-img/support-6.png";
+import supportIcon3 from "../../../assets/img/icon-img/support-7.png";
+import supportContent1 from "../../../assets/img/icon-img/support-8.png";
+import supportContent2 from "../../../assets/img/icon-img/support-9.png";
+import supportContent3 from "../../../assets/img/icon-img/support-10.png";
+import backgroundImage from "../../../assets/img/bg/pattern-1.png";
 
 const SupportArea = () => {
     return (

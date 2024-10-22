@@ -1,7 +1,7 @@
 import { FaLongArrowAltRight } from "react-icons/fa";
-import banner1 from '../../../../assets/img/banner/banner-42.png';
-import banner2 from '../../../../assets/img/banner/banner-43.png';
-import banner3 from '../../../../assets/img/banner/banner-44.png';
+import banner1 from '../../../assets/img/banner/banner-42.png';
+import banner2 from '../../../assets/img/banner/banner-43.png';
+import banner3 from '../../../assets/img/banner/banner-44.png';
 
 const BannerArea = () => {
     return (

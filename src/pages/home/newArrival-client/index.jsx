@@ -1,14 +1,14 @@
 import { IoMdStarOutline } from "react-icons/io";
 import { IoMdStar } from "react-icons/io";
 
-import product1 from '../../../../assets/img/product/hm20-pro-12.jpg';
-import product2 from '../../../../assets/img/product/hm20-pro-11.jpg';
-import product3 from '../../../../assets/img/product/hm20-pro-10.jpg';
-import product4 from '../../../../assets/img/product/hm20-pro-9.jpg';
-import product5 from '../../../../assets/img/product/hm20-pro-8.jpg';
-import product6 from '../../../../assets/img/product/hm20-pro-7.jpg';
-import product7 from '../../../../assets/img/product/hm20-pro-6.jpg';
-import product8 from '../../../../assets/img/product/hm20-pro-5.jpg';
+import product1 from '../../../assets/img/product/hm20-pro-12.jpg';
+import product2 from '../../../assets/img/product/hm20-pro-11.jpg';
+import product3 from '../../../assets/img/product/hm20-pro-10.jpg';
+import product4 from '../../../assets/img/product/hm20-pro-9.jpg';
+import product5 from '../../../assets/img/product/hm20-pro-8.jpg';
+import product6 from '../../../assets/img/product/hm20-pro-7.jpg';
+import product7 from '../../../assets/img/product/hm20-pro-6.jpg';
+import product8 from '../../../assets/img/product/hm20-pro-5.jpg';
 
 
 const NewArrival = () => {

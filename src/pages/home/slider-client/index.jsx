@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Slider from "react-slick";
-import slider1 from '../../../../assets/img/slider/slider-20-1.jpg';
-import slider2 from '../../../../assets/img/slider/slider-28-2.jpg';
+import slider1 from '../../../assets/img/slider/slider-20-1.jpg';
+import slider2 from '../../../assets/img/slider/slider-28-2.jpg';
 
 const SliderClient = () => {
     const sliderRef = useRef();

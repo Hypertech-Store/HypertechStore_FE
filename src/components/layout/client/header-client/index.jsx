@@ -27,7 +27,7 @@ const HeaderClient = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               <div className="logo">
-                <a href="index.html">
+                <a href="">
                   <img alt src={logo} />
                 </a>
               </div>
@@ -36,44 +36,8 @@ const HeaderClient = () => {
               <div className="main-menu">
                 <nav>
                   <ul>
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li><a href="shop.html"> Shop <FaAngleDown /> </a>
-                      <ul className="mega-menu">
-                        <li>
-                          <ul>
-                            <li className="mega-menu-title"><a href="#">shop layout</a></li>
-                            <li><a href="shop.html">standard style</a></li>
-                            <li><a href="shop-filter.html">Grid filter style</a></li>
-                            <li><a href="shop-grid-2-col.html">Grid 2 column</a></li>
-                            <li><a href="shop-no-sidebar.html">Grid No sidebar</a></li>
-                            <li><a href="shop-grid-fw.html">Grid full wide </a></li>
-                            <li><a href="shop-right-sidebar.html">Grid right sidebar</a></li>
-                            <li><a href="shop-list.html">list 1 column box </a></li>
-                            <li><a href="shop-list-fw.html">list 1 column full wide </a></li>
-                            <li><a href="shop-list-fw-2col.html">list 2 column full wide</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <ul>
-                            <li className="mega-menu-title"><a href="#">product details</a></li>
-                            <li><a href="product-details.html">tab style 1</a></li>
-                            <li><a href="product-details-2.html">tab style 2</a></li>
-                            <li><a href="product-details-3.html">tab style 3</a></li>
-                            <li><a href="product-details-4.html">sticky style</a></li>
-                            <li><a href="product-details-5.html">gallery style </a></li>
-                            <li><a href="product-details-slider-box.html">Slider style</a></li>
-                            <li><a href="product-details-affiliate.html">affiliate style</a></li>
-                            <li><a href="product-details-6.html">fixed image style </a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <ul>
-                            <li className="mega-menu-img"><a href="shop.html"><img src="assets/img/banner/banner-12.png" alt /></a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="shop"> Shop</a></li>
                     <li><a href="shop.html">Collection</a></li>
                     <li><a href="#"> Pages <FaAngleDown /></a>
                       <ul className="submenu">
