@@ -8,7 +8,7 @@ const Breadcrumb = () => {
                             <li>
                                 <a href="/">Trang chủ</a>
                             </li>
-                            <li className="active">Cửa hàng </li>
+                            <li className="active">Chi tiết sản phẩm</li>
                         </ul>
                     </div>
                 </div>

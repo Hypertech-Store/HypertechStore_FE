@@ -1,4 +1,3 @@
-import { FaAngleDown } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { PiUserCircleLight } from "react-icons/pi";
 import { CiHeart } from "react-icons/ci";
@@ -27,7 +26,7 @@ const HeaderClient = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               <div className="logo">
-                <a href="">
+                <a href="/">
                   <img alt src={logo} />
                 </a>
               </div>
@@ -36,33 +35,12 @@ const HeaderClient = () => {
               <div className="main-menu">
                 <nav>
                   <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="shop"> Shop</a></li>
-                    <li><a href="shop.html">Collection</a></li>
-                    <li><a href="#"> Pages <FaAngleDown /></a>
-                      <ul className="submenu">
-                        <li><a href="about.html">about us</a></li>
-                        <li><a href="cart-page.html">cart page</a></li>
-                        <li><a href="checkout.html">checkout </a></li>
-                        <li><a href="wishlist.html">wishlist </a></li>
-                        <li><a href="my-account.html">my account</a></li>
-                        <li><a href="login-register.html">login / register </a></li>
-                        <li><a href="contact.html">contact us </a></li>
-                        <li><a href="404.html">404 page </a></li>
-                      </ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="cua-hang">Cửa hàng</a></li>
+                    <li><a href="bai-viet">Bài viết</a>
                     </li>
-                    <li><a href="#">Blog <FaAngleDown /></a>
-                      <ul className="submenu">
-                        <li><a href="blog.html">blog standard</a></li>
-                        <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
-                        <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
-                        <li><a href="blog-details.html">blog details 1</a></li>
-                        <li><a href="blog-details-2.html">blog details 2</a></li>
-                        <li><a href="blog-details-3.html">blog details 3</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="about.html"> About </a></li>
-                    <li><a href="contact.html"> Contact</a></li>
+                    <li><a href="ve-chung-toi">Về chúng tôi </a></li>
+                    <li><a href="lien-he">Liên hệ</a></li>
                   </ul>
                 </nav>
               </div>

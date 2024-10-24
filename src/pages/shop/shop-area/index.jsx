@@ -1,5 +1,8 @@
 import { FaTable } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa";
+import { BsCart } from "react-icons/bs";
+import { CiHeart } from "react-icons/ci";
+import { IoEyeOutline } from "react-icons/io5";
 import { LiaAngleDoubleLeftSolid, LiaAngleDoubleRightSolid } from "react-icons/lia";
 import product1 from "../../../assets/img/product/pro-1.jpg";
 import product2 from "../../../assets/img/product/pro-1-1.jpg";
@@ -52,25 +55,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product1} alt />
                                                             <img className="hover-img" src={product2} alt />
                                                         </a>
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -88,25 +92,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product3} alt />
                                                             <img className="hover-img" src={product4} alt />
                                                         </a>
                                                         <span className="purple">New</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -123,25 +128,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product5} alt />
                                                             <img className="hover-img" src={product6} alt />
                                                         </a>
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -159,25 +165,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product7} alt />
                                                             <img className="hover-img" src={product8} alt />
                                                         </a>
                                                         <span className="purple">New</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -194,25 +201,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product9} alt />
                                                             <img className="hover-img" src={product10} alt />
                                                         </a>
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -230,25 +238,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product11} alt />
                                                             <img className="hover-img" src={product12} alt />
                                                         </a>
                                                         <span className="purple">New</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -265,7 +274,7 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product13} alt />
 
                                                             <img className="hover-img" src={product8} alt />
@@ -273,18 +282,19 @@ const Shop = () => {
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -302,25 +312,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product14} alt />
                                                             <img className="hover-img" src={product11} alt />
                                                         </a>
                                                         <span className="purple">New</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -337,25 +348,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product1} alt />
                                                             <img className="hover-img" src={product2} alt />
                                                         </a>
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -373,25 +385,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product1} alt />
                                                             <img className="hover-img" src={product2} alt />
                                                         </a>
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -409,25 +422,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product3} alt />
                                                             <img className="hover-img" src={product4} alt />
                                                         </a>
                                                         <span className="purple">New</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -444,25 +458,26 @@ const Shop = () => {
                                             <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                 <div className="product-wrap mb-25 scroll-zoom">
                                                     <div className="product-img">
-                                                        <a href="product-details.html">
+                                                        <a href="/chi-tiet-san-pham">
                                                             <img className="default-img" src={product5} alt />
                                                             <img className="hover-img" src={product6} alt />
                                                         </a>
                                                         <span className="pink">-10%</span>
                                                         <div className="product-action">
                                                             <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><i className="pe-7s-like" /></a>
+                                                                <a title="Wishlist" href="#"><CiHeart /></a>
                                                             </div>
                                                             <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                                <a title="Add To Cart" href="#">
+                                                                    <BsCart className="iconCart" /> Add to cart</a>
                                                             </div>
                                                             <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="product-content text-center">
-                                                        <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
                                                         <div className="product-rating">
                                                             <i className="fa fa-star-o yellow" />
                                                             <i className="fa fa-star-o yellow" />
@@ -485,7 +500,7 @@ const Shop = () => {
                                                 <div className="col-xl-4 col-lg-5 col-md-5 col-sm-6">
                                                     <div className="product-wrap">
                                                         <div className="product-img">
-                                                            <a href="product-details.html">
+                                                            <a href="/chi-tiet-san-pham">
                                                                 <img className="default-img" src={product1} alt />
                                                                 <img className="hover-img" src={product2} alt />
                                                             </a>
@@ -495,7 +510,7 @@ const Shop = () => {
                                                 </div>
                                                 <div className="col-xl-8 col-lg-7 col-md-7 col-sm-6">
                                                     <div className="shop-list-content">
-                                                        <h3><a href="product-details.html">Products Name Here</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">Products Name Here</a></h3>
                                                         <div className="product-list-price">
                                                             <span>$ 60.00</span>
                                                             <span className="old">$ 90.00</span>
@@ -523,7 +538,7 @@ const Shop = () => {
                                                 <div className="col-xl-4 col-lg-5 col-md-5 col-sm-6">
                                                     <div className="product-wrap">
                                                         <div className="product-img">
-                                                            <a href="product-details.html">
+                                                            <a href="/chi-tiet-san-pham">
                                                                 <img className="default-img" src={product3} alt />
                                                                 <img className="hover-img" src={product4} alt />
                                                             </a>
@@ -533,7 +548,7 @@ const Shop = () => {
                                                 </div>
                                                 <div className="col-xl-8 col-lg-7 col-md-7 col-sm-6">
                                                     <div className="shop-list-content">
-                                                        <h3><a href="product-details.html">Products Name Here</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">Products Name Here</a></h3>
                                                         <div className="product-list-price">
                                                             <span>$ 60.00</span>
                                                         </div>
@@ -560,7 +575,7 @@ const Shop = () => {
                                                 <div className="col-xl-4 col-lg-5 col-md-5 col-sm-6">
                                                     <div className="product-wrap">
                                                         <div className="product-img">
-                                                            <a href="product-details.html">
+                                                            <a href="/chi-tiet-san-pham">
                                                                 <img className="default-img" src={product5} alt />
                                                                 <img className="hover-img" src={product6} alt />
                                                             </a>
@@ -570,7 +585,7 @@ const Shop = () => {
                                                 </div>
                                                 <div className="col-xl-8 col-lg-7 col-md-7 col-sm-6">
                                                     <div className="shop-list-content">
-                                                        <h3><a href="product-details.html">Products Name Here</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">Products Name Here</a></h3>
                                                         <div className="product-list-price">
                                                             <span>$ 30.00</span>
                                                             <span className="old">$ 50.00</span>
@@ -598,7 +613,7 @@ const Shop = () => {
                                                 <div className="col-xl-4 col-lg-5 col-md-5 col-sm-6">
                                                     <div className="product-wrap">
                                                         <div className="product-img">
-                                                            <a href="product-details.html">
+                                                            <a href="/chi-tiet-san-pham">
                                                                 <img className="default-img" src={product7} alt />
                                                                 <img className="hover-img" src={product8} alt />
                                                             </a>
@@ -608,7 +623,7 @@ const Shop = () => {
                                                 </div>
                                                 <div className="col-xl-8 col-lg-7 col-md-7 col-sm-6">
                                                     <div className="shop-list-content">
-                                                        <h3><a href="product-details.html">Products Name Here</a></h3>
+                                                        <h3><a href="/chi-tiet-san-pham">Products Name Here</a></h3>
                                                         <div className="product-list-price">
                                                             <span>$ 70.00</span>
                                                         </div>
