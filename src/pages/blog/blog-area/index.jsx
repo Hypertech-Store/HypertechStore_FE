@@ -24,7 +24,7 @@ const Blog = () => {
                                     <div className="col-lg-6 col-md-6 col-sm-12">
                                         <div className="blog-wrap-2 mb-30">
                                             <div className="blog-img-2">
-                                                <a href="blog-details.html"><img src={blog1} alt /></a>
+                                                <a href="/chi-tiet-bai-viet"><img src={blog1} alt /></a>
                                             </div>
                                             <div className="blog-content-2">
                                                 <div className="blog-meta-2">
@@ -33,11 +33,11 @@ const Blog = () => {
                                                         <li><a href="#">4 <FaRegComments /></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="blog-details.html">New shop collection our shop</a></h4>
+                                                <h4><a href="/chi-tiet-bai-viet">New shop collection our shop</a></h4>
                                                 <p>Aenean sollicitudin, lorem quis on endum uctor nisi elitod the cona sequat ipsum, necas sagittis sem natoque nibh id penatibus</p>
                                                 <div className="blog-share-comment">
                                                     <div className="blog-btn-2">
-                                                        <a href="blog-details.html">read more</a>
+                                                        <a href="/chi-tiet-bai-viet">read more</a>
                                                     </div>
                                                     <div className="blog-share">
                                                         <span>share :</span>
@@ -56,7 +56,7 @@ const Blog = () => {
                                     <div className="col-lg-6 col-md-6 col-sm-12">
                                         <div className="blog-wrap-2 mb-30">
                                             <div className="blog-img-2">
-                                                <a href="blog-details.html"><img src={blog2} alt /></a>
+                                                <a href="/chi-tiet-bai-viet"><img src={blog2} alt /></a>
                                                 <div className="video-icon">
                                                     <a className="video-popup" href="https://www.youtube.com/watch?v=6Tc7LBx7XzE">
                                                         <span className="play-icon">
@@ -72,11 +72,11 @@ const Blog = () => {
                                                         <li><a href="#">4 <FaRegComments /></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="blog-details.html">New shop collection our shop</a></h4>
+                                                <h4><a href="/chi-tiet-bai-viet">New shop collection our shop</a></h4>
                                                 <p>Aenean sollicitudin, lorem quis on endum uctor nisi elitod the cona sequat ipsum, necas sagittis sem natoque nibh id penatibus</p>
                                                 <div className="blog-share-comment">
                                                     <div className="blog-btn-2">
-                                                        <a href="blog-details.html">read more</a>
+                                                        <a href="/chi-tiet-bai-viet">read more</a>
                                                     </div>
                                                     <div className="blog-share">
                                                         <span>share :</span>
@@ -95,7 +95,7 @@ const Blog = () => {
                                     <div className="col-lg-6 col-md-6 col-sm-12">
                                         <div className="blog-wrap-2 mb-30">
                                             <div className="blog-img-2">
-                                                <a href="blog-details.html"><img src={blog3} alt /></a>
+                                                <a href="/chi-tiet-bai-viet"><img src={blog3} alt /></a>
                                             </div>
                                             <div className="blog-content-2">
                                                 <div className="blog-meta-2">
@@ -104,11 +104,11 @@ const Blog = () => {
                                                         <li><a href="#">4 <FaRegComments /></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="blog-details.html">New shop collection our shop</a></h4>
+                                                <h4><a href="/chi-tiet-bai-viet">New shop collection our shop</a></h4>
                                                 <p>Aenean sollicitudin, lorem quis on endum uctor nisi elitod the cona sequat ipsum, necas sagittis sem natoque nibh id penatibus</p>
                                                 <div className="blog-share-comment">
                                                     <div className="blog-btn-2">
-                                                        <a href="blog-details.html">read more</a>
+                                                        <a href="/chi-tiet-bai-viet">read more</a>
                                                     </div>
                                                     <div className="blog-share">
                                                         <span>share :</span>
@@ -127,7 +127,7 @@ const Blog = () => {
                                     <div className="col-lg-6 col-md-6 col-sm-12">
                                         <div className="blog-wrap-2 mb-30">
                                             <div className="blog-img-2">
-                                                <a href="blog-details.html"><img src={blog4} alt /></a>
+                                                <a href="/chi-tiet-bai-viet"><img src={blog4} alt /></a>
                                             </div>
                                             <div className="blog-content-2">
                                                 <div className="blog-meta-2">
@@ -136,11 +136,11 @@ const Blog = () => {
                                                         <li><a href="#">4 <FaRegComments /></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="blog-details.html">New shop collection our shop</a></h4>
+                                                <h4><a href="/chi-tiet-bai-viet">New shop collection our shop</a></h4>
                                                 <p>Aenean sollicitudin, lorem quis on endum uctor nisi elitod the cona sequat ipsum, necas sagittis sem natoque nibh id penatibus</p>
                                                 <div className="blog-share-comment">
                                                     <div className="blog-btn-2">
-                                                        <a href="blog-details.html">read more</a>
+                                                        <a href="/chi-tiet-bai-viet">read more</a>
                                                     </div>
                                                     <div className="blog-share">
                                                         <span>share :</span>

@@ -4,10 +4,13 @@ import { CiHeart } from "react-icons/ci";
 import { PiShoppingBagThin } from "react-icons/pi";
 
 import logo from "../../../../assets/img/logo/logo.png"
+import product1 from "../../../../assets/img/cart/cart-1.png"
+import product2 from "../../../../assets/img/cart/cart-2.png"
 import { useState } from "react";
 const HeaderClient = () => {
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [isSearchContentOpen, setIsSearchContentOpen] = useState(false);
+  const [isCartVisible, setIsCartVisible] = useState(false);
 
   const toggleAccountDropdown = (e) => {
     e.preventDefault();
@@ -18,6 +21,12 @@ const HeaderClient = () => {
     e.preventDefault();
     setIsSearchContentOpen(!isSearchContentOpen);
   };
+
+  const toggleCartVisibility = (e) => {
+    e.preventDefault();
+    setIsCartVisible(!isCartVisible);
+  };
+
 
   return (
     <>
@@ -66,59 +75,61 @@ const HeaderClient = () => {
                     visibility: isAccountDropdownOpen ? "visible" : "hidden"
                   }}>
                     <ul>
-                      <li><a href="login-register.html">Login</a></li>
-                      <li><a href="login-register.html">Register</a></li>
-                      <li><a href="wishlist.html">Wishlist</a></li>
-                      <li><a href="my-account.html">my account</a></li>
+                      <li><a href="/dang-nhap">Đăng nhập</a></li>
+                      <li><a href="/dang-ky">Đăng ký</a></li>
+                      <li><a href="/tai-khoan">Tài khoản</a></li>
                     </ul>
                   </div>
                 </div>
                 <div className="same-style header-wishlist">
-                  <a href="wishlist.html"><CiHeart /></a>
+                  <a href="/san-pham-yeu-thich"><CiHeart /></a>
                 </div>
                 <div className="same-style cart-wrap">
-                  <button className="icon-cart">
+                  <button className="icon-cart" onClick={toggleCartVisibility}>
                     <PiShoppingBagThin />
                     <span className="count-style">02</span>
                   </button>
-                  <div className="shopping-cart-content">
-                    <ul>
-                      <li className="single-shopping-cart">
-                        <div className="shopping-cart-img">
-                          <a href="#"><img alt="" src="assets/img/cart/cart-1.png" /></a>
-                        </div>
-                        <div className="shopping-cart-title">
-                          <h4><a href="#">T- Shart & Jeans</a></h4>
-                          <h6>Qty: 02</h6>
-                          <span>$260.00</span>
-                        </div>
-                        <div className="shopping-cart-delete">
-                          <a href="#"><i className="fa fa-times-circle"></i></a>
-                        </div>
-                      </li>
-                      <li className="single-shopping-cart">
-                        <div className="shopping-cart-img">
-                          <a href="#"><img alt="" src="assets/img/cart/cart-2.png" /></a>
-                        </div>
-                        <div className="shopping-cart-title">
-                          <h4><a href="#">T- Shart & Jeans</a></h4>
-                          <h6>Qty: 02</h6>
-                          <span>$260.00</span>
-                        </div>
-                        <div className="shopping-cart-delete">
-                          <a href="#"><i className="fa fa-times-circle"></i></a>
-                        </div>
-                      </li>
-                    </ul>
-                    <div className="shopping-cart-total">
-                      <h4>Shipping: <span>$20.00</span></h4>
-                      <h4>Total: <span className="shop-total">$260.00</span></h4>
+                  {isCartVisible && (
+                    <div className="shopping-cart-content cart-visible">
+                      <ul>
+                        <li className="single-shopping-cart">
+                          <div className="shopping-cart-img">
+                            <a href="#"><img alt="" src={product1} /></a>
+                          </div>
+                          <div className="shopping-cart-title">
+                            <h4><a href="#">T- Shart & Jeans</a></h4>
+                            <h6>Qty: 02</h6>
+                            <span>$260.00</span>
+                          </div>
+                          <div className="shopping-cart-delete">
+                            <a href="#"><i className="fa fa-times-circle"></i></a>
+                          </div>
+                        </li>
+                        <li className="single-shopping-cart">
+                          <div className="shopping-cart-img">
+                            <a href="#"><img alt="" src={product2} /></a>
+                          </div>
+                          <div className="shopping-cart-title">
+                            <h4><a href="#">T- Shart & Jeans</a></h4>
+                            <h6>Qty: 02</h6>
+                            <span>$260.00</span>
+                          </div>
+                          <div className="shopping-cart-delete">
+                            <a href="#"><i className="fa fa-times-circle"></i></a>
+                          </div>
+                        </li>
+                      </ul>
+                      <div className="shopping-cart-total">
+                        <h4>Shipping: <span>$20.00</span></h4>
+                        <h4>Total: <span className="shop-total">$260.00</span></h4>
+                      </div>
+                      <div className="shopping-cart-btn btn-hover text-center">
+                        <a className="default-btn" href="/gio-hang">view cart</a>
+                        <a className="default-btn" href="/thanh-toan">checkout</a>
+                      </div>
                     </div>
-                    <div className="shopping-cart-btn btn-hover text-center">
-                      <a className="default-btn" href="cart-page.html">view cart</a>
-                      <a className="default-btn" href="checkout.html">checkout</a>
-                    </div>
-                  </div>
+                  )}
+
                 </div>
               </div>
             </div>

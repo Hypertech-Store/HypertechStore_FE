@@ -16436,7 +16436,8 @@ h3.cart-page-title {
 }
 
 .cart-table-content table tbody>tr td.product-quantity .cart-plus-minus .dec.qtybutton {
-    border-right: 1px solid #e5e5e5;
+    border: 1px solid #e5e5e5;
+    background: transparent none repeat scroll 0 0;
     height: 40px;
     left: 0;
     padding-top: 8px;
@@ -16444,7 +16445,8 @@ h3.cart-page-title {
 }
 
 .cart-table-content table tbody>tr td.product-quantity .cart-plus-minus .inc.qtybutton {
-    border-left: 1px solid #e5e5e5;
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #e5e5e5;
     height: 40px;
     padding-top: 9px;
     right: 0;
@@ -17156,7 +17158,7 @@ h3.cart-page-title {
 .your-order-area .payment-accordion .panel-body p {
     padding: 0 0 0 10px;
     font-size: 14px;
-    color: #333;
+    color: #ccc;
 }
 
 .your-order-area .Place-order>a {
@@ -17802,11 +17804,11 @@ h3.cart-page-title {
     margin-bottom: 40px;
 }
 
-.login-register-wrapper .login-register-tab-list a {
+.login-register-wrapper .login-register-tab-list h3 {
     position: relative;
 }
 
-.login-register-wrapper .login-register-tab-list a::before {
+.login-register-wrapper .login-register-tab-list h3::before {
     background-color: #454545;
     bottom: 5px;
     content: "";
@@ -17819,7 +17821,7 @@ h3.cart-page-title {
     width: 1px;
 }
 
-.login-register-wrapper .login-register-tab-list a h4 {
+.login-register-wrapper .login-register-tab-list h3 {
     font-size: 25px;
     font-weight: 700;
     margin: 0 20px;
@@ -17828,11 +17830,11 @@ h3.cart-page-title {
     transition: all 0.3s ease 0s;
 }
 
-.login-register-wrapper .login-register-tab-list a:last-child::before {
+.login-register-wrapper .login-register-tab-list h3:last-child::before {
     display: none;
 }
 
-.login-register-wrapper .login-register-tab-list a.active h4 {
+.login-register-wrapper .login-register-tab-list h3.active {
     color: #a749ff;
 }
 
@@ -17882,6 +17884,7 @@ h3.cart-page-title {
     color: #242424;
     font-size: 15px;
     font-weight: 400;
+    margin-left: 5px;
 }
 
 @media only screen and (max-width: 767px) {

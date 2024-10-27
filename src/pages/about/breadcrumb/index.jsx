@@ -6,7 +6,7 @@ const Breadcrumb = () => {
                     <div className="breadcrumb-content text-center">
                         <ul>
                             <li>
-                                <a href="">Trang chủ</a>
+                                <a href="/">Trang chủ</a>
                             </li>
                             <li className="active">Về chúng tôi </li>
                         </ul>
