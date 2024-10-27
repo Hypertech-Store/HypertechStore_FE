@@ -1,6 +1,8 @@
 import { IoMdStarOutline } from "react-icons/io";
 import { IoMdStar } from "react-icons/io";
-
+import { BsCart } from "react-icons/bs";
+import { CiHeart } from "react-icons/ci";
+import { IoEyeOutline } from "react-icons/io5";
 import product1 from '../../../assets/img/product/hm20-pro-12.jpg';
 import product2 from '../../../assets/img/product/hm20-pro-11.jpg';
 import product3 from '../../../assets/img/product/hm20-pro-10.jpg';
@@ -42,13 +44,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -78,13 +80,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -113,13 +115,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -149,13 +151,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -184,13 +186,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -220,13 +222,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -255,13 +257,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -291,13 +293,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -330,13 +332,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -366,13 +368,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -401,13 +403,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -437,13 +439,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -472,13 +474,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -508,13 +510,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -543,13 +545,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -579,13 +581,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -618,13 +620,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -654,13 +656,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -689,13 +691,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -725,13 +727,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -785,13 +787,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -820,13 +822,13 @@ const NewArrival = () => {
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -856,13 +858,13 @@ const NewArrival = () => {
                                         <span className="purple">New</span>
                                         <div className="product-action">
                                             <div className="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="wishlist.html"><i className="pe-7s-like" /></a>
+                                                <a title="Wishlist" href="wishlist.html"><CiHeart /></a>
                                             </div>
                                             <div className="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i className="pe-7s-cart" /> Add to cart</a>
+                                                <a title="Add To Cart" href="#"><BsCart /> Add to cart</a>
                                             </div>
                                             <div className="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="pe-7s-look" /></a>
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                             </div>
                                         </div>
                                     </div>
