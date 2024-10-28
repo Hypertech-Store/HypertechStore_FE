@@ -71,7 +71,7 @@ const SliderClient = () => {
                                             All Electronic Products & Instrument For This Summer.
                                         </p>
                                         <div className="slider-btn slider-btn-round btn-hover">
-                                            <a className="animated" href="shop.html">
+                                            <a className="animated" href="/cua-hang">
                                                 SHOP NOW
                                             </a>
                                         </div>
@@ -108,7 +108,7 @@ const SliderClient = () => {
                                             All Electronic Products & Instrument For This Summer.
                                         </p>
                                         <div className="slider-btn slider-btn-round btn-hover">
-                                            <a className="animated" href="shop.html">
+                                            <a className="animated" href="/cua-hang">
                                                 SHOP NOW
                                             </a>
                                         </div>

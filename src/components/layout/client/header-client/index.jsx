@@ -3,7 +3,7 @@ import { PiUserCircleLight } from "react-icons/pi";
 import { CiHeart } from "react-icons/ci";
 import { PiShoppingBagThin } from "react-icons/pi";
 
-import logo from "../../../../assets/img/logo/logo.png"
+import logo from "../../../../assets/img/logo/logo-1.png"
 import product1 from "../../../../assets/img/cart/cart-1.png"
 import product2 from "../../../../assets/img/cart/cart-2.png"
 import { useState } from "react";

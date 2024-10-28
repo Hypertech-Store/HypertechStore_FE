@@ -52,14 +52,14 @@ const CollectionsArea = () => {
                         ].map((collection, index) => (
                             <div className="collection-product" key={index}>
                                 <div className="collection-img">
-                                    <a href="product-details.html">
+                                    <a href="/chi-tiet-san-pham">
                                         <img src={collection.img} alt={collection.title} />
                                     </a>
                                 </div>
                                 <div className="collection-content text-center">
                                     <span>{collection.products}</span>
                                     <h4>
-                                        <a href="product-details.html">{collection.title}</a>
+                                        <a href="/chi-tiet-san-pham">{collection.title}</a>
                                     </h4>
                                     <div className="collection-btn btn-hover btn-only-round">
                                         <a href="#">SHOP NOW</a>

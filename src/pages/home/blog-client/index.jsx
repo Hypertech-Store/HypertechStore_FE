@@ -16,14 +16,14 @@ const BlogArea = () => {
                     <div className="col-lg-4 col-md-6 col-sm-6">
                         <div className="blog-wrap mb-30 scroll-zoom">
                             <div className="blog-img mb-10">
-                                <a href="blog-details.html">
+                                <a href="/chi-tiet-bai-viet">
                                     <img src={blogImage1} alt="Blog Post 1" />
                                 </a>
                                 <span className="red">Lifestyle</span>
                             </div>
                             <div className="blog-content-3 text-center">
                                 <h3>
-                                    <a href="blog-details.html">Lorem ipsum dolor sit amet cons adipisic elit.</a>
+                                    <a href="/chi-tiet-bai-viet">Lorem ipsum dolor sit amet cons adipisic elit.</a>
                                 </h3>
                                 <span>By: <a href="#">Shop Admin</a></span>
                             </div>
@@ -32,14 +32,14 @@ const BlogArea = () => {
                     <div className="col-lg-4 col-md-6 col-sm-6">
                         <div className="blog-wrap mb-30 scroll-zoom">
                             <div className="blog-img mb-10">
-                                <a href="blog-details.html">
+                                <a href="/chi-tiet-bai-viet">
                                     <img src={blogImage2} alt="Blog Post 2" />
                                 </a>
                                 <span className="red">Lifestyle</span>
                             </div>
                             <div className="blog-content-3 text-center">
                                 <h3>
-                                    <a href="blog-details.html">Lorem ipsum dolor sit amet cons adipisic elit.</a>
+                                    <a href="/chi-tiet-bai-viet">Lorem ipsum dolor sit amet cons adipisic elit.</a>
                                 </h3>
                                 <span>By: <a href="#">Shop Admin</a></span>
                             </div>
@@ -48,14 +48,14 @@ const BlogArea = () => {
                     <div className="col-lg-4 col-md-6 col-sm-6">
                         <div className="blog-wrap mb-30 scroll-zoom">
                             <div className="blog-img mb-10">
-                                <a href="blog-details.html">
+                                <a href="/chi-tiet-bai-viet">
                                     <img src={blogImage3} alt="Blog Post 3" />
                                 </a>
                                 <span className="red">Lifestyle</span>
                             </div>
                             <div className="blog-content-3 text-center">
                                 <h3>
-                                    <a href="blog-details.html">Lorem ipsum dolor sit amet cons adipisic elit.</a>
+                                    <a href="/chi-tiet-bai-viet">Lorem ipsum dolor sit amet cons adipisic elit.</a>
                                 </h3>
                                 <span>By: <a href="#">Shop Admin</a></span>
                             </div>

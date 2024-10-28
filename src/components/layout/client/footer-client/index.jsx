@@ -1,4 +1,4 @@
-import logoImage from '../../../../assets/img/logo/logo.png'; // Import hình ảnh logo
+import logoImage from '../../../../assets/img/logo/logo-1.png'; // Import hình ảnh logo
 
 const Footer = () => {
   return (
