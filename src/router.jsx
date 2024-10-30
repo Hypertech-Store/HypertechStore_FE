@@ -1,39 +1,50 @@
 import { Route, Routes } from "react-router-dom"
 import LayoutClient from "./components/layout/client/layout-client"
-import Home from "./pages/home"
-import Shop from "./pages/shop"
-import ShopDetails from "./pages/product"
-import Blog from "./pages/blog"
-import BlogDetails from "./pages/blog-details"
-import About from "./pages/about"
-import Contact from "./pages/contact"
-import Login from "./pages/login"
-import Register from "./pages/register"
-import ForPassword from "./pages/for-password"
-import Account from "./pages/account"
-import Wishlist from "./pages/wishlist"
-import Cart from "./pages/cart"
-import Checkout from "./pages/checkout"
+import LayoutAdmin from "./components/layout/admin/layout-admin"
+
+// Client pages
+import HomeClient from "./pages/client/home"
+import Shop from "./pages/client/shop"
+import ShopDetails from "./pages/client/product"
+import Blog from "./pages/client/blog"
+import BlogDetails from "./pages/client/blog-details"
+import About from "./pages/client/about"
+import Contact from "./pages/client/contact"
+import Login from "./pages/client/login"
+import Register from "./pages/client/register"
+import ForPassword from "./pages/client/for-password"
+import Account from "./pages/client/account"
+import Wishlist from "./pages/client/wishlist"
+import Cart from "./pages/client/cart"
+import Checkout from "./pages/client/checkout"
+
+// Admin pages
+import HomeAdmin from "./pages/admin/home"
 
 
 const Router = () => {
   return (
     <Routes>
+      {/* Client Routes */}
       <Route path="/" element={<LayoutClient />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/cua-hang" element={<Shop />} />
-        <Route path="/chi-tiet-san-pham" element={<ShopDetails />} />
-        <Route path="/bai-viet" element={<Blog />} />
-        <Route path="/chi-tiet-bai-viet" element={<BlogDetails />} />
-        <Route path="/ve-chung-toi" element={<About />} />
-        <Route path="/lien-he" element={<Contact />} />
-        <Route path="/dang-nhap" element={<Login />} />
-        <Route path="/dang-ky" element={<Register />} />
-        <Route path="/quen-mat-khau" element={<ForPassword />} />
-        <Route path="/tai-khoan" element={<Account />} />
-        <Route path="/san-pham-yeu-thich" element={<Wishlist />} />
-        <Route path="/gio-hang" element={<Cart />} />
-        <Route path="/thanh-toan" element={<Checkout />} />
+        <Route index element={<HomeClient />} />
+        <Route path="cua-hang" element={<Shop />} />
+        <Route path="chi-tiet-san-pham" element={<ShopDetails />} />
+        <Route path="bai-viet" element={<Blog />} />
+        <Route path="chi-tiet-bai-viet" element={<BlogDetails />} />
+        <Route path="gioi-thieu" element={<About />} />
+        <Route path="lien-he" element={<Contact />} />
+        <Route path="dang-nhap" element={<Login />} />
+        <Route path="dang-ky" element={<Register />} />
+        <Route path="quen-mat-khau" element={<ForPassword />} />
+        <Route path="tai-khoan" element={<Account />} />
+        <Route path="san-pham-yeu-thich" element={<Wishlist />} />
+        <Route path="gio-hang" element={<Cart />} />
+        <Route path="thanh-toan" element={<Checkout />} />
+      </Route>
+
+      <Route path="/dashboard" element={<LayoutAdmin />}>
+        <Route index element={<HomeAdmin />} />
       </Route>
     </Routes>
   )

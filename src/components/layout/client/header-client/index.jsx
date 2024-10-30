@@ -3,7 +3,7 @@ import { PiUserCircleLight } from "react-icons/pi";
 import { CiHeart } from "react-icons/ci";
 import { PiShoppingBagThin } from "react-icons/pi";
 
-import logo from "../../../../assets/img/logo/logo-1.png"
+import logo from "../../../../assets/img/logo/logo2.png"
 import product1 from "../../../../assets/img/cart/cart-1.png"
 import product2 from "../../../../assets/img/cart/cart-2.png"
 import { useState } from "react";
@@ -36,7 +36,7 @@ const HeaderClient = () => {
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               <div className="logo">
                 <a href="/">
-                  <img alt src={logo} />
+                  <img src={logo} alt="Hypertech Store Logo" style={{ width: '200px', height: '80px', marginTop: -25 }} />
                 </a>
               </div>
             </div>
@@ -48,7 +48,7 @@ const HeaderClient = () => {
                     <li><a href="cua-hang">Cửa hàng</a></li>
                     <li><a href="bai-viet">Bài viết</a>
                     </li>
-                    <li><a href="ve-chung-toi">Về chúng tôi </a></li>
+                    {/* <li><a href="ve-chung-toi">Về chúng tôi </a></li> */}
                     <li><a href="lien-he">Liên hệ</a></li>
                   </ul>
                 </nav>
@@ -75,6 +75,7 @@ const HeaderClient = () => {
                     visibility: isAccountDropdownOpen ? "visible" : "hidden"
                   }}>
                     <ul>
+                      <li><a href="/dashboard">Dashboard</a></li>
                       <li><a href="/dang-nhap">Đăng nhập</a></li>
                       <li><a href="/dang-ky">Đăng ký</a></li>
                       <li><a href="/tai-khoan">Tài khoản</a></li>
