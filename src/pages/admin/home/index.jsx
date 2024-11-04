@@ -1,12 +1,10 @@
-import logo from '../../../assets/images/logo.gif';
-import logo1 from '../../../assets/images/logo-dark.gif';
 const Home = () => {
     document.title = "Dashboard - Hypertech Store"
     return (
         <div>
             <div className="iq-top-navbar">
                 <div className="iq-navbar-custom">
-                    <div className="iq-sidebar-logo">
+                    {/* <div className="iq-sidebar-logo">
                         <div className="top-logo">
                             <a href="index.html" className="logo">
                                 <div className="iq-light-logo">
@@ -18,19 +16,9 @@ const Home = () => {
                                 <span>vito</span>
                             </a>
                         </div>
-                    </div>
-                    <nav className="navbar navbar-expand-lg navbar-light p-0">
+                    </div> */}
+                    <nav className="navbar navbar-light p-0">
                         <div className="navbar-left">
-                            <ul id="topbar-data-icon" className="d-flex p-0 topbar-menu-icon">
-                                <li className="nav-item">
-                                    <a href="index.html" className="nav-link font-weight-bold search-box-toggle"><i className="ri-home-4-line" /></a>
-                                </li>
-                                <li><a href="chat.html" className="nav-link"><i className="ri-message-line" /></a></li>
-                                <li><a href="e-commerce-product-list.html" className="nav-link"><i className="ri-file-list-line" /></a>
-                                </li>
-                                <li><a href="profile.html" className="nav-link"><i className="ri-question-answer-line" /></a></li>
-                                <li><a href="todo.html" className="nav-link router-link-exact-active router-link-active"><i className="ri-chat-check-line" /></a></li>
-                            </ul>
                             <div className="iq-search-bar d-none d-md-block">
                                 <form action="#" className="searchbox">
                                     <input type="text" className="text search-input" placeholder="Type here to search..." />
@@ -54,16 +42,16 @@ const Home = () => {
                                 </form>
                             </div>
                         </div>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+                        {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
                             <i className="ri-menu-3-line" />
-                        </button>
-                        <div className="iq-menu-bt align-self-center">
+                        </button> */}
+                        {/* <div className="iq-menu-bt align-self-center">
                             <div className="wrapper-menu">
                                 <div className="main-circle"><i className="ri-arrow-left-s-line" /></div>
                                 <div className="hover-circle"><i className="ri-arrow-right-s-line" /></div>
                             </div>
-                        </div>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        </div> */}
+                        {/* <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ml-auto navbar-list">
                                 <li className="nav-item">
                                     <a className="search-toggle iq-waves-effect language-title" href="#">
@@ -211,14 +199,14 @@ const Home = () => {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <ul className="navbar-list">
                             <li>
                                 <a href="#" className="search-toggle iq-waves-effect d-flex align-items-center bg-primary rounded">
-                                    <img src="images/user/1.jpg" className="img-fluid rounded mr-3" />
+                                    <img src="../src/assets/images/user/1.jpg" className="img-fluid rounded mr-3" />
                                     <div className="caption">
-                                        <h6 className="mb-0 line-height text-white">Nik jone</h6>
-                                        <span className="font-size-12 text-white">Available</span>
+                                        <h6 className="mb-0 line-height text-white">Xin chào</h6>
+                                        <span className="font-size-12 text-white">Hai</span>
                                     </div>
                                 </a>
                                 <div className="iq-sub-dropdown iq-user-dropdown">

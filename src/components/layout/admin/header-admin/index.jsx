@@ -2,16 +2,16 @@
 const Header = () => {
   return (
     <div>
-      <div id="loading">
+      {/* <div id="loading">
         <div id="loading-center">
         </div>
-      </div>
+      </div> */}
       <div className="iq-sidebar">
         <div className="iq-sidebar-logo d-flex justify-content-between">
           <a href="index.html">
             <div className="iq-light-logo">
               <div className="iq-light-logo">
-                <img src="images/logo.gif" className="img-fluid" />
+                <img src="../src/assets/images/logo.gif" className="img-fluid" />
               </div>
               <div className="iq-dark-logo">
                 <img src="images/logo-dark.gif" className="img-fluid" />
@@ -20,7 +20,7 @@ const Header = () => {
             <div className="iq-dark-logo">
               <img src="images/logo-dark.gif" className="img-fluid" />
             </div>
-            <span>Vito</span>
+            <span>Hypertech</span>
           </a>
           <div className="iq-menu-bt-sidebar">
             <div className="iq-menu-bt align-self-center">
