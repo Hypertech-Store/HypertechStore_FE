@@ -1,5 +1,3 @@
-import logo from '../../../assets/images/logo.gif';
-import logo1 from '../../../assets/images/logo-dark.gif';
 const Home = () => {
     document.title = "Dashboard - Hypertech Store"
     return (
@@ -13,7 +11,7 @@ const Home = () => {
                                     <img src="/src/assets/images/logo-dark.gif" className="img-fluid" />
                                 </div>
                                 <div className="iq-dark-logo">
-                                    <img src={logo1} className="img-fluid" />
+                                    <img src="" className="img-fluid" />
                                 </div>
                                 <span>vito</span>
                             </a>
