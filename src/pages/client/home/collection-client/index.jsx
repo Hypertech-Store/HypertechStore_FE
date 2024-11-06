@@ -45,10 +45,10 @@ const CollectionsArea = () => {
                 <div className="collection-wrap">
                     <Slider {...sliderSettings} className="collection-active">
                         {[
-                            { img: product1, title: "Home Appliances", products: "25 Products" },
-                            { img: product2, title: "Bluetooth Speaker", products: "25 Products" },
-                            { img: product3, title: "Security Camera", products: "25 Products" },
-                            { img: product4, title: "Computer Accessories", products: "25 Products" },
+                            { img: product1, title: "Đồng hồ", products: "25 Products" },
+                            { img: product2, title: "Tablet", products: "25 Products" },
+                            { img: product3, title: "Điện thoại", products: "25 Products" },
+                            { img: product4, title: "Máy tính", products: "25 Products" },
                         ].map((collection, index) => (
                             <div className="collection-product" key={index}>
                                 <div className="collection-img">
