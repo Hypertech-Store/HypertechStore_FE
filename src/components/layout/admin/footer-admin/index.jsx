@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
+
 const Footer = () => {
+  const isShow = useSelector((state) => state.toggleSiteBarAdmin.isShow);
   return (
     <div>
-      <footer className="iq-footer">
+      <footer className={`iq-footer ${isShow ? "sidebar-main-active" : ""}`}>
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-6">

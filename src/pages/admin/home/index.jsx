@@ -1,8 +1,13 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 const Home = () => {
     document.title = "Dashboard - Hypertech Store"
+    const [isShowModal, setIsShowModal] = useState(false);
+    const isShow = useSelector((state) => state.toggleSiteBarAdmin.isShow);
     return (
         <div>
-            <div className="iq-top-navbar">
+            <div className={`iq-top-navbar ${isShow ? "sidebar-main-active" : ""}`}>
                 <div className="iq-navbar-custom">
                     {/* <div className="iq-sidebar-logo">
                         <div className="top-logo">
@@ -200,8 +205,8 @@ const Home = () => {
                                 </li>
                             </ul>
                         </div> */}
-                        <ul className="navbar-list">
-                            <li>
+                        <ul className="navbar-list" onClick={() => setIsShowModal(!isShowModal)}>
+                            <li className={`${isShowModal ? "iq-show" : ""}`}>
                                 <a href="#" className="search-toggle iq-waves-effect d-flex align-items-center bg-primary rounded">
                                     <img src="../src/assets/images/user/1.jpg" className="img-fluid rounded mr-3" />
                                     <div className="caption">
@@ -272,7 +277,7 @@ const Home = () => {
                     </nav>
                 </div>
             </div>
-            <div id="content-page" className="content-page">
+            <div id="content-page" className={`content-page ${isShow ? "sidebar-main-active" : ""}`}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-3">
