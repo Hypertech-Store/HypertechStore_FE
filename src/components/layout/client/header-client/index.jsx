@@ -36,7 +36,7 @@ const HeaderClient = () => {
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               <div className="logo">
                 <a href="/">
-                  <img src={logo} alt="Hypertech Store Logo" style={{ width: '200px', height: '80px', marginTop: -25 }} />
+                  <img src={logo} alt="Hypertech Store Logo" style={{ width: '200px', height: '70px', marginTop: -25 }} />
                 </a>
               </div>
             </div>
