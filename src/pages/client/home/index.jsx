@@ -1,4 +1,4 @@
-import SliderClient from "../home/slider-client"
+import SliderClient from "../home/slider-client" 
 import CollectionsArea from "../home/collection-client"
 // import SupportArea from "../home/suppoer-client"
 import NewArrival from "../home/newArrival-client"
