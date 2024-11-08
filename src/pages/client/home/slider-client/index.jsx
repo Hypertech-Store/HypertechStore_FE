@@ -36,7 +36,7 @@ const SliderClient = () => {
 
     return (
         <div className="slider-area">
-            <div className="slider-active owl-carousel nav-style-1 owl-dot-none"
+            <div className="slider-active nav-style-1 owl-dot-none"
 
                 style={{ position: 'relative' }}
                 onMouseEnter={() => setShowNav(true)}  // Hiển thị navigation khi hover

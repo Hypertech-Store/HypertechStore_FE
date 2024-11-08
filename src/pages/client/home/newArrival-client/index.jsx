@@ -37,9 +37,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product1} />
-                                            <img className="hover-img" src={product1} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product1} alt />
+                                            <img className="hover-img" src={product1} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -55,7 +55,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -73,9 +73,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product2} />
-                                            <img className="hover-img" src={product2} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product2} alt />
+                                            <img className="hover-img" src={product2} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -91,7 +91,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -108,9 +108,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product3} />
-                                            <img className="hover-img" src={product3} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product3} alt />
+                                            <img className="hover-img" src={product3} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -126,7 +126,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -144,9 +144,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product4} />
-                                            <img className="hover-img" src={product4} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product4} alt />
+                                            <img className="hover-img" src={product4} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -162,7 +162,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -179,9 +179,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product5} />
-                                            <img className="hover-img" src={product5} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product5} alt />
+                                            <img className="hover-img" src={product5} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -197,7 +197,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -215,9 +215,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product6} />
-                                            <img className="hover-img" src={product6} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product6} alt />
+                                            <img className="hover-img" src={product6} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -233,7 +233,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -250,9 +250,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product7} />
-                                            <img className="hover-img" src={product7} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product7} alt />
+                                            <img className="hover-img" src={product7} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -268,7 +268,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -286,9 +286,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product8} />
-                                            <img className="hover-img" src={product8} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product8} alt />
+                                            <img className="hover-img" src={product8} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -304,7 +304,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -325,9 +325,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product8} />
-                                            <img className="hover-img" src={product8} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product8} alt />
+                                            <img className="hover-img" src={product8} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -343,7 +343,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -361,9 +361,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product7} />
-                                            <img className="hover-img" src={product7} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product7} alt />
+                                            <img className="hover-img" src={product7} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -379,7 +379,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -396,9 +396,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product6} />
-                                            <img className="hover-img" src={product6} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product6} alt />
+                                            <img className="hover-img" src={product6} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -414,7 +414,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -432,9 +432,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product5} />
-                                            <img className="hover-img" src={product5} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product5} alt />
+                                            <img className="hover-img" src={product5} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -450,7 +450,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -467,9 +467,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product4} />
-                                            <img className="hover-img" src={product4} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product4} alt />
+                                            <img className="hover-img" src={product4} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -485,7 +485,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -503,9 +503,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product3} />
-                                            <img className="hover-img" src={product3} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product3} alt />
+                                            <img className="hover-img" src={product3} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -521,7 +521,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -538,9 +538,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product2} />
-                                            <img className="hover-img" src={product2} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product2} alt />
+                                            <img className="hover-img" src={product2} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -556,7 +556,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -574,9 +574,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product1} />
-                                            <img className="hover-img" src={product1} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product1} alt />
+                                            <img className="hover-img" src={product1} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -592,7 +592,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -613,9 +613,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product5} />
-                                            <img className="hover-img" src={product5} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product5} alt />
+                                            <img className="hover-img" src={product5} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -631,7 +631,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -649,9 +649,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product6} />
-                                            <img className="hover-img" src={product6} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product6} alt />
+                                            <img className="hover-img" src={product6} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -667,7 +667,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -684,9 +684,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product7} />
-                                            <img className="hover-img" src={product7} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product7} alt />
+                                            <img className="hover-img" src={product7} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -702,7 +702,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -720,9 +720,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product8} />
-                                            <img className="hover-img" src={product8} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product8} alt />
+                                            <img className="hover-img" src={product8} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -738,7 +738,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -755,14 +755,14 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product1} />
-                                            <img className="hover-img" src={product1} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product1} alt />
+                                            <img className="hover-img" src={product1} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -780,9 +780,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product2} />
-                                            <img className="hover-img" src={product2} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product2} alt />
+                                            <img className="hover-img" src={product2} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -798,7 +798,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -815,9 +815,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product3} />
-                                            <img className="hover-img" src={product3} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product3} alt />
+                                            <img className="hover-img" src={product3} alt />
                                         </a>
                                         <span className="pink">-10%</span>
                                         <div className="product-action">
@@ -833,7 +833,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
@@ -851,9 +851,9 @@ const NewArrival = () => {
                             <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div className="product-wrap mb-25">
                                     <div className="product-img">
-                                        <a href="/chi-tiet-san-pham">
-                                            <img className="default-img" src={product4} />
-                                            <img className="hover-img" src={product4} />
+                                        <a href="product-details.html">
+                                            <img className="default-img" src={product4} alt />
+                                            <img className="hover-img" src={product4} alt />
                                         </a>
                                         <span className="purple">New</span>
                                         <div className="product-action">
@@ -869,7 +869,7 @@ const NewArrival = () => {
                                         </div>
                                     </div>
                                     <div className="product-content text-center">
-                                        <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                        <h3><a href="product-details.html">Product Title Here</a></h3>
                                         <div className="product-rating">
                                             <IoMdStar className="star-filled" />
                                             <IoMdStar className="star-filled" />
