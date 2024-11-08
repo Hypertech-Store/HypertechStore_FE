@@ -75,7 +75,7 @@ const HeaderClient = () => {
                     visibility: isAccountDropdownOpen ? "visible" : "hidden"
                   }}>
                     <ul>
-                      <li><a href="/dashboard">Dashboard</a></li>
+                      <li><a href="/admin">Dashboard</a></li>
                       <li><a href="/dang-nhap">Đăng nhập</a></li>
                       <li><a href="/dang-ky">Đăng ký</a></li>
                       <li><a href="/tai-khoan">Tài khoản</a></li>

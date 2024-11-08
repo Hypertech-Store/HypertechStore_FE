@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LayoutClient from "./components/layout/client/layout-client";
 import LayoutAdmin from "./components/layout/admin/layout-admin";
 
@@ -19,6 +19,7 @@ import Cart from "./pages/client/cart";
 import Checkout from "./pages/client/checkout";
 // Admin pages
 import Dashboard from "./pages/admin/dashboard";
+import UserList from "./pages/admin/user/user-list";
 
 const Router = () => {
   return (
@@ -41,8 +42,10 @@ const Router = () => {
         <Route path="thanh-toan" element={<Checkout />} />
       </Route>
 
-      <Route path="/dashboard" element={<LayoutAdmin />}>
-        <Route index element={<Dashboard />} />
+      <Route path="/admin" element={<LayoutAdmin />}>
+        <Route index element={<Navigate to="dashboard" />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="user-list" element={<UserList />} />
       </Route>
     </Routes>
   );
