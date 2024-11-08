@@ -1,9 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-
-// import darkModeSlice from "./slice/darkModeSlice";
+import toggleSiteBarAdmin from "./slice/toggleSiteBarAdminSlice";
 
 const rootReducer = combineReducers({
-//   darkMode: darkModeSlice,
+  toggleSiteBarAdmin: toggleSiteBarAdmin,
 });
 
 export default rootReducer;
