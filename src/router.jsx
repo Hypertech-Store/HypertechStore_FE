@@ -1,26 +1,24 @@
-import { Route, Routes } from "react-router-dom"
-import LayoutClient from "./components/layout/client/layout-client"
-import LayoutAdmin from "./components/layout/admin/layout-admin"
+import { Route, Routes } from "react-router-dom";
+import LayoutClient from "./components/layout/client/layout-client";
+import LayoutAdmin from "./components/layout/admin/layout-admin";
 
 // Client pages
-import HomeClient from "./pages/client/home"
-import Shop from "./pages/client/shop"
-import ShopDetails from "./pages/client/product"
-import Blog from "./pages/client/blog"
-import BlogDetails from "./pages/client/blog-details"
-import About from "./pages/client/about"
-import Contact from "./pages/client/contact"
-import Login from "./pages/client/login"
-import Register from "./pages/client/register"
-import ForPassword from "./pages/client/for-password"
-import Account from "./pages/client/account"
-import Wishlist from "./pages/client/wishlist"
-import Cart from "./pages/client/cart"
-import Checkout from "./pages/client/checkout"
-
+import HomeClient from "./pages/client/home";
+import Shop from "./pages/client/shop";
+import ShopDetails from "./pages/client/product";
+import Blog from "./pages/client/blog";
+import BlogDetails from "./pages/client/blog-details";
+import About from "./pages/client/about";
+import Contact from "./pages/client/contact";
+import Login from "./pages/client/login";
+import Register from "./pages/client/register";
+import ForPassword from "./pages/client/for-password";
+import Account from "./pages/client/account";
+import Wishlist from "./pages/client/wishlist";
+import Cart from "./pages/client/cart";
+import Checkout from "./pages/client/checkout";
 // Admin pages
-import HomeAdmin from "./pages/admin/home"
-
+import Dashboard from "./pages/admin/dashboard";
 
 const Router = () => {
   return (
@@ -29,7 +27,7 @@ const Router = () => {
       <Route path="/" element={<LayoutClient />}>
         <Route index element={<HomeClient />} />
         <Route path="cua-hang" element={<Shop />} />
-        <Route path="chi-tiet-san-pham" element={<ShopDetails />} />
+        <Route path="/chi-tiet-san-pham/:productId" element={<ShopDetails />} />
         <Route path="bai-viet" element={<Blog />} />
         <Route path="chi-tiet-bai-viet" element={<BlogDetails />} />
         <Route path="gioi-thieu" element={<About />} />
@@ -44,10 +42,10 @@ const Router = () => {
       </Route>
 
       <Route path="/dashboard" element={<LayoutAdmin />}>
-        <Route index element={<HomeAdmin />} />
+        <Route index element={<Dashboard />} />
       </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;

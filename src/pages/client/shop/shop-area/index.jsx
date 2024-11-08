@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { FaTable } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa";
 import { BsCart } from "react-icons/bs";
@@ -12,15 +13,24 @@ import product5 from "../../../../assets/img/product/pro-3.jpg";
 import product6 from "../../../../assets/img/product/pro-3-1.jpg";
 import product7 from "../../../../assets/img/product/pro-4.jpg";
 import product8 from "../../../../assets/img/product/pro-4-1.jpg";
-import product9 from "../../../../assets/img/product/pro-5.jpg";
-import product10 from "../../../../assets/img/product/pro-5-1.jpg";
-import product11 from "../../../../assets/img/product/pro-6.jpg";
-import product12 from "../../../../assets/img/product/pro-6-1.jpg";
-import product13 from "../../../../assets/img/product/pro-7.jpg";
-import product14 from "../../../../assets/img/product/pro-8.jpg";
 
 
 const Shop = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/san-pham/allProduct')
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data.data)) {
+                    setProducts(data.data); // Extract products from the 'data' field
+                } else {
+                    console.error('Error: Expected an array but got', typeof data);
+                    setProducts([]);
+                }
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    }, []);
     return (
         <>
             <div className="shop-area pt-95 pb-100 section-padding-1">
@@ -52,446 +62,49 @@ const Shop = () => {
                                 <div className="tab-content jump">
                                     <div id="shop-1" className="tab-pane active">
                                         <div className="row">
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product1} alt />
-                                                            <img className="hover-img" src={product2} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product3} alt />
-                                                            <img className="hover-img" src={product4} alt />
-                                                        </a>
-                                                        <span className="purple">New</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
+                                            {products.map((product) => (
+                                                <div key={product.id} className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
+                                                    <div className="product-wrap mb-25 scroll-zoom">
+                                                        <div className="product-img">
+                                                            <a href={`/chi-tiet-san-pham/${product.id}`}>
+                                                                <img className="default-img" src={product.duong_dan_anh} alt={product.ten_san_pham} />
+                                                            </a>
+                                                            <span className="pink">-10%</span>
+                                                            <div className="product-action">
+                                                                <div className="pro-same-action pro-wishlist">
+                                                                    <a title="Wishlist" href="#"><CiHeart /></a>
+                                                                </div>
+                                                                <div className="pro-same-action pro-cart">
+                                                                    <a title="Add To Cart" href="#">
+                                                                        <BsCart className="iconCart" /> Add to cart
+                                                                    </a>
+                                                                </div>
+                                                                <div className="pro-same-action pro-quickview">
+                                                                    <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product5} alt />
-                                                            <img className="hover-img" src={product6} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
+                                                        <div className="product-content text-center">
+                                                            <h3><a href={`/chi-tiet-san-pham/${product.id}`}>{product.ten_san_pham}</a></h3>
+                                                            <div className="product-rating">
+                                                                <i className="fa fa-star-o yellow" />
+                                                                <i className="fa fa-star-o yellow" />
+                                                                <i className="fa fa-star-o yellow" />
+                                                                <i className="fa fa-star-o" />
+                                                                <i className="fa fa-star-o" />
                                                             </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
+                                                            <div className="product-price">
+                                                                <span>
+                                                                    {parseFloat(product.gia).toLocaleString('en-US', { minimumFractionDigits: product.gia % 1 === 0 ? 0 : 2 })}VNĐ
+                                                                </span>
+                                                                <span className="old">13.500.000VNĐ</span>
                                                             </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product7} alt />
-                                                            <img className="hover-img" src={product8} alt />
-                                                        </a>
-                                                        <span className="purple">New</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product9} alt />
-                                                            <img className="hover-img" src={product10} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product11} alt />
-                                                            <img className="hover-img" src={product12} alt />
-                                                        </a>
-                                                        <span className="purple">New</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product13} alt />
 
-                                                            <img className="hover-img" src={product8} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product14} alt />
-                                                            <img className="hover-img" src={product11} alt />
-                                                        </a>
-                                                        <span className="purple">New</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product1} alt />
-                                                            <img className="hover-img" src={product2} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product1} alt />
-                                                            <img className="hover-img" src={product2} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product3} alt />
-                                                            <img className="hover-img" src={product4} alt />
-                                                        </a>
-                                                        <span className="purple">New</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                                <div className="product-wrap mb-25 scroll-zoom">
-                                                    <div className="product-img">
-                                                        <a href="/chi-tiet-san-pham">
-                                                            <img className="default-img" src={product5} alt />
-                                                            <img className="hover-img" src={product6} alt />
-                                                        </a>
-                                                        <span className="pink">-10%</span>
-                                                        <div className="product-action">
-                                                            <div className="pro-same-action pro-wishlist">
-                                                                <a title="Wishlist" href="#"><CiHeart /></a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-cart">
-                                                                <a title="Add To Cart" href="#">
-                                                                    <BsCart className="iconCart" /> Add to cart</a>
-                                                            </div>
-                                                            <div className="pro-same-action pro-quickview">
-                                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <h3><a href="/chi-tiet-san-pham">T- Shirt And Jeans</a></h3>
-                                                        <div className="product-rating">
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o yellow" />
-                                                            <i className="fa fa-star-o" />
-                                                            <i className="fa fa-star-o" />
-                                                        </div>
-                                                        <div className="product-price">
-                                                            <span>$ 60.00</span>
-                                                            <span className="old">$ 60.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            ))}
                                         </div>
                                     </div>
                                     <div id="shop-2" className="tab-pane">
@@ -660,10 +273,10 @@ const Shop = () => {
                         <div className="col-lg-3">
                             <div className="sidebar-style mr-30">
                                 <div className="sidebar-widget">
-                                    <h4 className="pro-sidebar-title">Search </h4>
+                                    <h4 className="pro-sidebar-title">Tìm kiếm </h4>
                                     <div className="pro-sidebar-search mb-50 mt-25">
                                         <form className="pro-sidebar-search-form" action="#">
-                                            <input type="text" placeholder="Search here..." />
+                                            <input type="text" placeholder="Tìm kiếm ở đây..." />
                                             <button>
                                                 <i className="pe-7s-search" />
                                             </button>
@@ -671,24 +284,18 @@ const Shop = () => {
                                     </div>
                                 </div>
                                 <div className="sidebar-widget">
-                                    <h4 className="pro-sidebar-title">Refine By </h4>
+                                    <h4 className="pro-sidebar-title">Bộ lọc </h4>
                                     <div className="sidebar-widget-list mt-30">
                                         <ul>
                                             <li>
                                                 <div className="sidebar-widget-list-left">
-                                                    <input type="checkbox" /> <a href="#">On Sale <span>4</span> </a>
+                                                    <input type="checkbox" /> <a href="#">Đang giảm giá <span>4</span> </a>
                                                     <span className="checkmark" />
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="sidebar-widget-list-left">
-                                                    <input type="checkbox" defaultValue /> <a href="#">New <span>4</span></a>
-                                                    <span className="checkmark" />
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="sidebar-widget-list-left">
-                                                    <input type="checkbox" defaultValue /> <a href="#">In Stock <span>4</span> </a>
+                                                    <input type="checkbox" defaultValue /> <a href="#">Sản phẩm mới <span>4</span></a>
                                                     <span className="checkmark" />
                                                 </div>
                                             </li>
@@ -696,16 +303,16 @@ const Shop = () => {
                                     </div>
                                 </div>
                                 <div className="sidebar-widget mt-45">
-                                    <h4 className="pro-sidebar-title">Filter By Price </h4>
+                                    <h4 className="pro-sidebar-title">Lọc theo giá </h4>
                                     <div className="price-filter mt-10">
                                         <div className="price-slider-amount">
-                                            <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                                            <input type="text" id="amount" name="price" placeholder="Vui lòng nhập giá" />
                                         </div>
                                         <div id="slider-range" />
                                     </div>
                                 </div>
                                 <div className="sidebar-widget mt-50">
-                                    <h4 className="pro-sidebar-title">Colour </h4>
+                                    <h4 className="pro-sidebar-title">Lọc theo ãng </h4>
                                     <div className="sidebar-widget-list mt-20">
                                         <ul>
                                             <li>

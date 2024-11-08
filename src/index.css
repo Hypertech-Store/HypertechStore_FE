@@ -8706,10 +8706,19 @@ a.default-btn {
     margin: 0;
 }
 
+.toggle-description {
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+
+.toggle-description:hover {
+    text-decoration: underline;
+}
+
 .product-details-content .pro-details-list {
     margin: 20px 0 34px;
     border-bottom: 1px solid #e5e5e5;
-    padding: 0 0 37px;
+    padding: 0 0 10px;
 }
 
 .product-details-content .pro-details-list ul li {
@@ -8900,6 +8909,16 @@ a.default-btn {
     padding: 0;
     text-align: center;
     width: 80px;
+}
+
+.toggle-description {
+    text-decoration: underline;
+    transition: text-decoration 0.2s ease;
+}
+
+.toggle-description:hover {
+    color: blue;
+    text-decoration: underline;
 }
 
 .product-details-content .pro-details-quality .pro-details-cart {
