@@ -20,6 +20,7 @@ import Checkout from "./pages/client/checkout";
 // Admin pages
 import Dashboard from "./pages/admin/dashboard";
 import UserList from "./pages/admin/user/user-list";
+import UserAdd from "./pages/admin/user/user-add";
 
 const Router = () => {
   return (
@@ -48,6 +49,7 @@ const Router = () => {
           <Route index element={<Navigate to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="user-list" element={<UserList />} />
+          <Route path="user-add" element={<UserAdd />} />
         </Route>
       </Routes>
     </>
