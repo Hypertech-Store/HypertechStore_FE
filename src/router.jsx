@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react"; // import useState
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LayoutClient from "./components/layout/client/layout-client";
 import LayoutAdmin from "./components/layout/admin/layout-admin";
 
@@ -20,29 +19,14 @@ import Cart from "./pages/client/cart";
 import Checkout from "./pages/client/checkout";
 // Admin pages
 import Dashboard from "./pages/admin/dashboard";
-import Header from "./components/layout/client/header-client"; 
+import UserList from "./pages/admin/user/user-list";
 
 const Router = () => {
-  const [user, setUser] = useState(null);
-
-// Giả sử thông tin người dùng được lấy từ API hoặc lưu trong localStorage/sessionStorage
-useEffect(() => {
-  // Kiểm tra thông tin người dùng trong localStorage/sessionStorage hoặc gọi API để lấy thông tin người dùng
-  const userData = localStorage.getItem('user'); // hoặc sessionStorage.getItem('user')
-  
-  if (userData) {
-    setUser(JSON.parse(userData));
-  }
-}, []); // Khởi tạo useState cho user
-
   return (
     <>
-      {/* Đảm bảo Header nhận prop user */}
-      <Header user={user} />
-
       <Routes>
         {/* Client Routes */}
-        {/* <Route path="/" element={<LayoutClient />}> */}
+        <Route path="/" element={<LayoutClient />}>
           <Route index element={<HomeClient />} />
           <Route path="cua-hang" element={<Shop />} />
           <Route path="/chi-tiet-san-pham/:productId" element={<ShopDetails />} />
@@ -50,18 +34,20 @@ useEffect(() => {
           <Route path="chi-tiet-bai-viet" element={<BlogDetails />} />
           <Route path="gioi-thieu" element={<About />} />
           <Route path="lien-he" element={<Contact />} />
-          <Route path="dang-nhap" element={<Login setUser={setUser} />} /> {/* Thêm setUser vào Login */}
+          <Route path="dang-nhap" element={<Login />} />
           <Route path="dang-ky" element={<Register />} />
           <Route path="quen-mat-khau" element={<ForPassword />} />
           <Route path="tai-khoan" element={<Account />} />
           <Route path="san-pham-yeu-thich" element={<Wishlist />} />
           <Route path="gio-hang" element={<Cart />} />
           <Route path="thanh-toan" element={<Checkout />} />
-        {/* </Route> */}
+        </Route>
 
         {/* Admin Routes */}
-        <Route path="/dashboard" element={<LayoutAdmin />}>
-          <Route index element={<Dashboard />} />
+        <Route path="/admin" element={<LayoutAdmin />}>
+          <Route index element={<Navigate to="dashboard" />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="user-list" element={<UserList />} />
         </Route>
       </Routes>
     </>

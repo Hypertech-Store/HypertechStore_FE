@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsShowSiteBarAdmin } from "../../../../redux/slice/toggleSiteBarAdminSlice";
+import { Link, NavLink, useLocation } from "react-router-dom";
 const Header = () => {
   const [isToggle, setIsToggle] = useState({
     user: false,
@@ -10,6 +11,7 @@ const Header = () => {
 
   const isShow = useSelector((state) => state.toggleSiteBarAdmin.isShow);
   const dispatch = useDispatch();
+  const location = useLocation();
   return (
     <div>
       {/* <div id="loading">
@@ -45,9 +47,9 @@ const Header = () => {
           <nav className="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" className="iq-menu">
               {/* <li className="iq-menu-title"><i className="ri-subtract-line" /><span>Dashboard</span></li> */}
-              <li className="active">
-                <a href="index.html" className="iq-waves-effect"><i className="ri-home-4-line" /><span>Dashboard</span></a>
-              </li>
+              <NavLink to={'dashboard'} className={`${location.pathname.startsWith('dashboard') ? "active" : ""} iq-menu-item`}>
+                <a className="iq-waves-effect"><i className="ri-home-4-line" /><span>Dashboard</span></a>
+              </NavLink>
               {/* <li>
                 <a href="dashboard-1.html" className="iq-waves-effect"><i className="ri-home-3-line" /><span>Dashboard
                   2</span></a>
@@ -79,19 +81,25 @@ const Header = () => {
                 </ul>
               </li> */}
               {/* <li><a href="todo.html" className="iq-waves-effect" aria-expanded="false"><i className="ri-chat-check-line" /><span>Todo</span></a></li> */}
-              <li>
+              {/* <li>
                 <a href="#userinfo" className="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded={isToggle.user} onClick={() => setIsToggle({auth: false, product: false, user: !isToggle.user})}><i className="ri-user-line" /><span>User</span><i className="ri-arrow-right-s-line iq-arrow-right" /></a>
                 <ul id="userinfo" className={`iq-submenu collapse ${isToggle.user ? "show" : ""}`} data-parent="#iq-sidebar-toggle">
                   <li><a href="profile.html"><i className="ri-profile-line" />User Profile</a></li>
                   <li><a href="profile-edit.html"><i className="ri-file-edit-line" />User Edit</a></li>
                   <li><a href="add-user.html"><i className="ri-user-add-line" />User Add</a></li>
-                  <li><a href="user-list.html"><i className="ri-file-list-line" />User List</a></li>
+                  <li><Link to={'user-list'}><i className="ri-file-list-line" />User List</Link></li>
                 </ul>
-              </li>
+              </li> */}
+              {/* <li className="iq-menu-item">
+                <Link to={'user-list'} className="iq-waves-effect"><i className="ri-user-line" /><span>User</span></Link>
+              </li> */}
+              <NavLink to={'user-list'} className={`${location.pathname.startsWith('user-list') ? "active" : ""} iq-menu-item`}>
+                <a className="iq-waves-effect"><i className="ri-user-line" /><span>User</span></a>
+              </NavLink>
               {/* <li><a href="calendar.html" className="iq-waves-effect"><i className="ri-calendar-2-line" /><span>Calendar</span></a></li> */}
-              <li><a href="chat.html" className="iq-waves-effect"><i className="ri-message-line" /><span>Chat</span></a>
+              <li className="iq-menu-item"><a href="chat.html" className="iq-waves-effect"><i className="ri-message-line" /><span>Chat</span></a>
               </li>
-              <li>
+              <li className="iq-menu-item">
                 <a href="#ecommerce" className="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded={isToggle.product} onClick={() => setIsToggle({auth: false, product: !isToggle.product, user: false})}><i className="ri-shopping-cart-line" /><span>E-commerce</span><i className="ri-arrow-right-s-line iq-arrow-right" /></a>
                 <ul id="ecommerce" className={`iq-submenu collapse ${isToggle.product ? "show" : ""}`} data-parent="#iq-sidebar-toggle">
                   <li><a href="e-commerce-product-list.html"><i className="ri-file-list-line" />Product Listing</a>
