@@ -934,7 +934,8 @@ Profile Edit
 .profile-img-edit { position: relative; display: inline-block; height: 150px; width: 150px; }
 .file-upload { display: none; }
 .p-image { position: absolute; top: auto; right: 8px; bottom: 10px; transition: all .3s cubic-bezier(.175, .885, .32, 1.275); background: var(--iq-primary); color: var(--iq-white); border-radius: 50%; height: 30px; width: 30px; line-height: 28px; text-align: center; font-size: 12px; cursor: pointer; }
-.upload-button { font-size: 1.5em; }
+.upload-button { font-size: 1.5em; background: rgba(130, 122, 243, 0.2) !important; }
+.upload-button:hover {background: rgba(65, 52, 248, 0.2) !important;}
 .iq-edit-profile .nav-link { padding: 20px 15px; border-radius: 0; color: var(--iq-icon-color); text-align: center; font-size: 16px; border-left: 1px solid var(--iq-light-border); }
 .iq-edit-profile.nav-pills .nav-link.active, .iq-edit-profile.nav-pills .show>.nav-link { color: var(--iq-white); background: var(--iq-primary); }
 ul.iq-edit-profile li:first-child a { border-radius: 8px 0 0 15px; border-left: none; }
