@@ -16535,6 +16535,160 @@ h3.cart-page-title {
     padding: 30px 0px 55px;
 }
 
+.iconcart-empty {
+    display: inline-block;
+    height: 270px;
+    width: 432px;
+    background-image: url(//cdn.tgdd.vn/mwgcart/v2/vue-pro/img/empty-cart.c915bd7.png);
+    background-size: 432px 270px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    line-height: 2rem;
+}
+
+.cart-empty h1 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
+
+.cart-empty span {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: rgb(152, 162, 179);
+    /* Màu sắc của text thông báo */
+}
+
+.btn-backhome {
+    margin-top: 30px;
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--mainColor);
+    background-color: var(--mainColor);
+    padding: 0.625rem;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    /* Màu chữ của nút */
+    text-decoration: none;
+    /* Xóa gạch chân */
+}
+
+.cart-empty .note-help {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgb(152, 162, 179);
+    /* Màu của phần text hỗ trợ */
+}
+
+.cart-empty .note-help a {
+    color: #288ad6;
+    /* Màu sắc của số điện thoại */
+    text-decoration: none;
+    /* Xóa gạch chân trong link */
+}
+
+.cart-empty {
+    display: flex;
+    flex-direction: column;
+    /* Sắp xếp các phần tử theo chiều dọc */
+    align-items: center;
+    /* Căn giữa theo chiều ngang */
+    justify-content: center;
+    /* Căn giữa theo chiều dọc */
+    height: 80vh;
+    /* Đặt chiều cao div bằng với chiều cao màn hình */
+    text-align: center;
+    /* Căn giữa văn bản */
+}
+
+.iconcart-empty {
+    display: inline-block;
+    height: 270px;
+    width: 432px;
+    background-image: url(../src/assets/img/cart/empty-cart.c915bd7b5c74dda48827756e3.png);
+    background-size: 432px 270px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    line-height: 2rem;
+}
+
+.cart-empty h1 {
+    font: 14px / 18px Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    /* Đặt kích thước riêng cho h1 */
+    line-height: 3rem;
+    font-weight: 700;
+    color: #344054;
+}
+
+.cart-empty span {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(152 162 179 / var(--tw-text-opacity));
+}
+
+.btn-backhome {
+    margin: 30px auto;
+    /* Căn giữa nút bằng cách cho margin trái và phải tự động */
+    display: inline-block;
+    /* Sử dụng inline-block để dễ căn giữa */
+    width: 30%;
+    /* Bạn có thể thay đổi kích thước theo nhu cầu */
+    justify-content: center;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #2A83E9;
+    background-color: #2A83E9;
+    padding: 0.625rem;
+    text-align: center;
+    font-weight: 700;
+
+    transition: background-color 0.3s ease;
+    /* Thêm hiệu ứng hover mượt */
+}
+
+.btn-backhome:hover {
+    background-color: rgba(255, 255, 255, var(--tw-text-opacity));
+    color: #2A83E9;
+    /* Màu nền thay đổi khi hover */
+    cursor: pointer;
+    /* Đổi con trỏ thành bàn tay khi hover */
+}
+
+.cart-empty .note-help {
+    font-size: .75rem;
+    line-height: 1rem;
+    color: rgba(152, 162, 179, 1);
+}
+
+
+.select-container {
+    position: relative;
+}
+
+select {
+    margin-top: -10px;
+    padding-right: 30px;
+    /* Để chừa chỗ cho icon */
+    appearance: none;
+    /* Xóa bớt style mặc định của select */
+    -webkit-appearance: none;
+    /* Xóa style mặc định trên trình duyệt Safari */
+    -moz-appearance: none;
+    padding: 10px;
+    font-size: 14px;
+    background-color: white;
+}
+
+
+
 @media only screen and (max-width: 767px) {
     .cart-shiping-update-wrapper {
         display: block;

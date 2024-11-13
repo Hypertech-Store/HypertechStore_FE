@@ -20,20 +20,20 @@ import Cart from "./pages/client/cart";
 import Checkout from "./pages/client/checkout";
 // Admin pages
 import Dashboard from "./pages/admin/dashboard";
-import Header from "./components/layout/client/header-client"; 
+import Header from "./components/layout/client/header-client";
 
 const Router = () => {
   const [user, setUser] = useState(null);
 
-// Giả sử thông tin người dùng được lấy từ API hoặc lưu trong localStorage/sessionStorage
-useEffect(() => {
-  // Kiểm tra thông tin người dùng trong localStorage/sessionStorage hoặc gọi API để lấy thông tin người dùng
-  const userData = localStorage.getItem('user'); // hoặc sessionStorage.getItem('user')
-  
-  if (userData) {
-    setUser(JSON.parse(userData));
-  }
-}, []); // Khởi tạo useState cho user
+  // Giả sử thông tin người dùng được lấy từ API hoặc lưu trong localStorage/sessionStorage
+  useEffect(() => {
+    // Kiểm tra thông tin người dùng trong localStorage/sessionStorage hoặc gọi API để lấy thông tin người dùng
+    const userData = localStorage.getItem('user'); // hoặc sessionStorage.getItem('user')
+
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []); // Khởi tạo useState cho user
 
   return (
     <>
@@ -42,7 +42,7 @@ useEffect(() => {
 
       <Routes>
         {/* Client Routes */}
-        {/* <Route path="/" element={<LayoutClient />}> */}
+        <Route path="/" element={<LayoutClient />}>
           <Route index element={<HomeClient />} />
           <Route path="cua-hang" element={<Shop />} />
           <Route path="/chi-tiet-san-pham/:productId" element={<ShopDetails />} />
@@ -57,7 +57,7 @@ useEffect(() => {
           <Route path="san-pham-yeu-thich" element={<Wishlist />} />
           <Route path="gio-hang" element={<Cart />} />
           <Route path="thanh-toan" element={<Checkout />} />
-        {/* </Route> */}
+        </Route>
 
         {/* Admin Routes */}
         <Route path="/dashboard" element={<LayoutAdmin />}>

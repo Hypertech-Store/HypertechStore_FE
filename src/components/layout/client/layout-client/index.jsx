@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import HeaderClient from "../header-client"
+// import HeaderClient from "../header-client"
 
 import FooterClient from "../footer-client"
 
@@ -7,7 +7,7 @@ import FooterClient from "../footer-client"
 const LayoutClient = () => {
   return (
     <>
-      <HeaderClient />
+      {/* <HeaderClient /> */}
       <div><Outlet /></div>
       <FooterClient />
     </>

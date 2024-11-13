@@ -31,7 +31,7 @@ export const deleteProductById = async (productId) => {
 };
 
 
-export const getVariantProductById = async (productId) => {
-    const res = await instance.get(`/san-pham/${productId}/bien-the`);
-    return res;
-};
+// export const getVariantProductById = async (productId) => {
+//     const res = await instance.get(`/san-pham/${productId}/bien-the`);
+//     return res;
+// };
