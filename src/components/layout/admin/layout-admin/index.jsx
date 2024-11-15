@@ -12,7 +12,7 @@ const LayoutAdmin = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const isShow = useSelector((state) => state.toggleSiteBarAdmin.isShow);
   return (
-    <div style={{backgroundColor: '#f8f7fd'}}>
+    <div style={{ backgroundColor: '#f8f7fd' }}>
       <HeaderAdmin />
       <div className={`iq-top-navbar ${isShow ? "sidebar-main-active" : ""}`}>
         <div className="iq-navbar-custom">
@@ -294,10 +294,7 @@ const LayoutAdmin = () => {
                   href="#"
                   className="search-toggle iq-waves-effect d-flex align-items-center bg-primary rounded"
                 >
-                  <img
-                    src="../src/assets/images/user/1.jpg"
-                    className="img-fluid rounded mr-3"
-                  />
+                  <img src="../src/assets/images/user/1.jpg" className="img-fluid rounded mr-3" />
                   <div className="caption">
                     <h6 className="mb-0 line-height text-white">Xin chào</h6>
                     <span className="font-size-12 text-white">Hai</span>
