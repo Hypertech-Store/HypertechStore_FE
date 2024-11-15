@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsShowSiteBarAdmin } from "../../../../redux/slice/toggleSiteBarAdminSlice";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import logo from "../../../../assets/img/logo/logo2.png";
 const Header = () => {
   const [isToggle, setIsToggle] = useState({
     user: false,
@@ -23,16 +24,15 @@ const Header = () => {
           <a href="index.html">
             <div className="iq-light-logo">
               <div className="iq-light-logo">
-                <img src="../src/assets/images/logo.gif" className="img-fluid" />
+                <img src={logo} className="img-fluid" />
               </div>
               <div className="iq-dark-logo">
-                <img src="images/logo-dark.gif" className="img-fluid" />
+                <img src={logo} className="img-fluid" />
               </div>
             </div>
             <div className="iq-dark-logo">
-              <img src="images/logo-dark.gif" className="img-fluid" />
+              <img src={logo} className="img-fluid" />
             </div>
-            <span>Hypertech</span>
           </a>
           <div className="iq-menu-bt-sidebar">
             <div className="iq-menu-bt align-self-center" onClick={() => dispatch(setIsShowSiteBarAdmin(!isShow))}>
@@ -100,7 +100,7 @@ const Header = () => {
               <li className="iq-menu-item"><a href="chat.html" className="iq-waves-effect"><i className="ri-message-line" /><span>Chat</span></a>
               </li>
               <li className="iq-menu-item">
-                <a href="#ecommerce" className="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded={isToggle.product} onClick={() => setIsToggle({auth: false, product: !isToggle.product, user: false})}><i className="ri-shopping-cart-line" /><span>E-commerce</span><i className="ri-arrow-right-s-line iq-arrow-right" /></a>
+                <a href="#ecommerce" className="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded={isToggle.product} onClick={() => setIsToggle({ auth: false, product: !isToggle.product, user: false })}><i className="ri-shopping-cart-line" /><span>E-commerce</span><i className="ri-arrow-right-s-line iq-arrow-right" /></a>
                 <ul id="ecommerce" className={`iq-submenu collapse ${isToggle.product ? "show" : ""}`} data-parent="#iq-sidebar-toggle">
                   <li><a href="e-commerce-product-list.html"><i className="ri-file-list-line" />Product Listing</a>
                   </li>
