@@ -12,7 +12,7 @@ const LayoutAdmin = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const isShow = useSelector((state) => state.toggleSiteBarAdmin.isShow);
   return (
-    <>
+    <div style={{backgroundColor: '#f8f7fd'}}>
       <HeaderAdmin />
       <div className={`iq-top-navbar ${isShow ? "sidebar-main-active" : ""}`}>
         <div className="iq-navbar-custom">
@@ -403,7 +403,7 @@ const LayoutAdmin = () => {
         <Outlet />
       </div>
       <FooterAdmin />
-    </>
+    </div>
   );
 };
 export default LayoutAdmin;
