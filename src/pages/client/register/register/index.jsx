@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -90,6 +90,9 @@ const Register = () => {
                                                         onChange={handleChange}
                                                     />
                                                     <div className="button-box">
+                                                        <div className="login-toggle-btn">
+                                                            <a href="/dang-nhap">Bạn đã có tài khoản?</a>
+                                                        </div>
                                                         <button type="submit"><span>Đăng ký</span></button>
                                                     </div>
                                                 </form>

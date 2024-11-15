@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'react-range-slider-input/dist/style.css';
 
 import './index.css';
 import { PersistGate } from "redux-persist/integration/react";

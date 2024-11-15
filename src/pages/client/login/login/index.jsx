@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // import useNavigate từ react-router-dom v6
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [mat_khau, setPassword] = useState('');
-    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
     const navigate = useNavigate(); // Khởi tạo useNavigate để điều hướng
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Ngừng reload trang khi form được submit
-        setLoading(true); // Bật trạng thái loading
+        e.preventDefault();
+        setLoading(true);
 
         const loginData = { email, mat_khau };
 
@@ -24,24 +22,26 @@ const Login = () => {
                 body: JSON.stringify(loginData),
             });
 
+            console.log(response); // Log phản hồi API để kiểm tra
+
             const data = await response.json();
+            console.log(data); // Log nội dung JSON nhận được từ API
 
             if (response.ok) {
-                // Lưu thông tin người dùng nếu đăng nhập thành công
-                setUser(data);
-                
-                // Hiển thị thông báo đăng nhập thành công
-                alert('Đăng nhập thành công!');
-
-                // Chuyển hướng sang trang chủ
+                localStorage.setItem('userToken', data.token ? data.token : 'token');
+                localStorage.setItem('userId', data.user.id);
+                localStorage.setItem('userInfo', JSON.stringify(data));
+                toast.success('Đăng nhập thành công!');
                 navigate('/');
             } else {
-                setError(data.message || 'Đăng nhập thất bại');
+                toast.error(data.message || 'Đăng nhập thất bại');
+
             }
         } catch (err) {
-            setError('Có lỗi xảy ra, vui lòng thử lại');
+            toast.error(`Có lỗi xảy ra, ${err?.message}`);
+
         } finally {
-            setLoading(false); // Tắt trạng thái loading
+            setLoading(false);
         }
     };
 
@@ -53,7 +53,7 @@ const Login = () => {
                         <div className="col-lg-7 col-md-12 ms-auto me-auto">
                             <div className="login-register-wrapper">
                                 <div className="login-register-tab-list nav">
-                                    <h3 className="active"> đăng nhập </h3>
+                                    <h3 className="active"> Đăng nhập </h3>
                                 </div>
                                 <div className="tab-content">
                                     <div id="lg1" className="tab-pane active">
@@ -61,11 +61,12 @@ const Login = () => {
                                             <div className="login-register-form">
                                                 <form onSubmit={handleLogin}>
                                                     <input
-                                                        type="text"
+                                                        type="email"
                                                         name="user-email"
                                                         placeholder="Email"
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
+                                                        required
                                                     />
                                                     <input
                                                         type="password"
@@ -73,6 +74,7 @@ const Login = () => {
                                                         placeholder="Mật khẩu"
                                                         value={mat_khau}
                                                         onChange={(e) => setPassword(e.target.value)}
+                                                        required
                                                     />
                                                     <div className="button-box">
                                                         <div className="login-toggle-btn">
@@ -94,8 +96,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-
-            {error && <div className="error-message">{error}</div>}
         </>
     );
 };
