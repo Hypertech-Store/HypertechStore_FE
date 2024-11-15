@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-// import LayoutClient from "./components/layout/client/layout-client";
+import LayoutClient from "./components/layout/client/layout-client";
 import LayoutAdmin from "./components/layout/admin/layout-admin";
 
 // Client pages
@@ -27,7 +27,7 @@ const Router = () => {
     <>
       <Routes>
         {/* Client Routes */}
-        {/* <Route path="/" element={<LayoutClient />}> */}
+        <Route path="/" element={<LayoutClient />}>
           <Route index element={<HomeClient />} />
           <Route path="cua-hang" element={<Shop />} />
           <Route path="/chi-tiet-san-pham/:productId" element={<ShopDetails />} />
@@ -42,7 +42,7 @@ const Router = () => {
           <Route path="san-pham-yeu-thich" element={<Wishlist />} />
           <Route path="gio-hang" element={<Cart />} />
           <Route path="thanh-toan" element={<Checkout />} />
-        {/* </Route> */}
+        </Route>
 
         {/* Admin Routes */}
         <Route path="/admin" element={<LayoutAdmin />}>

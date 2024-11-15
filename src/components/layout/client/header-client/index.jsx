@@ -122,7 +122,7 @@ const HeaderClient = () => {
                     <ul>
                       {isLoggedIn ? (
                         <>
-                          <li><a href="/dashboard">Dashboard</a></li>
+                          {/* <li><a href="/admin">Dashboard</a></li> */}
                           <li><a href="/tai-khoan">Tài khoản</a></li>
                           <li><a href="#" onClick={handleLogout}>Đăng xuất</a></li>
                         </>
@@ -157,7 +157,7 @@ const HeaderClient = () => {
                     <li><a href="/lien-he">Liên hệ</a></li>
                     {isLoggedIn ? (
                       <>
-                        <li><a href="/dashboard">Dashboard</a></li>
+                        {/* <li><a href="/admin">Dashboard</a></li> */}
                         <li><a href="/tai-khoan">Tài khoản</a></li>
                         <li><a href="#" onClick={handleLogout}>Đăng xuất</a></li>
                       </>

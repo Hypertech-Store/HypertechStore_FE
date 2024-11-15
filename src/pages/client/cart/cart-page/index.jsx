@@ -177,7 +177,7 @@ const Cart = () => {
                         <i className="iconcart-empty"></i>
                         <h1>Giỏ hàng trống</h1>
                         <span className="dmx">Không có sản phẩm nào trong giỏ hàng</span>
-                        <a href="/" className="btn-backhome">Về trang chủ</a>
+                        <a href="/cua-hang" className="btn-backhome">Tiếp tục mua sắm</a>
                         <p className="note-help">
                             Khi cần trợ giúp vui lòng gọi
                             <a style={{ color: '#288ad6' }} href="tel:1900232460"> 1900 232 460 </a>
