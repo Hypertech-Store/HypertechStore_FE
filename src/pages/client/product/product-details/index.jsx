@@ -11,6 +11,8 @@ import { FaDribbble } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+
 // Importing images
 
 import product1 from '../../../../assets/img/product/hm20-pro-12.jpg';
@@ -69,6 +71,95 @@ const ShopDetails = () => {
         return text;
     };
 
+    // State to manage the visibility of dropdown sections
+    const [isOpen, setIsOpen] = useState({
+        config: false,
+        camera: false,
+        battery: false,
+        features: false,
+        connectivity: false,
+        design: false,
+    });
+
+    // Toggle function for dropdown
+    const toggleDropdown = (section) => {
+        setIsOpen(prevState => ({
+            ...prevState,
+            [section]: !prevState[section], // Toggle the specific section
+        }));
+    };
+
+    const styles = {
+        wrapper: {
+            marginTop: '20px',
+        },
+        boxSpecifi: {
+            marginBottom: '15px',
+        },
+        link: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px',
+            backgroundColor: '#f4f4f4',
+            color: '#333',
+            cursor: 'pointer',
+            textDecoration: 'none',
+            borderRadius: '10px',
+        },
+        linkHover: {
+            backgroundColor: '#eaeaea',
+        },
+        textSpecifi: {
+            display: 'none',
+            paddingLeft: '20px',
+        },
+        textSpecifiItem: {
+            marginTop: '15px',
+            display: 'flex',
+            justifyContent: 'space-between',  // Đảm bảo thẳng hàng các phần tử theo chiều ngang
+            alignItems: 'center',  // Căn giữa các phần tử theo chiều dọc
+            marginBottom: '10px',
+        },
+        itemLabel: {
+            display: 'inline-block',
+            fontWeight: '600',
+            color: '#344054',
+            paddingRight: '4px',  // Reduced padding-right to bring itemLabel closer to itemValue
+        },
+        itemValue: {
+            fontWeight: 'normal',
+            paddingLeft: '4px',  // Reduced padding-left to bring itemValue closer to itemLabel
+            display: 'flex',      // Chuyển sang flexbox để kiểm soát căn chỉnh các phần tử
+            justifyContent: 'flex-start',  // Căn trái các phần tử trong itemValue
+            alignItems: 'center',  // Căn giữa các phần tử theo chiều dọc
+        },
+
+        itemValueSpan: {
+            marginLeft: '-35pc',  // Thêm margin-left vào span để căn chỉnh với itemLabel
+        },
+
+        activeTextSpecifi: {
+            display: 'block',
+        },
+        icon: {
+            fontSize: '28px', // Kích thước icon lớn hơn
+        },
+        h4: {
+            fontSize: '15px',
+        },
+
+        // New style for a custom divider
+        itemSeparator: {
+            border: 'none',
+            height: '1px',
+            backgroundColor: '#ddd', // Light color for the divider
+            margin: '8px 0',  // Space between items
+            opacity: 0.5,     // Make it slightly transparent for a lighter look
+        },
+    };
+
+
 
     const wordLimit = 40; // Limit to 40 characters
 
@@ -101,7 +192,7 @@ const ShopDetails = () => {
                                             alt={productData?.sanPham?.ten_san_pham || 'Product Image'} // Use a descriptive alt text
                                         />
 
-                                        <span>-29%</span>
+                                        <span style={styles.itemValueSpan}>-29%</span>
                                         <div className="product-video">
                                             <a className="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
                                                 <i className="fa fa-video-camera"></i>
@@ -156,6 +247,33 @@ const ShopDetails = () => {
                                     </span>
                                 )}
 
+                                <div className="pro-details-size-color mt-3">
+                                    <div className="pro-details-color-wrap">
+                                        <span>Color</span>
+                                        <div className="pro-details-color-content">
+                                            <ul>
+                                                <li className="blue" />
+                                                <li className="maroon active" />
+                                                <li className="gray" />
+                                                <li className="green" />
+                                                <li className="yellow" />
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="pro-details-size">
+                                        <span>Dung lượng</span>
+                                        <div className="pro-details-size-content">
+                                            <ul>
+                                                <li><a href="#">64gb</a></li>
+                                                <li><a href="#">128gb</a></li>
+                                                <li><a href="#">258gb</a></li>
+                                                <li><a href="#">526gb</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 {/* Quantity Selection */}
                                 <div className="pro-details-quality">
                                     <div className="cart-plus-minus">
@@ -198,6 +316,8 @@ const ShopDetails = () => {
                                 </div>
 
 
+
+
                                 {/* Social Share Buttons */}
                                 <div className="pro-details-social">
                                     <ul>
@@ -232,18 +352,201 @@ const ShopDetails = () => {
                         </div>
                         <div className="tab-content description-review-bottom">
                             {/* Additional Information Tab */}
-                            <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`}>
+                            <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`} style={styles.wrapper}>
                                 <div className="product-anotherinfo-wrapper">
-                                    <ul>
-                                        <li><span>Cấu hình & Bộ nhớ:</span> 8GB RAM, 128GB Storage</li>
-                                        <li><span>Camera & Màn hình:</span> Camera 12MP, Màn hình 6.5 inch Full HD+</li>
-                                        <li><span>Pin & Sạc:</span> 5000mAh, Sạc nhanh 30W</li>
-                                        <li><span>Tiện ích:</span> NFC, Bluetooth 5.0, Face ID</li>
-                                        <li><span>Kết nối:</span> 4G, Wi-Fi 6, USB Type-C</li>
-                                        <li><span>Thiết kế & Chất liệu:</span> Kim loại, Màn hình cong 2.5D</li>
-                                    </ul>
+                                    {/* Cấu hình & Bộ nhớ Section */}
+                                    <div className="box-specifi" style={styles.boxSpecifi}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
+                                            <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
+                                            {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                        </a>
+                                        <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Apple A18 Pro 6 nhân</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Chip đồ họa (GPU): </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Apple CPU 6 nhân</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>RAM:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>8 GB</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Dung lượng lưu trữ:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>128 GB</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Danh bạ:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Không giới hạn</span></aside>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                    {/* Camera & Màn hình Section */}
+                                    <div className="box-specifi" style={styles.boxSpecifi}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
+                                            <h4 style={styles.h4}>Camera & Màn hình</h4>
+                                            {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                        </a>
+                                        <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Độ phân giải camera sau:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Chính 48 MP & Phụ 48 MP, 12 MP </span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Quay phim camera sau:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>6.5 inch Full HD+</span></aside>
+                                            </li>
+
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Đèn Flash camera sau:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Có</span></aside>
+                                            </li>
+
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Tính năng camera sau:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>6.5 inch Full HD+</span></aside>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Pin & Sạc Section */}
+                                    <div className="box-specifi" style={styles.boxSpecifi}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
+                                            <h4 style={styles.h4}>Pin & Sạc</h4>
+                                            {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                        </a>
+                                        <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Dung lượng pin:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>33 giờ</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Loại pin:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Li-Ion</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Hỗ trợ sạc tối đa:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>20 W</span></aside>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Tiện ích Section */}
+                                    <div className="box-specifi" style={styles.boxSpecifi}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('features')} style={styles.link}>
+                                            <h4 style={styles.h4}>Tiện ích</h4>
+                                            {isOpen.features ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                        </a>
+                                        <ul className="text-specifi" style={isOpen.features ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>NFC:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Có</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Bluetooth:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>5.0</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Face ID:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Có</span></aside>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Kết nối Section */}
+                                    <div className="box-specifi" style={styles.boxSpecifi}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
+                                            <h4 style={styles.h4}>Kết nối</h4>
+                                            {isOpen.connectivity ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                        </a>
+                                        <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Mạng di động:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Hỗ trợ 5G</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>SIM:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>1 Nano SIM & 1 eSIM</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Wi-Fi:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Wi-Fi 7</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Bluetooth:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>v5.3</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Cổng kết nối/sạc::</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Type-C</span></aside>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Thiết kế & Chất liệu Section */}
+                                    <div className="box-specifi" style={styles.boxSpecifi}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
+                                            <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
+                                            {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                        </a>
+                                        <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Thiết kế:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Nguyên khối</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Chất liệu:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Khung Titan & Mặt lưng kính cường lực</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Kích thước, khối lượng:
+                                                </aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Dài 163 mm - Ngang 77.6 mm - Dày 8.25 mm - Nặng 227 g</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Thời điểm ra mắt:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>09/2024</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Hãng:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>iPhone (Apple)</span></aside>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
+
+
                             {/* Reviews Tab */}
                             <div id="des-details2" className={`tab-pane ${activeTab === 'des-details2' ? 'active' : ''}`}>
                                 <div className="row">
@@ -257,7 +560,7 @@ const ShopDetails = () => {
                                                     <div className="review-top-wrap">
                                                         <div className="review-left">
                                                             <div className="review-name">
-                                                                <h4>White Lewis</h4>
+                                                                <h4 style={styles.h4}>White Lewis</h4>
                                                             </div>
                                                             <div className="review-rating">
                                                                 <IoMdStar className="star-filled" />
@@ -284,7 +587,7 @@ const ShopDetails = () => {
                                                     <div className="review-top-wrap">
                                                         <div className="review-left">
                                                             <div className="review-name">
-                                                                <h4>John Doe</h4>
+                                                                <h4 style={styles.h4}>John Doe</h4>
                                                             </div>
                                                             <div className="review-rating">
                                                                 <IoMdStar className="star-filled" />
@@ -307,7 +610,7 @@ const ShopDetails = () => {
                                     </div>
                                     <div className="col-lg-5">
                                         <div className="ratting-form-wrapper pl-50">
-                                            <h3>Add a Review</h3>
+                                            <h4 style={styles.h4}>Add a Review</h4>
                                             <div className="ratting-form">
                                                 <form action="#">
                                                     <div className="star-box">
@@ -378,7 +681,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -414,7 +717,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -449,7 +752,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -485,7 +788,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
