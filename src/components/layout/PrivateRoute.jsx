@@ -1,17 +1,14 @@
-// src/components/PrivateRoute.jsx
-import React from 'react';
-
 import { Navigate, Outlet } from 'react-router-dom';
 
 const PrivateRoute = () => {
-    // Check for token in localStorage (or use your own authentication logic)
-    const token = localStorage.getItem('authToken');
+    const isAuthenticated = localStorage.getItem('customRole') === 'admin'; // Check for authentication
 
-    if (!token) {
+    if (!isAuthenticated) {
+        // If not authenticated, redirect to the login page
         return <Navigate to="/login" />;
     }
 
-    return <Outlet />;
+    return <Outlet />; // Render child routes (nested routes) inside the protected area
 };
 
 export default PrivateRoute;

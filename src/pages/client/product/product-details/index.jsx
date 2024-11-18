@@ -28,20 +28,37 @@ const ShopDetails = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [activeTab, setActiveTab] = useState('des-details1'); // Default tab state
     const [isExpanded, setIsExpanded] = useState(false);
+    // const [phoneSpecs, setPhoneSpecs] = useState(null); // Trạng thái để lưu thông số điện thoại
+
 
     useEffect(() => {
-        // Fetch product data from API
+        // Lấy dữ liệu sản phẩm từ API
         fetch(`http://127.0.0.1:8000/api/san-pham/detail/${productId}`)
             .then((response) => response.json())
             .then((data) => {
-                const product = data; // Assuming 'data' is the product object
-                console.log(data);
+                const product = data?.sanPham; // Kiểm tra nếu dữ liệu có sanPham hay không
+                if (product) {
+                    console.log('Product Data:', product);
 
-                setProductData(product);
-                setSelectedImage({ img: product?.sanPham?.duong_dan_anh, zoomImg: product?.sanPham?.duong_dan_anh });
+                    // Cập nhật trạng thái với dữ liệu sản phẩm
+                    setProductData(product);
+                    setSelectedImage({
+                        img: product?.duong_dan_anh || '', // Đảm bảo có giá trị mặc định nếu không có ảnh
+                        zoomImg: product?.duong_dan_anh || '' // Cập nhật ảnh zoom tương ứng
+                    });
+
+                    // Lấy thông số điện thoại từ dữ liệu và lưu vào trạng thái
+                    // const specs = product?.thong_so_dien_thoai || null;
+                    // setPhoneSpecs(specs);
+                } else {
+                    console.error('Sản phẩm không tồn tại.');
+                }
             })
-            .catch((error) => console.error('Error fetching product data:', error));
+            .catch((error) => {
+                console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+            });
     }, [productId]);
+
 
     // Quantity handling functions
     const handleDecrease = () => {
@@ -88,6 +105,7 @@ const ShopDetails = () => {
             [section]: !prevState[section], // Toggle the specific section
         }));
     };
+
 
     const styles = {
         wrapper: {
@@ -354,102 +372,163 @@ const ShopDetails = () => {
                             {/* Additional Information Tab */}
                             <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`} style={styles.wrapper}>
                                 <div className="product-anotherinfo-wrapper">
-                                    {/* Cấu hình & Bộ nhớ Section */}
+                                    {/* Cấu hình & Bộ nhớ */}
+
                                     <div className="box-specifi" style={styles.boxSpecifi}>
-                                        <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('configuration')} style={styles.link}>
                                             <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
-                                            {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                            {isOpen.configuration ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                         </a>
-                                        <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                        <ul className="text-specifi" style={isOpen.configuration ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Apple A18 Pro 6 nhân</span></aside>
+                                                <aside style={styles.itemLabel}>Hệ điều hành:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.he_dieu_hanh}</span></aside>
                                             </li>
                                             <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Chip đồ họa (GPU): </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Apple CPU 6 nhân</span></aside>
+                                                <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.chip_xu_ly}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Tốc độ CPU:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.toc_do_cpu}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Chip đồ họa (GPU):</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.chip_do_hoa}</span></aside>
                                             </li>
                                             <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>RAM:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>8 GB</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.ram}</span></aside>
                                             </li>
                                             <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Dung lượng lưu trữ:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>128 GB</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.dung_luong_luu_tru}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Dung lượng còn lại (khả dụng) khoảng:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.dung_luong_con_lai}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Thẻ nhớ:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.the_nho}</span></aside>
                                             </li>
                                             <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Danh bạ:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Không giới hạn</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.danh_ba}</span></aside>
                                             </li>
-
                                         </ul>
                                     </div>
 
-                                    {/* Camera & Màn hình Section */}
+                                    {/* Camera & Màn hình */}
+
                                     <div className="box-specifi" style={styles.boxSpecifi}>
-                                        <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('camera_screen')} style={styles.link}>
                                             <h4 style={styles.h4}>Camera & Màn hình</h4>
-                                            {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                            {isOpen.camera_screen ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                         </a>
-                                        <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                        <ul className="text-specifi" style={isOpen.camera_screen ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Độ phân giải camera sau:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Chính 48 MP & Phụ 48 MP, 12 MP </span></aside>
+                                                <aside style={styles.itemLabel}>Độ phân giải camera sau:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.camera_sau_resolution}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Quay phim camera sau:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>6.5 inch Full HD+</span></aside>
+                                                <aside style={styles.itemLabel}>Quay phim camera sau:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.camera_sau_video}</span></aside>
                                             </li>
-
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Đèn Flash camera sau:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Có</span></aside>
+                                                <aside style={styles.itemLabel}>Đèn Flash camera sau:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.camera_sau_flash}</span></aside>
                                             </li>
-
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Tính năng camera sau:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>6.5 inch Full HD+</span></aside>
+                                                <aside style={styles.itemLabel}>Tính năng camera sau:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.camera_sau_tinh_nang}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Độ phân giải camera trước:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.camera_truoc_resolution}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Tính năng camera trước:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.camera_truoc_tinh_nang}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Công nghệ màn hình:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.cong_nghe_man_hinh}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Độ phân giải màn hình:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.man_hinh_resolution}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Màn hình rộng:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.man_hinh_rong}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Độ sáng tối đa:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.man_hinh_do_sang_max}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Mặt kính cảm ứng:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.mat_kinh_cam_ung}</span></aside>
                                             </li>
                                         </ul>
                                     </div>
 
-                                    {/* Pin & Sạc Section */}
+                                    {/* Pin & Sạc */}
+
                                     <div className="box-specifi" style={styles.boxSpecifi}>
-                                        <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('battery_charging')} style={styles.link}>
                                             <h4 style={styles.h4}>Pin & Sạc</h4>
-                                            {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                            {isOpen.battery_charging ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                         </a>
-                                        <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                        <ul className="text-specifi" style={isOpen.battery_charging ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Dung lượng pin:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>33 giờ</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.dung_luong_pin}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Loại pin:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Li-Ion</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.loai_pin}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Hỗ trợ sạc tối đa:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>20 W</span></aside>
+                                                <aside style={styles.itemLabel}>Hỗ trợ sạc tối đa:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.sac_toi_da}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Sạc kèm theo máy:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.sac_kem_theo}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Công nghệ pin:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.cong_nghe_pin}</span></aside>
                                             </li>
                                         </ul>
                                     </div>
 
-                                    {/* Tiện ích Section */}
+                                    {/* Tiên ích */}
+
                                     <div className="box-specifi" style={styles.boxSpecifi}>
                                         <a href="javascript:;" onClick={() => toggleDropdown('features')} style={styles.link}>
                                             <h4 style={styles.h4}>Tiện ích</h4>
@@ -457,23 +536,44 @@ const ShopDetails = () => {
                                         </a>
                                         <ul className="text-specifi" style={isOpen.features ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>NFC:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Có</span></aside>
+                                                <aside style={styles.itemLabel}>Bảo mật nâng cao:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.bao_mat_nang_cao}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Bluetooth:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>5.0</span></aside>
+                                                <aside style={styles.itemLabel}>Tính năng đặc biệt:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.tinh_nang_dac_biet}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Face ID:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Có</span></aside>
+                                                <aside style={styles.itemLabel}>Kháng nước, bụi:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.khang_nuoc_bui}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Ghi âm:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.ghi_am}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Radio:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.radio}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Xem phim:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.xem_phim}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Nghe nhạc:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.nghe_nhac}</span></aside>
                                             </li>
                                         </ul>
                                     </div>
 
-                                    {/* Kết nối Section */}
+                                    {/* Kết nối */}
+
                                     <div className="box-specifi" style={styles.boxSpecifi}>
                                         <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
                                             <h4 style={styles.h4}>Kết nối</h4>
@@ -482,64 +582,77 @@ const ShopDetails = () => {
                                         <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Mạng di động:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Hỗ trợ 5G</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.mang_di_dong}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>SIM:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>1 Nano SIM & 1 eSIM</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.sim}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Wi-Fi:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Wi-Fi 7</span></aside>
+                                                <aside style={styles.itemLabel}>Wifi:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.wifi}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Bluetooth:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>v5.3</span></aside>
+                                                <aside style={styles.itemLabel}>GPS:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.gps}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Cổng kết nối/sạc::</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Type-C</span></aside>
+                                                <aside style={styles.itemLabel}>Bluetooth:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.bluetooth}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Cổng kết nối/sạc:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.cong_ket_noi_sac}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Jack tai nghe:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.jack_tai_nghe}</span></aside>
+                                            </li>
+                                            <div style={styles.itemSeparator} />
+                                            <li style={styles.textSpecifiItem}>
+                                                <aside style={styles.itemLabel}>Kết nối khác:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.ket_noi_khac}</span></aside>
                                             </li>
                                         </ul>
                                     </div>
 
-                                    {/* Thiết kế & Chất liệu Section */}
+                                    {/* Thiết kế & Chất liệu */}
+
                                     <div className="box-specifi" style={styles.boxSpecifi}>
-                                        <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
+                                        <a href="javascript:;" onClick={() => toggleDropdown('design_material')} style={styles.link}>
                                             <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
-                                            {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                            {isOpen.design_material ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                         </a>
-                                        <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                        <ul className="text-specifi" style={isOpen.design_material ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Thiết kế:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Nguyên khối</span></aside>
+                                                <aside style={styles.itemLabel}>Thiết kế:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.thiet_ke}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Chất liệu:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Khung Titan & Mặt lưng kính cường lực</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.chat_lieu}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
-                                                <aside style={styles.itemLabel}>Kích thước, khối lượng:
-                                                </aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>Dài 163 mm - Ngang 77.6 mm - Dày 8.25 mm - Nặng 227 g</span></aside>
+                                                <aside style={styles.itemLabel}>Kích thước, khối lượng:</aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.kich_thuoc_khoi_luong}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Thời điểm ra mắt:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>09/2024</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.thoi_diem_ra_mat}</span></aside>
                                             </li>
-                                            <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+                                            <div style={styles.itemSeparator} />
                                             <li style={styles.textSpecifiItem}>
                                                 <aside style={styles.itemLabel}>Hãng:</aside>
-                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>iPhone (Apple)</span></aside>
+                                                <aside style={styles.itemValue}><span style={styles.itemValueSpan}>{productData?.hang}</span></aside>
                                             </li>
                                         </ul>
                                     </div>
