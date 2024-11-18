@@ -177,13 +177,17 @@ const ShopDetails = () => {
                         {/* Product Image Section */}
                         <div className="col-xl-7 col-lg-7 col-md-12">
                             <div className="product-details-img mr-20 product-details-tab">
+
                                 {/* <div id="gallery" className="product-dec-slider-2">
+
                                     {productData?.sanPham?.hinh_anh_san_phams?.map((image) => (
                                         <a key={image?.id} data-image={image?.duong_dan_hinh_anh} data-zoom-image={image?.duong_dan_hinh_anh}>
                                             <img src={image?.duong_dan_hinh_anh} />
                                         </a>
                                     ))}
+
                                 </div> */}
+
 
                                 <div className="zoompro-wrap zoompro-2 pl-20">
                                     <div className="zoompro-border zoompro-span">
@@ -270,10 +274,6 @@ const ShopDetails = () => {
                                             </ul>
                                         </div>
                                     </div>
-
-
-
-
                                     {/* Storage Size Selection */}
                                     <div className="pro-details-size">
                                         <span>Dung lượng</span>
@@ -331,10 +331,6 @@ const ShopDetails = () => {
                                         <li><a href="#">Electronic</a></li>
                                     </ul>
                                 </div>
-
-
-
-
                                 {/* Social Share Buttons */}
                                 <div className="pro-details-social">
                                     <ul>

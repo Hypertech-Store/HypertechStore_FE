@@ -8972,8 +8972,11 @@ a.default-btn {
 
 .product-details-content .pro-details-quality .pro-details-cart button:hover {
     border: none;
+
     background-color: #a749ff;
+
 }
+
 
 .product-details-content .pro-details-quality .pro-details-wishlist a {
     font-size: 23px;
