@@ -48,7 +48,7 @@ const Header = () => {
             <ul id="iq-sidebar-toggle" className="iq-menu">
               {/* <li className="iq-menu-title"><i className="ri-subtract-line" /><span>Dashboard</span></li> */}
               <NavLink to={'dashboard'} className={`${location.pathname.startsWith('dashboard') ? "active" : ""} iq-menu-item`}>
-                <a className="iq-waves-effect"><i className="ri-home-4-line" /><span>Dashboard</span></a>
+                <a className="iq-waves-effect"><i className="ri-home-4-line" /><span>Bảng điều khiển</span></a>
               </NavLink>
               {/* <li>
                 <a href="dashboard-1.html" className="iq-waves-effect"><i className="ri-home-3-line" /><span>Dashboard
@@ -94,20 +94,20 @@ const Header = () => {
                 <Link to={'user-list'} className="iq-waves-effect"><i className="ri-user-line" /><span>User</span></Link>
               </li> */}
               <NavLink to={'user-list'} className={`${location.pathname.startsWith('user-list') ? "active" : ""} iq-menu-item`}>
-                <a className="iq-waves-effect"><i className="ri-user-line" /><span>User</span></a>
+                <a className="iq-waves-effect"><i className="ri-user-line" /><span>Khách hàng</span></a>
               </NavLink>
               {/* <li><a href="calendar.html" className="iq-waves-effect"><i className="ri-calendar-2-line" /><span>Calendar</span></a></li> */}
-              <li className="iq-menu-item"><a href="chat.html" className="iq-waves-effect"><i className="ri-message-line" /><span>Chat</span></a>
+              <li className="iq-menu-item"><a href="chat.html" className="iq-waves-effect"><i className="ri-message-line" /><span>Tin nhắn</span></a>
               </li>
               <li className="iq-menu-item">
-                <a href="#ecommerce" className="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded={isToggle.product} onClick={() => setIsToggle({ auth: false, product: !isToggle.product, user: false })}><i className="ri-shopping-cart-line" /><span>E-commerce</span><i className="ri-arrow-right-s-line iq-arrow-right" /></a>
+                <a href="#ecommerce" className="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded={isToggle.product} onClick={() => setIsToggle({ auth: false, product: !isToggle.product, user: false })}><i className="ri-shopping-cart-line" /><span>Sản phẩm</span><i className="ri-arrow-right-s-line iq-arrow-right" /></a>
                 <ul id="ecommerce" className={`iq-submenu collapse ${isToggle.product ? "show" : ""}`} data-parent="#iq-sidebar-toggle">
-                  <li><a href="e-commerce-product-list.html"><i className="ri-file-list-line" />Product Listing</a>
+                  <li><a href="e-commerce-product-list.html"><i className="ri-file-list-line" />Danh sách sản phẩm</a>
                   </li>
-                  <li><a href="e-commerce-product-detail.html"><i className="ri-pages-line" />Product Details</a>
+                  <li><a href="e-commerce-product-detail.html"><i className="ri-pages-line" />Chi tiết sản phẩm</a>
                   </li>
-                  <li><a href="e-commerce-checkout.html"><i className="ri-shopping-cart-2-line" />Checkout</a></li>
-                  <li><a href="e-commerce-wishlist.html"><i className="ri-heart-line" />Wishlist</a></li>
+                  <li><a href="e-commerce-checkout.html"><i className="ri-shopping-cart-2-line" />Thanh toán</a></li>
+                  <li><a href="e-commerce-wishlist.html"><i className="ri-heart-line" />Yêu thích</a></li>
                 </ul>
               </li>
               {/* <li className="iq-menu-title"><i className="ri-subtract-line" /><span>Components</span></li>

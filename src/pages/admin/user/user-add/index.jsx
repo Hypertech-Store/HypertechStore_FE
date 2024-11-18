@@ -9,7 +9,7 @@ const UserAdd = () => {
           <div className="iq-card">
             <div className="iq-card-header d-flex justify-content-between">
               <div className="iq-header-title">
-                <h4 className="card-title">Add New User</h4>
+                <h4 className="card-title">Thêm người dùng mới</h4>
               </div>
             </div>
             <div className="iq-card-body">
@@ -101,7 +101,7 @@ const UserAdd = () => {
           <div className="iq-card">
             <div className="iq-card-header d-flex justify-content-between">
               <div className="iq-header-title">
-                <h4 className="card-title">New User Information</h4>
+                <h4 className="card-title">Thông tin người dùng mới</h4>
               </div>
             </div>
             <div className="iq-card-body">
@@ -127,21 +127,12 @@ const UserAdd = () => {
                       />
                     </div>
                     <div className="form-group col-md-6">
-                      <label htmlFor="add1">Street Address 1:</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="add1"
-                        placeholder="Street Address 1"
-                      />
-                    </div>
-                    <div className="form-group col-md-6">
-                      <label htmlFor="add2">Street Address 2:</label>
+                      <label htmlFor="add2">Địa chỉ:</label>
                       <input
                         type="text"
                         className="form-control"
                         id="add2"
-                        placeholder="Street Address 2"
+                        placeholder="Địa chỉ"
                       />
                     </div>
                     <div className="form-group col-md-12">
@@ -242,13 +233,13 @@ const UserAdd = () => {
                     </div>
                   </div>
                   <div className="d-flex gap-3">
-                  <button type="submit" className="btn btn-primary mt-3">
-                    Add New User
-                  </button>
+                    <button type="submit" className="btn btn-primary mt-3">
+                      Add New User
+                    </button>
 
-                  <Link to={'/admin/user-list'} className="btn btn-outline-primary mt-3">
-                    Back
-                  </Link>
+                    <Link to={'/admin/user-list'} className="btn btn-outline-primary mt-3">
+                      Back
+                    </Link>
                   </div>
                 </form>
               </div>

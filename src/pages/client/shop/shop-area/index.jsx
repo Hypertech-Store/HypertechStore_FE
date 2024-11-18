@@ -140,67 +140,67 @@ const Shop = () => {
             });
     };
 
-    const addToWishlist = (productId) => {
-        const customerId = userId;  // Lấy customer ID từ userId hoặc từ localStorage/session nếu cần
+    // const addToWishlist = (productId) => {
+    //     const customerId = userId;  // Lấy customer ID từ userId hoặc từ localStorage/session nếu cần
 
-        const data = {
-            khach_hang_id: customerId,
-            san_pham_id: productId,
-        };
+    //     const data = {
+    //         khach_hang_id: customerId,
+    //         san_pham_id: productId,
+    //     };
 
-        axios.post('http://127.0.0.1:8000/api/danh-sach-yeu-thich/addWishlist', data)
-            .then(response => {
-                // Kiểm tra phản hồi API
-                console.log('API response:', response.data);
+    //     axios.post('http://127.0.0.1:8000/api/danh-sach-yeu-thich/addWishlist', data)
+    //         .then(response => {
+    //             // Kiểm tra phản hồi API
+    //             console.log('API response:', response.data);
 
-                // Nếu sản phẩm đã có trong danh sách yêu thích
-                if (response.data && response.data.message === 'Sản phẩm đã có trong danh sách yêu thích.') {
-                    toast.info('Sản phẩm này đã có trong danh sách yêu thích.', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
-                }
-                // Nếu sản phẩm đã được thêm thành công vào danh sách yêu thích
-                else if (response.data && response.data.message === 'Sản phẩm đã được thêm vào danh sách yêu thích.') {
-                    setWishlist(prev => new Set(prev).add(productId));
-                    toast.success('Bạn đã thêm thành công sản phẩm vào yêu thích!', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
-                }
-                else {
-                    // Nếu API trả về thông báo không xác định, xử lý như một lỗi
-                    console.error('Failed to add product to wishlist:', response.data);
-                    toast.error('Đã xảy ra lỗi khi thêm sản phẩm vào yêu thích!', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error adding product to wishlist:', error);
-                toast.error('Đã xảy ra lỗi khi thêm sản phẩm vào yêu thích!', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                });
-            });
-    };
+    //             // Nếu sản phẩm đã có trong danh sách yêu thích
+    //             if (response.data && response.data.message === 'Sản phẩm đã có trong danh sách yêu thích.') {
+    //                 toast.info('Sản phẩm này đã có trong danh sách yêu thích.', {
+    //                     position: "top-right",
+    //                     autoClose: 5000,
+    //                     hideProgressBar: false,
+    //                     closeOnClick: true,
+    //                     pauseOnHover: true,
+    //                     draggable: true,
+    //                 });
+    //             }
+    //             // Nếu sản phẩm đã được thêm thành công vào danh sách yêu thích
+    //             else if (response.data && response.data.message === 'Sản phẩm đã được thêm vào danh sách yêu thích.') {
+    //                 setWishlist(prev => new Set(prev).add(productId));
+    //                 toast.success('Bạn đã thêm thành công sản phẩm vào yêu thích!', {
+    //                     position: "top-right",
+    //                     autoClose: 5000,
+    //                     hideProgressBar: false,
+    //                     closeOnClick: true,
+    //                     pauseOnHover: true,
+    //                     draggable: true,
+    //                 });
+    //             }
+    //             else {
+    //                 // Nếu API trả về thông báo không xác định, xử lý như một lỗi
+    //                 console.error('Failed to add product to wishlist:', response.data);
+    //                 toast.error('Đã xảy ra lỗi khi thêm sản phẩm vào yêu thích!', {
+    //                     position: "top-right",
+    //                     autoClose: 5000,
+    //                     hideProgressBar: false,
+    //                     closeOnClick: true,
+    //                     pauseOnHover: true,
+    //                     draggable: true,
+    //                 });
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Error adding product to wishlist:', error);
+    //             toast.error('Đã xảy ra lỗi khi thêm sản phẩm vào yêu thích!', {
+    //                 position: "top-right",
+    //                 autoClose: 5000,
+    //                 hideProgressBar: false,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: true,
+    //             });
+    //         });
+    // };
 
     // Define the handleSortChange function here
     const handleSortChange = (event) => {
@@ -350,6 +350,15 @@ const Shop = () => {
                                                     saleProduct ? saleProduct.sale_theo_phan_tram : null
                                                 );
 
+                                                // Tính toán giá đã giảm
+                                                const originalPrice = parseFloat(product.gia);
+                                                let discountedPrice = originalPrice;
+                                                if (saleProduct && saleProduct.sale_theo_phan_tram) {
+                                                    const discountPercentage = parseFloat(saleProduct.sale_theo_phan_tram);
+                                                    const discountAmount = (originalPrice * discountPercentage) / 100;
+                                                    discountedPrice = originalPrice - discountAmount;
+                                                }
+
                                                 return (
                                                     <div key={product.id} className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                         <div className="product-wrap mb-25 scroll-zoom">
@@ -370,7 +379,7 @@ const Shop = () => {
                                                                         {(!saleProduct || !saleProduct.sale_theo_phan_tram) && label === "New" && isNewProduct(product.created_at) && "New"}
                                                                     </span>
                                                                 )}
-                                                                <div className="product-action">
+                                                                {/* <div className="product-action">
                                                                     <div className="pro-same-action pro-wishlist">
                                                                         <a onClick={() => addToWishlist(product.id)}><CiHeart /></a>
                                                                     </div>
@@ -386,7 +395,7 @@ const Shop = () => {
                                                                     <div className="pro-same-action pro-quickview">
                                                                         <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><IoEyeOutline /></a>
                                                                     </div>
-                                                                </div>
+                                                                </div> */}
                                                             </div>
                                                             <div className="product-content text-center">
                                                                 <h3><a href={`/chi-tiet-san-pham/${product.id}`}>{product.ten_san_pham}</a></h3>
@@ -399,9 +408,13 @@ const Shop = () => {
                                                                 </div>
                                                                 <div className="product-price">
                                                                     <span>
-                                                                        {parseFloat(product.gia).toLocaleString('en-US', { minimumFractionDigits: product.gia % 1 === 0 ? 0 : 2 })} VNĐ
+                                                                        {new Intl.NumberFormat('vi-VN').format(discountedPrice)} VNĐ
                                                                     </span>
-                                                                    <span className="old">13.500.000 VNĐ</span>
+                                                                    {saleProduct && (
+                                                                        <span className="old">
+                                                                            {new Intl.NumberFormat('vi-VN').format(originalPrice)} VNĐ
+                                                                        </span>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                         </div>
