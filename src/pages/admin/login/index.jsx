@@ -5,52 +5,48 @@ import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import background from "../../../assets/img/illustrations/boy-with-rocket-light.png";
 
 const LoginPage = () => {
-    document.title = "Hypertech Store - Đăng nhập hệ thống Admin"
+    document.title = "Hypertech Store - Đăng nhập hệ thống Admin";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    // Handle login with API request
-    const handleLogin = async (e) => {
+    // Danh sách tài khoản tự tạo
+    const users = [
+        { email: "admin@hypertech.com", password: "admin123", role: 0 }, // Admin
+        { email: "staff@hypertech.com", password: "staff123", role: 1 }, // Staff
+    ];
+
+    // Handle login with local user data
+    const handleLogin = (e) => {
         e.preventDefault();
 
-        try {
-            // API call to get users
-            const response = await fetch("http://127.0.0.1:8000/api/quan-tri-viens/getAll");
-            const data = await response.json();
+        // Tìm người dùng trong danh sách cục bộ
+        const user = users.find((user) => user.email === email);
 
-            // Find the user matching the provided email
-            const user = data.data.find((user) => user.email === email);
+        if (user) {
+            if (user.password === password) {
+                // Kiểm tra vai trò của người dùng
+                if (user.role === 0 || user.role === 1) {
+                    localStorage.setItem("customRole", user.role === 0 ? "admin" : "staff"); // Lưu role vào localStorage
 
-            if (user) {
-                // Check if password matches (ensure the password is hashed and compare accordingly)
-                // You need to add logic to compare hashed passwords, using a library like bcrypt.js or other
-                if (user.mat_khau === password) { // Adjust this for hashed password comparison
-                    if (user.role === 0 || user.role === 1) { // Check if role is admin (0) or staff (1)
-                        localStorage.setItem("customRole", user.role === 0 ? "admin" : "staff"); // Save role to localStorage
+                    toast.success("Đăng nhập thành công", {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: true,
+                    });
 
-                        toast.success("Đăng nhập thành công", {
-                            position: "top-right",
-                            autoClose: 2000,
-                            hideProgressBar: true,
-                        });
-
-                        setTimeout(() => {
-                            navigate("/admin"); // Redirect to /admin
-                        }, 2000);
-                    } else {
-                        setErrorMessage("Access denied. Only admins and staff can log in.");
-                    }
+                    setTimeout(() => {
+                        navigate("/admin"); // Chuyển hướng đến /admin
+                    }, 2000);
                 } else {
-                    setErrorMessage("Invalid email or password.");
+                    setErrorMessage("Access denied. Only admins and staff can log in.");
                 }
             } else {
-                setErrorMessage("User not found.");
+                setErrorMessage("Invalid email or password.");
             }
-        } catch (error) {
-            console.error("Error during login:", error);
-            setErrorMessage("An error occurred while trying to log in.");
+        } else {
+            setErrorMessage("User not found.");
         }
     };
 
