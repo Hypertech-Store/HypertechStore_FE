@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LayoutClient from "./components/layout/client/layout-client";
 import LayoutAdmin from "./components/layout/admin/layout-admin";
 
@@ -22,8 +22,10 @@ import Checkout from "./pages/client/checkout";
 // Admin pages
 import AdminLogin from "./pages/admin/login";
 import Dashboard from "./pages/admin/dashboard";
-import UserList from "./pages/admin/user/user-list";
-import UserAdd from "./pages/admin/user/user-add";
+import StaffList from "./pages/admin/staff/staff-list";
+import StaffAdd from "./pages/admin/staff/staff-add";
+import StaffEdit from "./pages/admin/staff/staff-edit";
+// import ListProduct from "./pages/admin/product/listProduct";
 
 // PrivateRoute Component
 import PrivateRoute from "../src/components/layout/PrivateRoute.jsx"; // Import the PrivateRoute component
@@ -51,13 +53,15 @@ const Router = () => {
       </Route>
 
       {/* Admin Routes */}
-      <Route path="/login" element={<AdminLogin />} />  {/* Admin login page */}
-      <Route path="/admin" element={<PrivateRoute />}>  {/* Wrap /admin routes with PrivateRoute */}
-        <Route element={<LayoutAdmin />}>
-          <Route index element={<Navigate to="dashboard" />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="user-list" element={<UserList />} />
-          <Route path="user-add" element={<UserAdd />} />
+      <Route path="/login" element={<AdminLogin />} />
+      {/* Wrap /admin routes with PrivateRoute */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/admin" element={<LayoutAdmin />}>
+          <Route index element={<Dashboard />} />
+          <Route path="danh-sach-nhan-vien" element={<StaffList />} />
+          <Route path="them-nhan-vien" element={<StaffAdd />} />
+          <Route path="sua-nhan-vien/:id" element={<StaffEdit />} />
+          {/* Add more protected routes under /admin as needed */}
         </Route>
       </Route>
 

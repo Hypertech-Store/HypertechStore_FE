@@ -1,136 +1,131 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import Slider from 'react-slick';
-import logo from "../../../../src/assets/images/logo-white.png";
-import login from "../../../../src/assets/images/login/1.png";
-import "../../../assets/css/bootstrap.min.css";
-import "../../../assets/css/style.css";
-import "../../../assets/css/responsive.css";
-import "../../../assets/css/typography.css";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+import background from "../../../assets/img/illustrations/boy-with-rocket-light.png";
+
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(true);  // State to handle loading spinner visibility
-    const navigate = useNavigate();  // Use useNavigate instead of useHistory
+    document.title = "Hypertech Store - Đăng nhập hệ thống Admin"
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        // Simulating a loading process and then hiding the spinner
-        const timer = setTimeout(() => {
-            setIsLoading(false); // Hide the loading spinner after 2 seconds (or any custom logic)
-        }, 2000); // Adjust time as needed
-
-        // Cleanup function to clear the timer if the component unmounts
-        return () => clearTimeout(timer);
-    }, []);
-
-    const settings = {
-        dots: true, // Enable dots navigation
-        infinite: true, // Infinite loop
-        speed: 500, // Transition speed
-        autoplay: true, // Enable auto-play
-        autoplaySpeed: 2000, // Speed of auto-play (in ms)
-        slidesToShow: 1, // Show 1 slide at a time
-        slidesToScroll: 1, // Scroll 1 slide at a time
-        arrows: false, // Disable the next and prev arrows
-    };
-
-    const handleSubmit = (e) => {
+    // Handle login with API request
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        // Assuming backend authentication here
-        if (email === 'admin@example.com' && password === 'admin123') {
-            localStorage.setItem('authToken', 'yourAuthTokenHere'); // Store token
-            navigate('/admin');  // Redirect to the admin page using navigate
-            toast.success("Bạn đã đăng nhập hệ thống quản trị viên thành công!"); // Show success toast
-        } else {
-            toast.error("Có lỗi xảy ra vui lòng thử lại!"); // Show error toast
+        try {
+            // API call to get users
+            const response = await fetch("http://127.0.0.1:8000/api/quan-tri-viens/getAll");
+            const data = await response.json();
+
+            // Find the user matching the provided email
+            const user = data.data.find((user) => user.email === email);
+
+            if (user) {
+                // Check if password matches (ensure the password is hashed and compare accordingly)
+                // You need to add logic to compare hashed passwords, using a library like bcrypt.js or other
+                if (user.mat_khau === password) { // Adjust this for hashed password comparison
+                    if (user.role === 0 || user.role === 1) { // Check if role is admin (0) or staff (1)
+                        localStorage.setItem("customRole", user.role === 0 ? "admin" : "staff"); // Save role to localStorage
+
+                        toast.success("Đăng nhập thành công", {
+                            position: "top-right",
+                            autoClose: 2000,
+                            hideProgressBar: true,
+                        });
+
+                        setTimeout(() => {
+                            navigate("/admin"); // Redirect to /admin
+                        }, 2000);
+                    } else {
+                        setErrorMessage("Access denied. Only admins and staff can log in.");
+                    }
+                } else {
+                    setErrorMessage("Invalid email or password.");
+                }
+            } else {
+                setErrorMessage("User not found.");
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            setErrorMessage("An error occurred while trying to log in.");
         }
     };
 
     return (
-        <div>
-            {/* Loading Spinner */}
-            {isLoading && (
-                <div id="loading">
-                    <div id="loading-center">
-                        {/* Spinner Icon */}
-                        <div className="spinner"></div>
+        <div className="authentication-wrapper authentication-cover">
+            <ToastContainer />
+            <div className="authentication-inner row m-0">
+                {/* Left Text */}
+                <div className="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
+                    <div className="w-100 d-flex justify-content-center">
+                        <img
+                            src={background}
+                            className="img-fluid"
+                            alt="Login image"
+                            width={650}
+                            style={{ height: "86vh" }}
+                        />
                     </div>
                 </div>
-            )}
-
-            {/* Login Form */}
-            <section className="sign-in-page">
-                <div className="container bg-white mt-5 p-0">
-                    <div className="row no-gutters">
-                        <div className="col-sm-6 align-self-center">
-                            <div className="sign-in-from">
-                                <h1 className="mb-0 dark-signin">Đăng nhập</h1>
-                                <p className="mt-3">Nhập email và mật khẩu của bạn để truy cập vào bảng quản trị.</p>
-                                <form className="mt-4" onSubmit={handleSubmit}>
-                                    <div className="form-group">
-                                        <label htmlFor="exampleInputEmail1">Email</label>
-                                        <input
-                                            type="email"
-                                            className="form-control mb-0"
-                                            id="exampleInputEmail1"
-                                            placeholder="Địa chỉ email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="exampleInputPassword1">Mật khẩu</label>
-                                        <a href="#" className="float-right">Quên mật khẩu?</a>
-                                        <input
-                                            type="password"
-                                            className="form-control mb-0"
-                                            id="exampleInputPassword1"
-                                            placeholder="Mật khẩu"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="d-inline-block w-100">
-                                        <div className="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                            <label className="custom-control-label" htmlFor="customCheck1">Nhớ tài khoản</label>
-                                        </div>
-                                        <button type="submit" className="btn btn-primary float-right">Đăng nhập</button>
-                                    </div>
-                                </form>
+                {/* /Left Text */}
+                {/* Login */}
+                <div className="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
+                    <div className="w-px-400 mx-auto mt-12 pt-5">
+                        <h4 className="mb-1">Welcome to hypertech! 👋</h4>
+                        <p className="mb-6">
+                            Please sign in to your account and start the adventure
+                        </p>
+                        {errorMessage && (
+                            <div className="alert alert-danger" role="alert">
+                                {errorMessage}
                             </div>
-                        </div>
-                        <div className="col-sm-6 text-center">
-                            <div className="sign-in-detail text-white">
-                                <a className="sign-in-logo mb-5" href="#">
-                                    <img src={logo} className="img-fluid" alt="logo" />
-                                </a>
-                                {/* Slick Slider */}
-                                <Slider {...settings}>
-                                    <div className="item">
-                                        <img src={login} className="img-fluid mb-4" alt="login-1" />
-                                        <h4 className="mb-1 text-white">Manage your orders</h4>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content.</p>
-                                    </div>
-                                    <div className="item">
-                                        <img src={login} className="img-fluid mb-4" alt="login-2" />
-                                        <h4 className="mb-1 text-white">Easy Shopping Experience</h4>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content.</p>
-                                    </div>
-                                    <div className="item">
-                                        <img src={login} className="img-fluid mb-4" alt="login-3" />
-                                        <h4 className="mb-1 text-white">Track Your Orders</h4>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content.</p>
-                                    </div>
-                                </Slider>
+                        )}
+                        <form onSubmit={handleLogin} className="mb-6">
+                            <div className="mb-6">
+                                <label htmlFor="email" className="form-label">
+                                    Email
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Nhập email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    autoFocus
+                                />
                             </div>
-                        </div>
+                            <div className="mb-6 form-password-toggle">
+                                <label className="form-label" htmlFor="password">
+                                    Password
+                                </label>
+                                <div className="input-group input-group-merge">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        className="form-control"
+                                        name="password"
+                                        placeholder="Nhâp mật khẩu"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    <span className="input-group-text cursor-pointer">
+                                        <i className="bx bx-hide" />
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="submit" className="btn btn-primary d-grid w-100">
+                                Sign in
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </section>
+                {/* /Login */}
+            </div>
         </div>
     );
 };
