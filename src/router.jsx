@@ -28,11 +28,25 @@ import StaffEdit from "./pages/admin/staff/staff-edit";
 // import ListProduct from "./pages/admin/product/listProduct";
 
 // PrivateRoute Component
-import PrivateRoute from "../src/components/layout/PrivateRoute.jsx"; // Import the PrivateRoute component
+// import PrivateRoute from "../src/components/layout/PrivateRoute.jsx"; // Import the PrivateRoute component
 
 const Router = () => {
   return (
     <Routes>
+
+      {/* Admin Routes */}
+      <Route path="/login" element={<AdminLogin />} />
+      {/* Wrap /admin routes with PrivateRoute */}
+      {/* <Route element={<PrivateRoute />}> */}
+      <Route path="/admin" element={<LayoutAdmin />}>
+        <Route index element={<Dashboard />} />
+        <Route path="danh-sach-nhan-vien" element={<StaffList />} />
+        <Route path="them-nhan-vien" element={<StaffAdd />} />
+        <Route path="sua-nhan-vien/:id" element={<StaffEdit />} />
+        {/* Add more protected routes under /admin as needed */}
+      </Route>
+      {/* </Route> */}
+
       {/* Client Routes */}
       <Route path="/" element={<LayoutClient />}>
         <Route index element={<HomeClient />} />
@@ -51,20 +65,6 @@ const Router = () => {
         <Route path="gio-hang" element={<Cart />} />
         <Route path="thanh-toan" element={<Checkout />} />
       </Route>
-
-      {/* Admin Routes */}
-      <Route path="/login" element={<AdminLogin />} />
-      {/* Wrap /admin routes with PrivateRoute */}
-      <Route element={<PrivateRoute />}>
-        <Route path="/admin" element={<LayoutAdmin />}>
-          <Route index element={<Dashboard />} />
-          <Route path="danh-sach-nhan-vien" element={<StaffList />} />
-          <Route path="them-nhan-vien" element={<StaffAdd />} />
-          <Route path="sua-nhan-vien/:id" element={<StaffEdit />} />
-          {/* Add more protected routes under /admin as needed */}
-        </Route>
-      </Route>
-
     </Routes>
   );
 };

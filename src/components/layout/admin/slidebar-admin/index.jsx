@@ -2,34 +2,34 @@ import { useState } from "react";
 
 import { Link } from 'react-router-dom';
 
-// Import các tệp CSS (nếu bạn sử dụng Webpack hoặc Vite, bạn có thể import trực tiếp)
-import '../../../../assets/vendor/fonts/boxicons.css';
-import '../../../../assets/vendor/fonts/fontawesome.css';
-import '../../../../assets/vendor/fonts/flag-icons.css';
+// // Import các tệp CSS (nếu bạn sử dụng Webpack hoặc Vite, bạn có thể import trực tiếp)
+// import '../../../../assets/vendor/fonts/boxicons.css';
+// import '../../../../assets/vendor/fonts/fontawesome.css';
+// import '../../../../assets/vendor/fonts/flag-icons.css';
 import '../../../../assets/vendor/css/rtl/core.css';
-import '../../../../assets/vendor/css/rtl/theme-default.css';
-import '../../../../assets/css/demo.css';
-import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css';
-import '../../../../assets/vendor/libs/typeahead-js/typeahead.css';
-import '../../../../assets/vendor/libs/apex-charts/apex-charts.css';
+// import '../../../../assets/vendor/css/rtl/theme-default.css';
+// import '../../../../assets/css/demo.css';
+// import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css';
+// import '../../../../assets/vendor/libs/typeahead-js/typeahead.css';
+// import '../../../../assets/vendor/libs/apex-charts/apex-charts.css';
 
 
-// Import các thư viện JavaScript
-import '../../../../assets/vendor/libs/jquery/jquery.js';
-import '../../../../assets/vendor/libs/popper/popper.js';
-import '../../../../assets/vendor/js/bootstrap.js';
-import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js';
-import '../../../../assets/vendor/libs/hammer/hammer.js';
-// import '../../../../assets/vendor/libs/i18n/i18n.js';
-import '../../../../assets/vendor/libs/typeahead-js/typeahead.js';
-import '../../../../assets/vendor/js/menu.js';
+// // Import các thư viện JavaScript
+// import '../../../../assets/vendor/libs/jquery/jquery.js';
+// import '../../../../assets/vendor/libs/popper/popper.js';
+// import '../../../../assets/vendor/js/bootstrap.js';
+// import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js';
+// import '../../../../assets/vendor/libs/hammer/hammer.js';
+// // import '../../../../assets/vendor/libs/i18n/i18n.js';
+// import '../../../../assets/vendor/libs/typeahead-js/typeahead.js';
+// import '../../../../assets/vendor/js/menu.js';
 
-// Vendors JS
-import '../../../../assets/vendor/libs/apex-charts/apexcharts.js';
-import '../../../../assets/vendor/js/helpers.js';
-import '../../../../assets/js/config.js';
-import '../../../../assets/js/main.js';
-import '../../../../assets/js/dashboards-analytics.js';
+// // Vendors JS
+// import '../../../../assets/vendor/libs/apex-charts/apexcharts.js';
+// import '../../../../assets/vendor/js/helpers.js';
+// import '../../../../assets/js/config.js';
+// import '../../../../assets/js/main.js';
+// import '../../../../assets/js/dashboards-analytics.js';
 import logo from "../../../../assets/img/logo/logo1.png";
 const SliderBar = () => {
     const [menuState, setMenuState] = useState({}); // Trạng thái động cho menu

@@ -60,7 +60,7 @@ const Header = () => {
             <i className="bx bx-menu bx-md" />
           </a>
         </div>
-        <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style={{ "margin-left": "10pc" }}>
+        <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse" >
           {/* Search */}
           <div className="navbar-nav align-items-center">
             <div className="nav-item navbar-search-wrapper mb-0">
