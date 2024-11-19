@@ -21,6 +21,9 @@ import product3 from '../../../../assets/img/product/hm20-pro-10.jpg';
 import product4 from '../../../../assets/img/product/hm20-pro-9.jpg';
 import testimonial1 from '../../../../assets/img/testimonial/1.jpg';
 import testimonial2 from '../../../../assets/img/testimonial/2.jpg';
+
+const link = "http://127.0.0.1:8000/storage/";
+
 const ShopDetails = () => {
     const { productId } = useParams(); // Get the productId from route params
     const [productData, setProductData] = useState(null);
@@ -162,7 +165,6 @@ const ShopDetails = () => {
     };
 
 
-
     const wordLimit = 40; // Limit to 40 characters
 
     if (!productData) return <div>Loading...</div>;
@@ -175,37 +177,66 @@ const ShopDetails = () => {
                 <div className="container">
                     <div className="row">
                         {/* Product Image Section */}
-                        <div className="col-xl-7 col-lg-7 col-md-12">
-                            <div className="product-details-img mr-20 product-details-tab">
-                                <div id="gallery" className="product-dec-slider-2">
-                                    {productData?.sanPham?.hinh_anh_san_phams?.map((image) => (
-                                        <a key={image?.id} data-image={image?.duong_dan_hinh_anh} data-zoom-image={image?.duong_dan_hinh_anh}>
-                                            <img src={image?.duong_dan_hinh_anh} />
+                        <div class="col-xl-7 col-lg-7 col-md-12">
+                            <div class="product-details-img mr-20 product-details-tab">
+                                <div
+                                    id="gallery"
+                                    className="product-dec-slider-2"
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: '10px', // Khoảng cách giữa các ảnh
+                                    }}
+                                >
+                                    {productData?.sanPham?.hinh_anh_san_phams?.map((image, index) => (
+                                        <a
+                                            key={index}
+                                            data-image={`${link}${image?.duong_dan_hinh_anh_luong}`}
+                                            data-zoom-image={`${link}${image?.duong_dan_hinh_anh_zoom}`}
+                                            style={{
+                                                display: 'block',
+                                                backgroundColor: '#f7f7f7', // Nền của mỗi hình ảnh
+                                                padding: '10px', // Khoảng cách giữa ảnh và nền
+                                                borderRadius: '5px', // Bo tròn góc
+                                            }}
+                                        >
+                                            <img
+                                                src={`${link}${image?.duong_dan_hinh_anh}`}
+                                                alt={`Product Image ${index + 1}`}
+                                                style={{
+                                                    display: 'block',
+                                                    width: '100px',
+                                                    height: '122px',
+                                                    objectFit: 'cover', // Đảm bảo hình ảnh không bị méo
+                                                }}
+                                            />
                                         </a>
                                     ))}
-
                                 </div>
 
-                                <div className="zoompro-wrap zoompro-2 pl-20">
-                                    <div className="zoompro-border zoompro-span">
+                                <div class="zoompro-wrap zoompro-2 pl-20" style={{
+                                    backgroundColor: "#f7f7f7", height: "600px", width: "500px",     // Sử dụng flexbox để căn giữa
+                                    padding: '20px',  // Padding bên trong
+                                    display: 'flex',
+                                    flexDirection: 'column',  // Căn chỉnh nội dung theo chiều dọc
+                                    justifyContent: 'center',  // Căn giữa theo chiều dọc
+                                    alignItems: 'center',
+                                    marginLeft: "10px",
+                                }}>
+                                    <div class="zoompro-border zoompro-span">
                                         <img
                                             className="zoompro"
                                             src={selectedImage.img}
                                             data-zoom-image={selectedImage.zoomImg}
-                                            alt={productData?.sanPham?.ten_san_pham || 'Product Image'} // Use a descriptive alt text
+                                            alt={productData?.sanPham?.ten_san_pham || 'Product Image'}
                                         />
+                                        <span>-29%</span>
 
-                                        <span style={styles.itemValueSpan}>-29%</span>
-                                        <div className="product-video">
-                                            <a className="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
-                                                <i className="fa fa-video-camera"></i>
-                                                View Video
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         {/* Product Details Section */}
                         <div className="col-lg-5 col-md-12">
@@ -304,11 +335,9 @@ const ShopDetails = () => {
                                         <button >Thêm giỏ hàng</button>
                                     </div>
                                     <div className="pro-details-wishlist">
-                                        <a href="#"><CiHeart /></a>
+                                        <a onClick={() => addToWishlist(productData.id)}><CiHeart /></a>
                                     </div>
-                                    <div className="pro-details-compare">
-                                        <a href="#"><CiShuffle /></a>
-                                    </div>
+                                    
                                 </div>
 
                                 {/* Categories */}
