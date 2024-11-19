@@ -8791,6 +8791,15 @@ a.default-btn {
     margin-right: 0px;
 }
 
+.product-details-content .pro-details-size-color .pro-details-color-wrap .pro-details-color-content ul li {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
 .product-details-content .pro-details-size-color .pro-details-color-wrap .pro-details-color-content ul li.blue {
     background-color: #4798f3;
     border: 1px solid #4798f3;
@@ -8815,6 +8824,7 @@ a.default-btn {
     background-color: #e28b37;
     border: 1px solid #e28b37;
 }
+
 
 .product-details-content .pro-details-size-color .pro-details-size span {
     display: block;
@@ -8963,7 +8973,10 @@ a.default-btn {
 .product-details-content .pro-details-quality .pro-details-cart button:hover {
     background-color: #a749ff;
     border: none;
+    background-color: #a749ff;
+
 }
+
 
 .product-details-content .pro-details-quality .pro-details-wishlist a {
     font-size: 23px;
