@@ -217,7 +217,7 @@ const StaffList = () => {
                                                     <td>{staffItem.so_dien_thoai}</td>
                                                     <td>{staffItem.email}</td>
                                                     <td>{staffItem.dia_chi}</td>
-                                                    <td className="switch">
+                                                    <td className="">
                                                         <label className="switch" style={switchStyles}>
                                                             <span
                                                                 className="slider round"

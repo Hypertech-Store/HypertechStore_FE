@@ -140,67 +140,6 @@ const Shop = () => {
             });
     };
 
-    // const addToWishlist = (productId) => {
-    //     const customerId = userId;  // Lấy customer ID từ userId hoặc từ localStorage/session nếu cần
-
-    //     const data = {
-    //         khach_hang_id: customerId,
-    //         san_pham_id: productId,
-    //     };
-
-    //     axios.post('http://127.0.0.1:8000/api/danh-sach-yeu-thich/addWishlist', data)
-    //         .then(response => {
-    //             // Kiểm tra phản hồi API
-    //             console.log('API response:', response.data);
-
-    //             // Nếu sản phẩm đã có trong danh sách yêu thích
-    //             if (response.data && response.data.message === 'Sản phẩm đã có trong danh sách yêu thích.') {
-    //                 toast.info('Sản phẩm này đã có trong danh sách yêu thích.', {
-    //                     position: "top-right",
-    //                     autoClose: 5000,
-    //                     hideProgressBar: false,
-    //                     closeOnClick: true,
-    //                     pauseOnHover: true,
-    //                     draggable: true,
-    //                 });
-    //             }
-    //             // Nếu sản phẩm đã được thêm thành công vào danh sách yêu thích
-    //             else if (response.data && response.data.message === 'Sản phẩm đã được thêm vào danh sách yêu thích.') {
-    //                 setWishlist(prev => new Set(prev).add(productId));
-    //                 toast.success('Bạn đã thêm thành công sản phẩm vào yêu thích!', {
-    //                     position: "top-right",
-    //                     autoClose: 5000,
-    //                     hideProgressBar: false,
-    //                     closeOnClick: true,
-    //                     pauseOnHover: true,
-    //                     draggable: true,
-    //                 });
-    //             }
-    //             else {
-    //                 // Nếu API trả về thông báo không xác định, xử lý như một lỗi
-    //                 console.error('Failed to add product to wishlist:', response.data);
-    //                 toast.error('Đã xảy ra lỗi khi thêm sản phẩm vào yêu thích!', {
-    //                     position: "top-right",
-    //                     autoClose: 5000,
-    //                     hideProgressBar: false,
-    //                     closeOnClick: true,
-    //                     pauseOnHover: true,
-    //                     draggable: true,
-    //                 });
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error('Error adding product to wishlist:', error);
-    //             toast.error('Đã xảy ra lỗi khi thêm sản phẩm vào yêu thích!', {
-    //                 position: "top-right",
-    //                 autoClose: 5000,
-    //                 hideProgressBar: false,
-    //                 closeOnClick: true,
-    //                 pauseOnHover: true,
-    //                 draggable: true,
-    //             });
-    //         });
-    // };
 
     // Define the handleSortChange function here
     const handleSortChange = (event) => {

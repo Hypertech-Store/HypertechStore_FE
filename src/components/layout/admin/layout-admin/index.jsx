@@ -8,7 +8,6 @@ import FooterAdmin from "../footer-admin"
 import '../../../../assets/vendor/fonts/boxicons.css';
 import '../../../../assets/vendor/fonts/fontawesome.css';
 import '../../../../assets/vendor/fonts/flag-icons.css';
-import '../../../../assets/vendor/css/rtl/core.css';
 import '../../../../assets/vendor/css/rtl/theme-default.css';
 import '../../../../assets/css/demo.css';
 import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css';
