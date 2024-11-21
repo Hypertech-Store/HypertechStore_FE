@@ -13,7 +13,7 @@ const Cart = () => {
     const [shippingMethod, setShippingMethod] = useState(null); // null là không có lựa chọn nào
 
     // Tính tổng tiền sản phẩm
-    const totalProductPrice = products.reduce((acc, product, index) => acc + (product.totalPrice * quantities[index]), 0);
+    const totalProductPrice = products.reduce((acc, product, index) => acc + (product.totalPrice), 0);
 
     // Tính phí vận chuyển
     const shippingCost = shippingMethod === 'standard' ? 54000 : (shippingMethod === 'express' ? 35000 : 0);

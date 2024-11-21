@@ -3,6 +3,7 @@ import { FaArrowTurnUp } from "react-icons/fa6";
 
 function Account() {
     const [activePanel, setActivePanel] = useState("my-account-1");
+    const userId = localStorage.getItem('userId');
     const [isLoading, setIsLoading] = useState(true); // Loading state
     const [profileData, setProfileData] = useState({});
     const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ function Account() {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/khach-hang/profile/1");
+                const response = await fetch(`http://127.0.0.1:8000/api/khach-hang/profile/${userId}`);
                 const data = await response.json();
                 setProfileData(data);
                 setIsLoading(false);
