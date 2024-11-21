@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import background from "../../../assets/img/illustrations/boy-with-rocket-light.png";
 
 const LoginPage = () => {
@@ -11,44 +12,60 @@ const LoginPage = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    // Danh sách tài khoản tự tạo
-    const users = [
-        { email: "admin@hypertech.com", password: "admin123", role: 0 }, // Admin
-        { email: "staff@hypertech.com", password: "staff123", role: 1 }, // Staff
-    ];
-
-    // Handle login with local user data
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/api/quan-tri-viens/login", {
+                email: email,
+                mat_khau: password,
+            });
 
-        // Tìm người dùng trong danh sách cục bộ
-        const user = users.find((user) => user.email === email);
+            console.log("API Response:", response.data); // Log phản hồi API
 
-        if (user) {
-            if (user.password === password) {
-                // Kiểm tra vai trò của người dùng
-                if (user.role === 0 || user.role === 1) {
-                    localStorage.setItem("customRole", user.role === 0 ? "admin" : "staff"); // Lưu role vào localStorage
+            const { quantrivien, message } = response.data;
+            console.log("Role:", quantrivien.role); // Thêm log vào đây để kiểm tra giá trị role
 
-                    toast.success("Đăng nhập thành công", {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: true,
-                    });
+            // Kiểm tra vai trò và lưu thông tin vào localStorage
+            if (quantrivien.role === 0 || quantrivien.role === 1) {
+                // Lưu thông tin vào localStorage
+                localStorage.setItem("customRole", quantrivien.role); // Lưu role là số, không phải chuỗi
+                localStorage.setItem("userName", quantrivien.ten_dang_nhap);
+                localStorage.setItem("userAvatar", quantrivien.anh_nguoi_dung || "default-avatar.png"); // Sử dụng avatar nếu có
 
-                    setTimeout(() => {
-                        navigate("/admin"); // Chuyển hướng đến /admin
-                    }, 2000);
-                } else {
-                    setErrorMessage("Access denied. Only admins and staff can log in.");
-                }
+                // Log dữ liệu đã lưu vào localStorage
+                console.log("Stored in localStorage:");
+                console.log("customRole:", localStorage.getItem("customRole"));
+                console.log("userName:", localStorage.getItem("userName"));
+                console.log("userAvatar:", localStorage.getItem("userAvatar"));
+
+                // Hiển thị thông báo thành công
+                toast.success(message, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                });
+
+                // Sử dụng setTimeout để đảm bảo lưu xong thông tin trước khi điều hướng
+                setTimeout(() => {
+                    console.log("Navigating to /admin...");
+                    navigate("/admin");
+                }, 1000); // Điều hướng sau 1 giây
             } else {
-                setErrorMessage("Invalid email or password.");
+                // Nếu quyền truy cập bị từ chối
+                setErrorMessage("Quyền truy cập bị từ chối. Chỉ có quản trị viên và nhân viên mới có thể đăng nhập.");
             }
-        } else {
-            setErrorMessage("User not found.");
+
+        } catch (error) {
+            console.error("Error during login:", error); // Log lỗi
+            if (error.response && error.response.data) {
+                setErrorMessage(error.response.data.message || "Đăng nhập thất bại.");
+            } else {
+                setErrorMessage("Đã xảy ra lỗi. Vui lòng thử lại.");
+            }
         }
     };
+
+
 
     return (
         <div className="authentication-wrapper authentication-cover">
@@ -70,15 +87,12 @@ const LoginPage = () => {
                 {/* Login */}
                 <div className="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
                     <div className="w-px-400 mx-auto mt-12 pt-5">
-                        <h4 className="mb-1">Welcome to hypertech! 👋</h4>
+                        <h4 className="mb-1">Chào mừng đến với hypertech! 👋</h4>
                         <p className="mb-6">
-                            Please sign in to your account and start the adventure
+                            Vui lòng đăng nhập vào tài khoản của bạn và bắt đầu cuộc phiêu lưu
                         </p>
-                        {errorMessage && (
-                            <div className="alert alert-danger" role="alert">
-                                {errorMessage}
-                            </div>
-                        )}
+
+                        {/* Form login */}
                         <form onSubmit={handleLogin} className="mb-6">
                             <div className="mb-6">
                                 <label htmlFor="email" className="form-label">
@@ -97,7 +111,7 @@ const LoginPage = () => {
                             </div>
                             <div className="mb-6 form-password-toggle">
                                 <label className="form-label" htmlFor="password">
-                                    Password
+                                    Mật khẩu
                                 </label>
                                 <div className="input-group input-group-merge">
                                     <input
@@ -115,9 +129,10 @@ const LoginPage = () => {
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary d-grid w-100">
-                                Sign in
+                                Đăng nhập
                             </button>
                         </form>
+
                     </div>
                 </div>
                 {/* /Login */}

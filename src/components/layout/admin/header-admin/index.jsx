@@ -10,18 +10,20 @@ const Header = () => {
   const [user, setUser] = useState(null); // Store the user data
   const navigate = useNavigate();
 
+  // Lấy thông tin người dùng từ localStorage khi trang được load
   useEffect(() => {
     const savedUser = localStorage.getItem('userInfo');
-    console.log('User info retrieved from localStorage in Header:', savedUser); // Log thông tin lấy từ localStorage
+    console.log('User info retrieved from localStorage in Header:', savedUser); // Kiểm tra giá trị lấy từ localStorage
 
     if (savedUser) {
-      const userData = JSON.parse(savedUser); // Chuyển đổi từ chuỗi JSON thành đối tượng
-      setUser(userData); // Cập nhật state `user`
-      console.log('User state updated in Header:', userData); // Log sau khi set state
+      const userData = JSON.parse(savedUser);
+      setUser(userData); // Cập nhật state user với thông tin lấy từ localStorage
+      console.log('User state updated in Header:', userData); // Kiểm tra state sau khi cập nhật
     } else {
       console.log('No user info found in localStorage in Header');
     }
-  }, []); // UseEffect chỉ chạy 1 lần khi component được render lần đầu
+  }, []);
+
 
   const handleLogout = () => {
     Swal.fire({
@@ -35,7 +37,7 @@ const Header = () => {
       cancelButtonText: "Hủy bỏ",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Xóa các thông tin đăng nhập
+        // Xóa các thông tin đăng nhập trong localStorage
         localStorage.removeItem("userToken");
         localStorage.removeItem("userInfo");
 
@@ -54,7 +56,7 @@ const Header = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar" style={{ marginLeft: '40px' }}>
+      <nav className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
         <div className="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
           <a className="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
             <i className="bx bx-menu bx-md" />
@@ -225,54 +227,38 @@ const Header = () => {
               </ul>
             </li>
             {/*/ Notification */}
-            {user ? (
-              <ul className="nav navbar-nav navbar-dropdown dropdown-user dropdown">
-                <li className="nav-item">
-                  <a className="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div className="avatar avatar-online">
-                      <img
-                        src={user.anh_nguoi_dung || 'default-avatar.png'}
-                        className="w-px-40 h-auto rounded-circle"
-                        alt="User Avatar"
-                      />
-                    </div>
-                  </a>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a className="dropdown-item" href="pages-account-settings-account.html">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0 me-3">
-                            <div className="avatar avatar-online">
-                              <img
-                                src={user.anh_nguoi_dung || 'default-avatar.png'}
-                                className="w-px-40 h-auto rounded-circle"
-                                alt="User Avatar"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex-grow-1">
-                            <h6 className="mb-0">{user.ten_dang_nhap}</h6>
-                            <small className="text-muted">
-                              {user.role === 0 ? "Admin" : "Staff"}
-                            </small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li><div className="dropdown-divider my-1" /></li>
-                    <li>
-                      <a className="dropdown-item" onClick={handleLogout}>
-                        <i className="bx bx-power-off bx-md me-3" />
-                        <span>Log Out</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            ) : (
-              <p>Loading user data...</p> // Nếu user không có, hiển thị thông báo
-            )}
-            {/*/ User */}
+            <ul className="navbar-nav flex-row align-items-center ms-auto">
+              {/* Nếu có người dùng */}
+              {user ? (
+                <ul className="nav navbar-nav navbar-dropdown dropdown-user dropdown">
+                  <li className="nav-item">
+                    <a className="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+                      <div className="avatar avatar-online">
+                        <img
+                          src={user.anh_nguoi_dung || 'default-avatar.png'} // Nếu không có avatar, sử dụng ảnh mặc định
+                          className="w-px-40 h-auto rounded-circle"
+                          alt="User Avatar"
+                        />
+                      </div>
+                    </a>
+                    <ul className="dropdown-menu dropdown-menu-end">
+                      <li>
+                        <a className="dropdown-item" href="pages-account-settings-account.html">
+                          <i className="bx bx-user me-2" />
+                          <span>Profile</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="javascript:void(0);" onClick={handleLogout}>
+                          <i className="bx bx-power-off me-2" />
+                          <span>Logout</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              ) : null}
+            </ul>
           </ul>
         </div>
       </nav>

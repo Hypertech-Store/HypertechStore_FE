@@ -7,6 +7,7 @@ import { FaListUl } from "react-icons/fa";
 // import { CiHeart } from "react-icons/ci";
 // import { IoEyeOutline } from "react-icons/io5";
 // import { RiArrowDropDownLine } from "react-icons/ri";
+import sale from "../../../../assets/images/sale.png";
 import { IoMdStarOutline, IoMdStar } from "react-icons/io";
 import RangeSlider from 'react-range-slider-input';
 import { LiaAngleDoubleLeftSolid, LiaAngleDoubleRightSolid } from "react-icons/lia";
@@ -301,11 +302,13 @@ const Shop = () => {
                                                 return (
                                                     <div key={product.id} className="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                                                         <div className="product-wrap mb-25 scroll-zoom">
+                                                            <img src={sale} style={{ maxWidth: '50px' }} />
                                                             <div className="product-img">
                                                                 <a href={`/chi-tiet-san-pham/${product.id}`}>
                                                                     <img className="default-img" src={product.duong_dan_anh} alt={product.ten_san_pham} />
                                                                 </a>
                                                                 {label && (
+
                                                                     <span className="pink">
                                                                         {/* Kiểm tra nếu sản phẩm đang sale, hiển thị phần trăm giảm giá */}
                                                                         {saleProduct && saleProduct.sale_theo_phan_tram && (

@@ -5,7 +5,7 @@ import { IoMdStar } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { CiHeart } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
-import { CiShuffle } from "react-icons/ci";
+// import { CiShuffle } from "react-icons/ci";
 import { FaFacebookF } from "react-icons/fa";
 import { FaDribbble } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
@@ -258,8 +258,8 @@ const ShopDetails = () => {
                 <div className="container">
                     <div className="row">
                         {/* Product Image Section */}
-                        <div class="col-xl-7 col-lg-7 col-md-12">
-                            <div class="product-details-img mr-20 product-details-tab">
+                        <div className="col-xl-7 col-lg-7 col-md-12">
+                            <div className="product-details-img mr-20 product-details-tab">
                                 <div
                                     id="gallery"
                                     className="product-dec-slider-2"
@@ -295,7 +295,7 @@ const ShopDetails = () => {
                                     ))}
                                 </div>
 
-                                <div class="zoompro-wrap zoompro-2 pl-20" style={{
+                                <div className="zoompro-wrap zoompro-2 pl-20" style={{
                                     backgroundColor: "#f7f7f7", height: "600px", width: "500px",     // Sử dụng flexbox để căn giữa
                                     padding: '20px',  // Padding bên trong
                                     display: 'flex',
@@ -304,7 +304,7 @@ const ShopDetails = () => {
                                     alignItems: 'center',
                                     marginLeft: "10px",
                                 }}>
-                                    <div class="zoompro-border zoompro-span">
+                                    <div className="zoompro-border zoompro-span">
                                         <img
                                             className="zoompro"
                                             src={selectedImage.img}
@@ -449,7 +449,7 @@ const ShopDetails = () => {
                                         <button onClick={handleAddToCartWithVariant}>Thêm giỏ hàng</button>
                                     </div>
                                     <div className="pro-details-wishlist">
-                                        <a onClick={() => addToWishlist(productData.id)}><CiHeart /></a>
+                                        <a><CiHeart /></a>
                                     </div>
 
                                 </div>
@@ -522,7 +522,7 @@ const ShopDetails = () => {
                                             {/* Cấu hình & Bộ nhớ Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
+                                                    <h4 style={styles.h4}>Bộ xử lý</h4>
                                                     {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -579,7 +579,16 @@ const ShopDetails = () => {
                                                             </span>
                                                         </aside>
                                                     </li>
-                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+                                            </div>
+
+                                            {/* Bố nhớ ram & ổn cứng */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('ram')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Bộ nhớ RAM, Ổ cứng</h4>
+                                                    {isOpen.ram ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.ram ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
                                                     <li style={styles.textSpecifiItem}>
                                                         <aside style={styles.itemLabel}>RAM:</aside>
                                                         <aside style={styles.itemValue}>
@@ -624,15 +633,13 @@ const ShopDetails = () => {
                                                             </span>
                                                         </aside>
                                                     </li>
-                                                    <div style={styles.itemSeparator} />
                                                 </ul>
-
                                             </div>
 
                                             {/* Camera & Màn hình Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Camera & Màn hình</h4>
+                                                    <h4 style={styles.h4}>Màn hình</h4>
                                                     {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -689,7 +696,7 @@ const ShopDetails = () => {
                                             {/* Pin & Sạc Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Pin & Sạc</h4>
+                                                    <h4 style={styles.h4}>Kích thước khối lượng</h4>
                                                     {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -709,7 +716,7 @@ const ShopDetails = () => {
                                             {/* Tiện ích Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('features')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Tiện ích</h4>
+                                                    <h4 style={styles.h4}>Đồ họa và Âm thanh</h4>
                                                     {isOpen.features ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.features ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -768,7 +775,7 @@ const ShopDetails = () => {
                                             {/* Kết nối Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Kết nối</h4>
+                                                    <h4 style={styles.h4}>Cổng kết nối & tính năng mở rộng</h4>
                                                     {isOpen.connectivity ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -798,7 +805,7 @@ const ShopDetails = () => {
                                             {/* Thiết kế & Chất liệu Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
+                                                    <h4 style={styles.h4}>Thông tin khác</h4>
                                                     {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -1298,68 +1305,10 @@ const ShopDetails = () => {
                                 ) : productData.sanPham?.danh_muc_id === 3 ? (
                                     <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`} style={styles.wrapper}>
                                         <div className="product-anotherinfo-wrapper">
-                                            {/* Cấu hình & Bộ nhớ Section */}
-                                            <div className="box-specifi" style={styles.boxSpecifi}>
-                                                <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
-                                                    {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
-                                                </a>
-                                                <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cpu}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Bộ nhớ trong:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.bo_nho_trong}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Hệ điều hành:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.he_dieu_hanh}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Kết nối hệ điều hành:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ket_noi_he_dieu_hanh}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Ứng dụng quản lý:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ung_dung_quan_ly}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Kết nối:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ket_noi}</span>
-                                                        </aside>
-                                                    </li>
-                                                </ul>
-
-
-                                            </div>
-
                                             {/* Camera & Màn hình Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Camera & Màn hình</h4>
+                                                    <h4 style={styles.h4}>Màn hình</h4>
                                                     {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -1394,6 +1343,16 @@ const ShopDetails = () => {
                                                         </aside>
                                                     </li>
                                                     <div style={styles.itemSeparator} />
+
+                                                </ul>
+
+                                            </div>
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('material')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Thiết kế</h4>
+                                                    {isOpen.material ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.material ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
 
                                                     <li style={styles.textSpecifiItem}>
                                                         <aside style={styles.itemLabel}>Chất liệu mặt:</aside>
@@ -1435,57 +1394,6 @@ const ShopDetails = () => {
                                                     </li>
                                                     <div style={styles.itemSeparator} />
                                                 </ul>
-
-                                            </div>
-
-                                            {/* Pin & Sạc Section */}
-                                            <div className="box-specifi" style={styles.boxSpecifi}>
-                                                <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Pin & Sạc</h4>
-                                                    {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
-                                                </a>
-                                                <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Khả năng thay dây:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.kha_nang_thay_day}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Thời gian sử dụng pin:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_gian_su_dung_pin}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Thời gian sạc:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_gian_sac}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Dung lượng pin:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.dung_luong_pin}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-
-                                                    <li style={styles.textSpecifiItem}>
-                                                        <aside style={styles.itemLabel}>Cổng sạc:</aside>
-                                                        <aside style={styles.itemValue}>
-                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cong_sac}</span>
-                                                        </aside>
-                                                    </li>
-                                                    <div style={styles.itemSeparator} />
-                                                </ul>
-
                                             </div>
 
                                             {/* Tiện ích Section */}
@@ -1564,20 +1472,116 @@ const ShopDetails = () => {
 
                                             </div>
 
-                                            {/* Kết nối Section */}
+
+                                            {/* Pin & Sạc Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
-                                                <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Kết nối</h4>
-                                                    {isOpen.connectivity ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Pin</h4>
+                                                    {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
-                                                <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Khả năng thay dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.kha_nang_thay_day}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời gian sử dụng pin:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_gian_su_dung_pin}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời gian sạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_gian_sac}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Dung lượng pin:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.dung_luong_pin}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cổng sạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cong_sac}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+
+                                            </div>
+                                            {/* Cấu hình & Bộ nhớ Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Cấu hình & Kết nối</h4>
+                                                    {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cpu}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Bộ nhớ trong:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.bo_nho_trong}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hệ điều hành:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.he_dieu_hanh}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối hệ điều hành:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ket_noi_he_dieu_hanh}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Ứng dụng quản lý:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ung_dung_quan_ly}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ket_noi}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
                                                     <li style={styles.textSpecifiItem}>
                                                         <aside style={styles.itemLabel}>Định vị:</aside>
                                                         <aside style={styles.itemValue}>
                                                             <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.dinh_vi}</span>
                                                         </aside>
                                                     </li>
-                                                    <div style={styles.itemSeparator} />
                                                 </ul>
 
 
@@ -1586,7 +1590,7 @@ const ShopDetails = () => {
                                             {/* Thiết kế & Chất liệu Section */}
                                             <div className="box-specifi" style={styles.boxSpecifi}>
                                                 <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
-                                                    <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
+                                                    <h4 style={styles.h4}>Thông tin khác</h4>
                                                     {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
                                                 </a>
                                                 <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
@@ -1622,6 +1626,10 @@ const ShopDetails = () => {
                                                 </ul>
 
                                             </div>
+
+
+
+
                                         </div>
                                     </div>
 
