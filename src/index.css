@@ -8839,7 +8839,7 @@ a.default-btn {
     margin: 0 2px 0 0;
 }
 
-.product-details-content .pro-details-size-color .pro-details-size .pro-details-size-content ul li a {
+.product-details-content .pro-details-size-color .pro-details-size .pro-details-size-content ul li span {
     background-color: #f1f2f6;
     color: #000;
     display: inline-block;
