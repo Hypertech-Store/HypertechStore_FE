@@ -171,7 +171,7 @@ const StaffList = () => {
     };
 
     return (
-        <div className="container-fluid mt-5" style={{ maxWidth: '95%' }}>
+        <div className="container-fluid mt-5" style={{ marginLeft: '50px', backgroundColor: '#f7f7f7' }}>
             <div className="row">
                 <div className="col-sm-12">
                     <div className="iq-card">
@@ -218,6 +218,11 @@ const StaffList = () => {
                                                     <td>{staffItem.email}</td>
                                                     <td>{staffItem.dia_chi}</td>
                                                     <td className="">
+                                                        {/* <div class="text-end">
+                                                            <div class="form-check form-switch mb-0">
+                                                                <input type="checkbox" class="form-check-input" checked />
+                                                            </div>
+                                                        </div> */}
                                                         <label className="switch" style={switchStyles}>
                                                             <span
                                                                 className="slider round"

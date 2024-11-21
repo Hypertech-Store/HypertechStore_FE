@@ -40,7 +40,7 @@ const LayoutAdmin = () => {
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <SliderBarAdmin />
-          <div id="content-page" style={{}}>
+          <div id="content-page">
             <HeaderAdmin />
             <Outlet />
           </div>
