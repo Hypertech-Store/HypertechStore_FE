@@ -21,16 +21,22 @@ import product3 from '../../../../assets/img/product/hm20-pro-10.jpg';
 import product4 from '../../../../assets/img/product/hm20-pro-9.jpg';
 import testimonial1 from '../../../../assets/img/testimonial/1.jpg';
 import testimonial2 from '../../../../assets/img/testimonial/2.jpg';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const link = "http://127.0.0.1:8000/storage/";
 
 const ShopDetails = () => {
+    const userId = localStorage.getItem('userId');
     const { productId } = useParams(); // Get the productId from route params
     const [productData, setProductData] = useState(null);
-    const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(null);
     const [activeTab, setActiveTab] = useState('des-details1'); // Default tab state
     const [isExpanded, setIsExpanded] = useState(false);
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedSize, setSelectedSize] = useState(null);
+    const [quantity, setQuantity] = useState(1);  // Để theo dõi số lượng
+
 
     useEffect(() => {
         // Fetch product details
@@ -85,6 +91,81 @@ const ShopDetails = () => {
         connectivity: false,
         design: false,
     });
+
+    const handleColorChange = (color) => {
+        setSelectedColor(color);
+        if (selectedSize) {
+            saveSelection(color, selectedSize);
+        }
+    };
+
+    const handleSizeChange = (size) => {
+        setSelectedSize(size);
+        if (selectedColor) {
+            saveSelection(selectedColor, size);
+        }
+    };
+
+    const saveSelection = (color, size) => {
+        console.log('Lưu trữ dữ liệu:', { color, size });
+
+    };
+
+    const handleAddToCartWithVariant = async () => {
+        if (!selectedColor || !selectedSize) {
+            toast.error('Vui lòng chọn màu và dung lượng!');
+            return;
+        }
+
+        try {
+            // 1. Kiểm tra biến thể trước khi thêm vào giỏ hàng
+            const variantResponse = await axios.post('http://127.0.0.1:8000/api/bien-the-san-pham/kiem-tra-bien-the', {
+                ten_bien_the: selectedColor,
+                gia_tri_bien_the: selectedSize
+            });
+
+            // Kiểm tra nếu không có id hoặc không thành công
+            if (!variantResponse.data.data.id) {
+                console.log('Biến thể sản phẩm không tồn tại!');
+                return;
+            }
+
+            const priceAfterDiscount = productData?.sale_theo_phan_tram
+                ? productData?.sanPham?.gia * (1 - parseFloat(productData?.sale_theo_phan_tram) / 100)
+                : productData?.sanPham?.gia;
+
+            const giaSanPham = (Math.floor(priceAfterDiscount) + Math.floor(variantResponse.data.data.gia)) * quantity;
+
+            console.log('Variant ID:', variantResponse.data.data.id);
+            console.log('khach_hang_id', userId);
+            // console.log('gio_hang_id', cartResponse);
+            console.log('san_pham_id', productId);
+            console.log('so_luong', quantity);
+            console.log('gia', giaSanPham);
+            // Tiến hành thêm vào giỏ hàng nếu biến thể hợp lệ
+            const payload = {
+                khach_hang_id: userId,
+                san_pham_id: productId,
+                bien_the_san_pham_id: variantResponse.data.data.id,
+                so_luong: quantity,
+                gia: giaSanPham
+            };
+
+            // 2. Gửi yêu cầu thêm sản phẩm vào giỏ hàng
+            const addToCartResponse = await axios.post('http://127.0.0.1:8000/api/gio-hang/them-san-pham', payload);
+
+            if (addToCartResponse.status === 200) {
+                toast.success('Sản phẩm đã được thêm vào giỏ hàng!');
+            } else {
+                toast.error('Đã có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
+                console.error('Error:', addToCartResponse.data.message || 'Failed to add product.');
+            }
+        } catch (error) {
+            toast.error('Đã có lỗi xảy ra. Vui lòng thử lại!');
+            console.error('Error:', error);
+        }
+    };
+
 
     // Toggle function for dropdown
     const toggleDropdown = (section) => {
@@ -230,7 +311,9 @@ const ShopDetails = () => {
                                             data-zoom-image={selectedImage.zoomImg}
                                             alt={productData?.sanPham?.ten_san_pham || 'Product Image'}
                                         />
-                                        <span>-29%</span>
+                                        {productData?.sale_theo_phan_tram && (
+                                            <span>-{parseFloat(productData?.sale_theo_phan_tram).toFixed(0)}%</span>
+                                        )}
 
                                     </div>
                                 </div>
@@ -243,12 +326,30 @@ const ShopDetails = () => {
                             <div className="product-details-content">
                                 <h2>{productData?.sanPham?.ten_san_pham}</h2>
                                 <div className="product-details-price">
-                                    <span>
-                                        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-                                            .format(productData?.sanPham?.gia)
-                                            .replace('₫', 'VNĐ')}
-                                    </span>
-                                    <span className="old">40,000,000 VNĐ</span>
+                                    {
+                                        productData?.sale_theo_phan_tram ? (
+                                            // Nếu có giảm giá, hiển thị giá giảm và giá gốc
+                                            <>
+                                                <span>
+                                                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                                        .format(productData?.sanPham?.gia * (1 - (parseFloat(productData?.sale_theo_phan_tram) / 100)))
+                                                        .replace('₫', 'VNĐ')}
+                                                </span>
+                                                <span className="old">
+                                                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                                        .format(productData?.sanPham?.gia)
+                                                        .replace('₫', 'VNĐ')}
+                                                </span>
+                                            </>
+                                        ) : (
+                                            // Nếu không có giảm giá, chỉ hiển thị giá gốc
+                                            <span>
+                                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                                    .format(productData?.sanPham?.gia)
+                                                    .replace('₫', 'VNĐ')}
+                                            </span>
+                                        )
+                                    }
                                 </div>
 
                                 {/* Product Rating */}
@@ -287,40 +388,53 @@ const ShopDetails = () => {
                                         <span>Color</span>
                                         <div className="pro-details-color-content">
                                             <ul>
-                                                {/* Duyệt qua biến thể màu sắc và chỉ hiển thị màu */}
-                                                {productData?.bienTheSanPhams?.map((variant, index) => {
-                                                    // Chuyển tên màu thành class name cho CSS
-                                                    const colorClass = variant.ten_bien_the.toLowerCase();
-                                                    return (
-                                                        <li
-                                                            key={index}
-                                                            className={colorClass}  // Class name based on color
-                                                            style={{ backgroundColor: getBackgroundColor(colorClass) }} // Nếu không có CSS, dùng màu động
-                                                        />
-                                                    );
-                                                })}
+                                                {Array.from(new Set(productData?.bienTheSanPhams?.map(variant => variant.ten_bien_the))) // Loại bỏ màu trùng lặp
+                                                    .map((color, index) => {
+                                                        const colorClass = color.toLowerCase();
+                                                        const isSelected = selectedColor === color;  // Kiểm tra xem màu có được chọn không
+                                                        return (
+                                                            <li
+                                                                key={index}
+                                                                onClick={() => handleColorChange(color)}
+                                                                style={{
+                                                                    backgroundColor: getBackgroundColor(colorClass),  // (tuỳ chọn) Thêm màu nền
+                                                                    border: isSelected ? '2px solid #000' : 'none',  // Hiển thị viền khi chọn
+                                                                    cursor: 'pointer',  // Thêm con trỏ để người dùng biết có thể click
+                                                                    transform: isSelected ? 'scale(1.1)' : 'scale(1)',  // Phóng to màu khi chọn
+                                                                    transition: 'transform 0.2s ease',  // Thêm hiệu ứng chuyển động mượt mà
+                                                                }}
+                                                            />
+                                                        );
+                                                    })}
                                             </ul>
                                         </div>
                                     </div>
-
-
-
 
                                     {/* Storage Size Selection */}
                                     <div className="pro-details-size">
                                         <span>Dung lượng</span>
                                         <div className="pro-details-size-content">
                                             <ul>
-                                                {/* Duyệt qua biến thể dung lượng và hiển thị */}
-                                                {productData?.bienTheSanPhams?.map((variant, index) => (
-                                                    <li key={index}>
-                                                        <a href="#">{variant.gia_tri_bien_the}</a>
-                                                    </li>
-                                                ))}
+                                                {Array.from(new Set(productData?.bienTheSanPhams?.map(variant => variant.gia_tri_bien_the))) // Loại bỏ dung lượng trùng lặp
+                                                    .map((size, index) => {
+                                                        const isSelected = selectedSize === size;  // Kiểm tra xem dung lượng có được chọn không
+                                                        return (
+                                                            <li
+                                                                key={index}
+                                                                onClick={() => handleSizeChange(size)}
+                                                            >
+                                                                <span style={{
+                                                                    border: isSelected ? '2px solid #000' : 'none',  // Hiển thị viền khi chọn
+                                                                    cursor: 'pointer',  // Thêm con trỏ để người dùng biết có thể click
+                                                                }}>{size}</span>
+                                                            </li>
+                                                        );
+                                                    })}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
 
 
 
@@ -332,7 +446,7 @@ const ShopDetails = () => {
                                         <button className="inc qtybutton" onClick={handleIncrease}>+</button>
                                     </div>
                                     <div className="pro-details-cart btn-hover">
-                                        <button >Thêm giỏ hàng</button>
+                                        <button onClick={handleAddToCartWithVariant}>Thêm giỏ hàng</button>
                                     </div>
                                     <div className="pro-details-wishlist">
                                         <a><CiHeart /></a>
@@ -380,6 +494,7 @@ const ShopDetails = () => {
                     </div>
                 </div>
             </div>
+
             <div className="description-review-area pb-90">
                 <div className="container">
                     <div className="description-review-wrapper">
@@ -1792,19 +1907,33 @@ export default ShopDetails;
 
 // Hàm để lấy màu sắc nếu không có trong CSS
 function getBackgroundColor(color) {
-    switch (color) {
+    switch (color.toLowerCase()) {
         case 'black':
-            return '#000000';
+            return '#000000'; // Màu đen
         case 'blue':
-            return '#4798f3';
+            return '#4798f3'; // Màu xanh dương
         case 'maroon':
-            return '#736751';
+            return '#736751'; // Màu nâu đỏ
         case 'gray':
-            return '#c0c0c0';
+            return '#c0c0c0'; // Màu xám
         case 'green':
-            return '#139c57';
+            return '#139c57'; // Màu xanh lá cây
         case 'yellow':
-            return '#e28b37';
+            return '#e28b37'; // Màu vàng
+        case 'red':
+            return '#e28b37'; // Màu đỏ
+        case 'white':
+            return '#ffffff'; // Màu trắng
+        case 'silver':
+            return '#c0c0c0'; // Màu bạc
+        case 'gold':
+            return '#d4af37'; // Màu vàng kim loại
+        case 'green':
+            return '#004b49'; // Màu xanh đêm (Apple)
+        case 'purple':
+            return '#6a0dad'; // Màu tím đậm
+        case 'aqua':
+            return '#00ffff'; // Màu aqua
         default:
             return '#000000'; // Màu mặc định nếu không có trong danh sách
     }
