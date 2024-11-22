@@ -6,23 +6,32 @@ import { useNavigate } from 'react-router-dom';
 import avatar from "../../../../assets/img/avatars/1.png";
 import avatar1 from "../../../../assets/img/avatars/5.png";
 import avatar2 from "../../../../assets/img/avatars/12.png";
+
+const link = "http://127.0.0.1:8000/storage/";
+
 const Header = () => {
   const [user, setUser] = useState(null); // Store the user data
   const navigate = useNavigate();
 
   // Lấy thông tin người dùng từ localStorage khi trang được load
   useEffect(() => {
-    const savedUser = localStorage.getItem('userInfo');
-    console.log('User info retrieved from localStorage in Header:', savedUser); // Kiểm tra giá trị lấy từ localStorage
+    // Retrieve the individual values from sessionStorage
+    const customRole = sessionStorage.customRole;
+    const userName = sessionStorage.userName;
+    const userAvatar = sessionStorage.userAvatar;
 
-    if (savedUser) {
-      const userData = JSON.parse(savedUser);
-      setUser(userData); // Cập nhật state user với thông tin lấy từ localStorage
-      console.log('User state updated in Header:', userData); // Kiểm tra state sau khi cập nhật
+    console.log('User info retrieved from sessionStorage in Header:', { customRole, userName, userAvatar });
+
+    if (customRole && userName && userAvatar) {
+      const userData = { customRole, userName, userAvatar }; // Create an object from session data
+      setUser(userData); // Update state with the user data
+      console.log('User state updated in Header:', userData); // Log the updated state
     } else {
-      console.log('No user info found in localStorage in Header');
+      console.log('No user info found in sessionStorage in Header');
     }
   }, []);
+
+
 
 
   const handleLogout = () => {
@@ -37,9 +46,9 @@ const Header = () => {
       cancelButtonText: "Hủy bỏ",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Xóa các thông tin đăng nhập trong localStorage
-        localStorage.removeItem("userToken");
-        localStorage.removeItem("userInfo");
+        // Xóa các thông tin đăng nhập trong sessionStorage
+        sessionStorage.removeItem("userInfo");
+        sessionStorage.removeItem("userToken");
 
         // Hiển thị thông báo đăng xuất thành công
         toast.success("Đăng xuất thành công!");
@@ -51,6 +60,7 @@ const Header = () => {
       }
     });
   };
+
 
 
   return (
@@ -235,29 +245,25 @@ const Header = () => {
                     <a className="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
                       <div className="avatar avatar-online">
                         <img
-                          src={user.anh_nguoi_dung || 'default-avatar.png'} // Nếu không có avatar, sử dụng ảnh mặc định
-                          className="w-px-40 h-auto rounded-circle"
+                          src={user.userAvatar ? `${link}${user.userAvatar}` : 'default-avatar.png'} // If there's no avatar, use the default image
                           alt="User Avatar"
+                          className="rounded-circle"
                         />
                       </div>
                     </a>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                      <li>
-                        <a className="dropdown-item" href="pages-account-settings-account.html">
-                          <i className="bx bx-user me-2" />
-                          <span>Profile</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0);" onClick={handleLogout}>
-                          <i className="bx bx-power-off me-2" />
-                          <span>Logout</span>
-                        </a>
-                      </li>
+                    <ul className="dropdown-menu">
+                      <li><a className="dropdown-item" href="javascript:void(0);" onClick={handleLogout}>Đăng xuất</a></li>
                     </ul>
                   </li>
                 </ul>
-              ) : null}
+              ) : (
+                <ul className="nav navbar-nav navbar-dropdown dropdown-user dropdown">
+                  <li className="nav-item">
+                    <a className="nav-link" href="/login">Đăng nhập</a>
+                  </li>
+                </ul>
+              )}
+
             </ul>
           </ul>
         </div>
