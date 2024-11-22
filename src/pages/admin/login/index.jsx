@@ -8,7 +8,8 @@ import background from "../../../assets/img/illustrations/boy-with-rocket-light.
 const LoginPage = () => {
     document.title = "Hypertech Store - Đăng nhập hệ thống Admin";
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
@@ -20,23 +21,18 @@ const LoginPage = () => {
                 mat_khau: password,
             });
 
-            console.log("API Response:", response.data); // Log phản hồi API
+            console.log("API Response:", response.data);
 
             const { quantrivien, message } = response.data;
-            console.log("Role:", quantrivien.role); // Thêm log vào đây để kiểm tra giá trị role
 
-            // Kiểm tra vai trò và lưu thông tin vào localStorage
+            // Kiểm tra vai trò người dùng
             if (quantrivien.role === 0 || quantrivien.role === 1) {
-                // Lưu thông tin vào localStorage
-                localStorage.setItem("customRole", quantrivien.role); // Lưu role là số, không phải chuỗi
-                localStorage.setItem("userName", quantrivien.ten_dang_nhap);
-                localStorage.setItem("userAvatar", quantrivien.anh_nguoi_dung || "default-avatar.png"); // Sử dụng avatar nếu có
+                // Lưu thông tin vào sessionStorage
+                sessionStorage.setItem("customRole", quantrivien.role);
+                sessionStorage.setItem("userName", quantrivien.ten_dang_nhap);
+                sessionStorage.setItem("userAvatar", quantrivien.anh_nguoi_dung || "default-avatar.png");
 
-                // Log dữ liệu đã lưu vào localStorage
-                console.log("Stored in localStorage:");
-                console.log("customRole:", localStorage.getItem("customRole"));
-                console.log("userName:", localStorage.getItem("userName"));
-                console.log("userAvatar:", localStorage.getItem("userAvatar"));
+                console.log(sessionStorage);
 
                 // Hiển thị thông báo thành công
                 toast.success(message, {
@@ -45,18 +41,17 @@ const LoginPage = () => {
                     hideProgressBar: true,
                 });
 
-                // Sử dụng setTimeout để đảm bảo lưu xong thông tin trước khi điều hướng
+                // Điều hướng sau khi toast hiển thị
                 setTimeout(() => {
                     console.log("Navigating to /admin...");
                     navigate("/admin");
-                }, 1000); // Điều hướng sau 1 giây
+                }, 2500);
             } else {
-                // Nếu quyền truy cập bị từ chối
-                setErrorMessage("Quyền truy cập bị từ chối. Chỉ có quản trị viên và nhân viên mới có thể đăng nhập.");
+                setErrorMessage("Quyền truy cập bị từ chối. Chỉ quản trị viên và nhân viên mới được phép.");
             }
-
         } catch (error) {
-            console.error("Error during login:", error); // Log lỗi
+            console.error("Error during login:", error);
+            // Hiển thị thông báo lỗi
             if (error.response && error.response.data) {
                 setErrorMessage(error.response.data.message || "Đăng nhập thất bại.");
             } else {
@@ -64,6 +59,14 @@ const LoginPage = () => {
             }
         }
     };
+
+
+
+    // Toggle password visibility
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
 
 
 
@@ -115,16 +118,19 @@ const LoginPage = () => {
                                 </label>
                                 <div className="input-group input-group-merge">
                                     <input
-                                        type="password"
+                                        type={passwordVisible ? 'text' : 'password'} // Conditionally change input type
                                         id="password"
                                         className="form-control"
                                         name="password"
-                                        placeholder="Nhâp mật khẩu"
+                                        placeholder="Nhập mật khẩu"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <span className="input-group-text cursor-pointer">
-                                        <i className="bx bx-hide" />
+                                    <span
+                                        className="input-group-text cursor-pointer"
+                                        onClick={togglePasswordVisibility} // Toggle password visibility
+                                    >
+                                        <i className={passwordVisible ? 'bx bx-show' : 'bx bx-hide'} />
                                     </span>
                                 </div>
                             </div>
