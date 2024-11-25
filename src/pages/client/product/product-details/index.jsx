@@ -385,7 +385,7 @@ const ShopDetails = () => {
                                 <div className="pro-details-size-color mt-3">
                                     {/* Color Selection */}
                                     <div className="pro-details-color-wrap">
-                                        <span>Color</span>
+                                        <span>Màu sắc</span>
                                         <div className="pro-details-color-content">
                                             <ul>
                                                 {Array.from(new Set(productData?.bienTheSanPhams?.map(variant => variant.ten_bien_the))) // Loại bỏ màu trùng lặp
