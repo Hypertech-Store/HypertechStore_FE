@@ -6,7 +6,7 @@ import { PiShoppingBagThin } from "react-icons/pi";
 import logo from "../../../../assets/img/logo/logo2.png"
 import product1 from "../../../../assets/img/cart/cart-1.png"
 import product2 from "../../../../assets/img/cart/cart-2.png"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const HeaderClient = () => {
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [isSearchContentOpen, setIsSearchContentOpen] = useState(false);
@@ -25,7 +25,18 @@ const HeaderClient = () => {
   const toggleCartVisibility = (e) => {
     e.preventDefault();
     setIsCartVisible(!isCartVisible);
+
   };
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Example: check if a user is logged in by looking for a token in localStorage
+    const userToken = localStorage.getItem("userToken");
+    if (userToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
 
   return (
@@ -36,7 +47,7 @@ const HeaderClient = () => {
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               <div className="logo">
                 <a href="/">
-                  <img src={logo} alt="Hypertech Store Logo" style={{ width: '200px', height: '80px', marginTop: -25 }} />
+                  <img src={logo} alt="Hypertech Store Logo" style={{ width: '200px', height: '70px', marginTop: -25 }} />
                 </a>
               </div>
             </div>
@@ -75,11 +86,19 @@ const HeaderClient = () => {
                     visibility: isAccountDropdownOpen ? "visible" : "hidden"
                   }}>
                     <ul>
-                      <li><a href="/dashboard">Dashboard</a></li>
-                      <li><a href="/dang-nhap">Đăng nhập</a></li>
-                      <li><a href="/dang-ky">Đăng ký</a></li>
-                      <li><a href="/tai-khoan">Tài khoản</a></li>
-                    </ul>
+                    {isLoggedIn ? (
+                      <>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/tai-khoan">Tài khoản</a></li>
+                        <li><a href="#" onClick={handleLogout}>Đăng xuất</a></li>
+                      </>
+                    ) : (
+                      <>
+                        <li><a href="/dang-nhap">Đăng nhập</a></li>
+                        <li><a href="/dang-ky">Đăng ký</a></li>
+                      </>
+                    )}
+                  </ul>
                   </div>
                 </div>
                 <div className="same-style header-wishlist">
