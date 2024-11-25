@@ -11,6 +11,8 @@ import { FaDribbble } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+
 // Importing images
 
 import product1 from '../../../../assets/img/product/hm20-pro-12.jpg';
@@ -19,6 +21,9 @@ import product3 from '../../../../assets/img/product/hm20-pro-10.jpg';
 import product4 from '../../../../assets/img/product/hm20-pro-9.jpg';
 import testimonial1 from '../../../../assets/img/testimonial/1.jpg';
 import testimonial2 from '../../../../assets/img/testimonial/2.jpg';
+
+const link = "http://127.0.0.1:8000/storage/";
+
 const ShopDetails = () => {
     const { productId } = useParams(); // Get the productId from route params
     const [productData, setProductData] = useState(null);
@@ -28,17 +33,19 @@ const ShopDetails = () => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        // Fetch product data from API
+        // Fetch product details
         fetch(`http://127.0.0.1:8000/api/san-pham/detail/${productId}`)
             .then((response) => response.json())
             .then((data) => {
-                const product = data; // Assuming 'data' is the product object
-                console.log(data);
+                const product = data;  // Assuming 'data' is the product object
+                console.log('Product data:', data);
 
                 setProductData(product);
                 setSelectedImage({ img: product?.sanPham?.duong_dan_anh, zoomImg: product?.sanPham?.duong_dan_anh });
             })
             .catch((error) => console.error('Error fetching product data:', error));
+
+
     }, [productId]);
 
     // Quantity handling functions
@@ -69,6 +76,94 @@ const ShopDetails = () => {
         return text;
     };
 
+    // State to manage the visibility of dropdown sections
+    const [isOpen, setIsOpen] = useState({
+        config: false,
+        camera: false,
+        battery: false,
+        features: false,
+        connectivity: false,
+        design: false,
+    });
+
+    // Toggle function for dropdown
+    const toggleDropdown = (section) => {
+        setIsOpen(prevState => ({
+            ...prevState,
+            [section]: !prevState[section], // Toggle the specific section
+        }));
+    };
+
+    const styles = {
+        wrapper: {
+            marginTop: '20px',
+        },
+        boxSpecifi: {
+            marginBottom: '15px',
+        },
+        link: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px',
+            backgroundColor: '#f4f4f4',
+            color: '#333',
+            cursor: 'pointer',
+            textDecoration: 'none',
+            borderRadius: '10px',
+        },
+        linkHover: {
+            backgroundColor: '#eaeaea',
+        },
+        textSpecifi: {
+            display: 'none',
+            paddingLeft: '20px',
+        },
+        textSpecifiItem: {
+            marginTop: '15px',
+            display: 'flex',
+            justifyContent: 'space-between',  // Đảm bảo thẳng hàng các phần tử theo chiều ngang
+            alignItems: 'center',  // Căn giữa các phần tử theo chiều dọc
+            marginBottom: '10px',
+        },
+        itemLabel: {
+            display: 'inline-block',
+            fontWeight: '600',
+            color: '#344054',
+            paddingRight: '4px',  // Reduced padding-right to bring itemLabel closer to itemValue
+        },
+        itemValue: {
+            fontWeight: 'normal',
+            paddingLeft: '4px',  // Reduced padding-left to bring itemValue closer to itemLabel
+            display: 'flex',      // Chuyển sang flexbox để kiểm soát căn chỉnh các phần tử
+            justifyContent: 'flex-start',  // Căn trái các phần tử trong itemValue
+            alignItems: 'center',  // Căn giữa các phần tử theo chiều dọc
+        },
+
+        itemValueSpan: {
+            marginLeft: '-35pc',  // Thêm margin-left vào span để căn chỉnh với itemLabel
+        },
+
+        activeTextSpecifi: {
+            display: 'block',
+        },
+        icon: {
+            fontSize: '28px', // Kích thước icon lớn hơn
+        },
+        h4: {
+            fontSize: '15px',
+        },
+
+        // New style for a custom divider
+        itemSeparator: {
+            border: 'none',
+            height: '1px',
+            backgroundColor: '#ddd', // Light color for the divider
+            margin: '8px 0',  // Space between items
+            opacity: 0.5,     // Make it slightly transparent for a lighter look
+        },
+    };
+
 
     const wordLimit = 40; // Limit to 40 characters
 
@@ -82,36 +177,66 @@ const ShopDetails = () => {
                 <div className="container">
                     <div className="row">
                         {/* Product Image Section */}
-                        <div className="col-xl-7 col-lg-7 col-md-12">
-                            <div className="product-details-img mr-20 product-details-tab">
-                                {/* <div id="gallery" className="product-dec-slider-2">
-                                    {productData?.sanPham?.hinh_anh_san_phams?.map((image) => (
-                                        <a key={image?.id} data-image={image?.duong_dan_hinh_anh} data-zoom-image={image?.duong_dan_hinh_anh}>
-                                            <img src={image?.duong_dan_hinh_anh} />
+                        <div class="col-xl-7 col-lg-7 col-md-12">
+                            <div class="product-details-img mr-20 product-details-tab">
+                                <div
+                                    id="gallery"
+                                    className="product-dec-slider-2"
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: '10px', // Khoảng cách giữa các ảnh
+                                    }}
+                                >
+                                    {productData?.sanPham?.hinh_anh_san_phams?.map((image, index) => (
+                                        <a
+                                            key={index}
+                                            data-image={`${link}${image?.duong_dan_hinh_anh_luong}`}
+                                            data-zoom-image={`${link}${image?.duong_dan_hinh_anh_zoom}`}
+                                            style={{
+                                                display: 'block',
+                                                backgroundColor: '#f7f7f7', // Nền của mỗi hình ảnh
+                                                padding: '10px', // Khoảng cách giữa ảnh và nền
+                                                borderRadius: '5px', // Bo tròn góc
+                                            }}
+                                        >
+                                            <img
+                                                src={`${link}${image?.duong_dan_hinh_anh}`}
+                                                alt={`Product Image ${index + 1}`}
+                                                style={{
+                                                    display: 'block',
+                                                    width: '100px',
+                                                    height: '122px',
+                                                    objectFit: 'cover', // Đảm bảo hình ảnh không bị méo
+                                                }}
+                                            />
                                         </a>
                                     ))}
-                                </div> */}
+                                </div>
 
-                                <div className="zoompro-wrap zoompro-2 pl-20">
-                                    <div className="zoompro-border zoompro-span">
+                                <div class="zoompro-wrap zoompro-2 pl-20" style={{
+                                    backgroundColor: "#f7f7f7", height: "600px", width: "500px",     // Sử dụng flexbox để căn giữa
+                                    padding: '20px',  // Padding bên trong
+                                    display: 'flex',
+                                    flexDirection: 'column',  // Căn chỉnh nội dung theo chiều dọc
+                                    justifyContent: 'center',  // Căn giữa theo chiều dọc
+                                    alignItems: 'center',
+                                    marginLeft: "10px",
+                                }}>
+                                    <div class="zoompro-border zoompro-span">
                                         <img
                                             className="zoompro"
                                             src={selectedImage.img}
                                             data-zoom-image={selectedImage.zoomImg}
-                                            alt={productData?.sanPham?.ten_san_pham || 'Product Image'} // Use a descriptive alt text
+                                            alt={productData?.sanPham?.ten_san_pham || 'Product Image'}
                                         />
-
                                         <span>-29%</span>
-                                        <div className="product-video">
-                                            <a className="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
-                                                <i className="fa fa-video-camera"></i>
-                                                View Video
-                                            </a>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         {/* Product Details Section */}
                         <div className="col-lg-5 col-md-12">
@@ -156,6 +281,49 @@ const ShopDetails = () => {
                                     </span>
                                 )}
 
+                                <div className="pro-details-size-color mt-3">
+                                    {/* Color Selection */}
+                                    <div className="pro-details-color-wrap">
+                                        <span>Color</span>
+                                        <div className="pro-details-color-content">
+                                            <ul>
+                                                {/* Duyệt qua biến thể màu sắc và chỉ hiển thị màu */}
+                                                {productData?.bienTheSanPhams?.map((variant, index) => {
+                                                    // Chuyển tên màu thành class name cho CSS
+                                                    const colorClass = variant.ten_bien_the.toLowerCase();
+                                                    return (
+                                                        <li
+                                                            key={index}
+                                                            className={colorClass}  // Class name based on color
+                                                            style={{ backgroundColor: getBackgroundColor(colorClass) }} // Nếu không có CSS, dùng màu động
+                                                        />
+                                                    );
+                                                })}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    {/* Storage Size Selection */}
+                                    <div className="pro-details-size">
+                                        <span>Dung lượng</span>
+                                        <div className="pro-details-size-content">
+                                            <ul>
+                                                {/* Duyệt qua biến thể dung lượng và hiển thị */}
+                                                {productData?.bienTheSanPhams?.map((variant, index) => (
+                                                    <li key={index}>
+                                                        <a href="#">{variant.gia_tri_bien_the}</a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                                 {/* Quantity Selection */}
                                 <div className="pro-details-quality">
                                     <div className="cart-plus-minus">
@@ -164,14 +332,12 @@ const ShopDetails = () => {
                                         <button className="inc qtybutton" onClick={handleIncrease}>+</button>
                                     </div>
                                     <div className="pro-details-cart btn-hover">
-                                        <a href="#">Thêm giỏ hàng</a>
+                                        <button >Thêm giỏ hàng</button>
                                     </div>
                                     <div className="pro-details-wishlist">
-                                        <a href="#"><CiHeart /></a>
+                                        <a onClick={() => addToWishlist(productData.id)}><CiHeart /></a>
                                     </div>
-                                    <div className="pro-details-compare">
-                                        <a href="#"><CiShuffle /></a>
-                                    </div>
+                                    
                                 </div>
 
                                 {/* Categories */}
@@ -191,11 +357,12 @@ const ShopDetails = () => {
                                 <div className="pro-details-meta">
                                     <span>Tag :</span>
                                     <ul>
-                                        <li><a href="#">Fashion, </a></li>
                                         <li><a href="#">Furniture,</a></li>
                                         <li><a href="#">Electronic</a></li>
                                     </ul>
                                 </div>
+
+
 
 
                                 {/* Social Share Buttons */}
@@ -232,18 +399,1123 @@ const ShopDetails = () => {
                         </div>
                         <div className="tab-content description-review-bottom">
                             {/* Additional Information Tab */}
-                            <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`}>
-                                <div className="product-anotherinfo-wrapper">
-                                    <ul>
-                                        <li><span>Cấu hình & Bộ nhớ:</span> 8GB RAM, 128GB Storage</li>
-                                        <li><span>Camera & Màn hình:</span> Camera 12MP, Màn hình 6.5 inch Full HD+</li>
-                                        <li><span>Pin & Sạc:</span> 5000mAh, Sạc nhanh 30W</li>
-                                        <li><span>Tiện ích:</span> NFC, Bluetooth 5.0, Face ID</li>
-                                        <li><span>Kết nối:</span> 4G, Wi-Fi 6, USB Type-C</li>
-                                        <li><span>Thiết kế & Chất liệu:</span> Kim loại, Màn hình cong 2.5D</li>
-                                    </ul>
-                                </div>
+                            <div className="tab-content description-review-bottom">
+                                {/* Kiểm tra xem sản phẩm thuộc loại điện thoại, máy tính hay đồng hồ */}
+                                {productData.sanPham?.danh_muc_id === 1 ? (
+                                    <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`} style={styles.wrapper}>
+                                        <div className="product-anotherinfo-wrapper">
+                                            {/* Cấu hình & Bộ nhớ Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
+                                                    {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Công nghệ của bộ vi xử lý (CPU):</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.cong_nghe_cpu}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Số nhân:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.so_nhan}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Số lượng lõi:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.so_luong_luong}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tốc độ CPU:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.toc_do_cpu}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tốc độ tối đa:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.toc_do_toi_da}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Bộ nhớ cache:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.bo_nho_cache}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>RAM:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.ram}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Loại RAM:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.loai_ram}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tốc độ bus RAM:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.toc_do_bus_ram}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hỗ trợ RAM tối đa:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.ho_tro_ram_toi_da}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Ổ cứng:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.o_cung}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Camera & Màn hình Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Camera & Màn hình</h4>
+                                                    {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Màn hình:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.man_hinh}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Độ phân giải:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.do_phan_giai}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tần số quét:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.tan_so_quet}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Công nghệ màn hình:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.cong_nghe_man_hinh}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Card đồ họa:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.card_do_hoa}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Pin & Sạc Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Pin & Sạc</h4>
+                                                    {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Khối lượng:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.khoi_luong}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Tiện ích Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('features')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Tiện ích</h4>
+                                                    {isOpen.features ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.features ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Công nghệ âm thanh:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.cong_nghe_am_thanh}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cổng giao tiếp:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.cong_giao_tiep}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối không dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.ket_noi_khong_day}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Webcam:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.webcam}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tính năng khác:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.tinh_nang_khac}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                </ul>
+
+
+
+                                            </div>
+
+                                            {/* Kết nối Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Kết nối</h4>
+                                                    {isOpen.connectivity ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối không dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.ket_noi_khong_day}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cổng giao tiếp:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.cong_giao_tiep}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+
+                                                </ul>
+
+
+                                            </div>
+
+                                            {/* Thiết kế & Chất liệu Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
+                                                    {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Đèn bàn phím:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.den_ban_phim}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời điểm ra mắt:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_may_tinh?.thoi_diem_ra_mat}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : productData.sanPham?.danh_muc_id === 2 ? (
+                                    <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`} style={styles.wrapper}>
+                                        <div className="product-anotherinfo-wrapper">
+                                            {/* Cấu hình & Bộ nhớ Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
+                                                    {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.chip_xu_ly}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tốc độ CPU:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.toc_do_cpu}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chip đồ họa (GPU):</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.chip_do_hoa}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>RAM:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.ram}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Dung lượng lưu trữ:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.dung_luong_luu_tru}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Dung lượng còn lại:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.dung_luong_con_lai}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thẻ nhớ:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.the_nho}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Danh bạ:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dien_thoai?.danh_ba}</span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Camera & Màn hình Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Camera & Màn hình</h4>
+                                                    {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Camera sau resolution:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.camera_sau_resolution}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Quay phim camera sau:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.camera_sau_video}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Đèn Flash camera sau:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.camera_sau_flash}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tính năng camera sau:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.camera_sau_tinh_nang}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Camera trước resolution:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.camera_truoc_resolution}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tính năng camera trước:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.camera_truoc_tinh_nang}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Công nghệ màn hình:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.cong_nghe_man_hinh}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Màn hình resolution:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.man_hinh_resolution}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Màn hình rộng:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.man_hinh_rong} inch
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Độ sáng màn hình max:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.man_hinh_do_sang_max} nits
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Mặt kính cảm ứng:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.mat_kinh_cam_ung}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Pin & Sạc Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Pin & Sạc</h4>
+                                                    {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Dung lượng pin:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.dung_luong_pin} mAh
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Loại pin:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.loai_pin}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hỗ trợ sạc tối đa:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.sac_toi_da} W
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cổng sạc kèm theo:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.sac_kem_theo}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Công nghệ sạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.cong_nghe_pin}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Tiện ích Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('features')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Tiện ích</h4>
+                                                    {isOpen.features ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.features ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Face ID:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.bao_mat_nang_cao === "Face ID" ? "Có" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tính năng đặc biệt</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.tinh_nang_dac_biet === "Spatial audio" ? "Có" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kháng nước bụi:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.khang_nuoc_bui === "IP68" ? "IP68" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Ghi âm:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.ghi_am === "Stereo" ? "Stereo" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Radio:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.radio === "FM radio" ? "FM radio" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Xem phim:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.xem_phim === "HDR" ? "HDR" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Nghe nhạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.nghe_nhac === "Apple Music" ? "Apple Music" : "Không"}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+
+
+                                            </div>
+
+                                            {/* Kết nối Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Kết nối</h4>
+                                                    {isOpen.connectivity ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Mạng di động:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.mang_di_dong}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>SIM:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.sim}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Wi-Fi:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.wifi}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Bluetooth:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.bluetooth}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cổng kết nối/sạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.cong_ket_noi_sac}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Jack tai nghe:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.jack_tai_nghe}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối khác:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.ket_noi_khac}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+
+                                            </div>
+
+                                            {/* Thiết kế & Chất liệu Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
+                                                    {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thiết kế:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.thiet_ke}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chất liệu:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.chat_lieu}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kích thước, khối lượng:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.kich_thuoc_khoi_luong}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời điểm ra mắt:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.thoi_diem_ra_mat}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} /> {/* Custom horizontal line */}
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hãng:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>
+                                                                {productData.sanPham?.thong_so_dien_thoai?.hang}
+                                                            </span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : productData.sanPham?.danh_muc_id === 3 ? (
+                                    <div id="des-details1" className={`tab-pane ${activeTab === 'des-details1' ? 'active' : ''}`} style={styles.wrapper}>
+                                        <div className="product-anotherinfo-wrapper">
+                                            {/* Cấu hình & Bộ nhớ Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('config')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Cấu hình & Bộ nhớ</h4>
+                                                    {isOpen.config ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.config ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chip xử lý (CPU):</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cpu}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Bộ nhớ trong:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.bo_nho_trong}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hệ điều hành:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.he_dieu_hanh}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối hệ điều hành:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ket_noi_he_dieu_hanh}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Ứng dụng quản lý:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ung_dung_quan_ly}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kết nối:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ket_noi}</span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+
+                                            </div>
+
+                                            {/* Camera & Màn hình Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('camera')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Camera & Màn hình</h4>
+                                                    {isOpen.camera ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.camera ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Công nghệ màn hình:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cong_nghe_man_hinh}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kích thước màn hình:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.kich_thuoc_man_hinh}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Độ phân giải màn hình:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.do_phan_giai}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Kích thước mặt:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.kich_thuoc_mat}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chất liệu mặt:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.chat_lieu_mat}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chất liệu khung viền:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.chat_lieu_khung_vien}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chất liệu dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.chat_lieu_day}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Độ rộng dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.do_rong_day}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Độ dài dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.do_dai_day}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Pin & Sạc Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('battery')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Pin & Sạc</h4>
+                                                    {isOpen.battery ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.battery ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Khả năng thay dây:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.kha_nang_thay_day}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời gian sử dụng pin:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_gian_su_dung_pin}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời gian sạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_gian_sac}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Dung lượng pin:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.dung_luong_pin}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cổng sạc:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cong_sac}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+
+                                            </div>
+
+                                            {/* Tiện ích Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('features')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Tiện ích</h4>
+                                                    {isOpen.features ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.features ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Môn thể thao:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.mon_the_thao}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hỗ trợ ngoài ghi:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ho_tro_ngoai_ghi}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tiện ích đặc biệt:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.tien_ich_dac_biet}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Chống nước:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.chong_nuoc}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Theo dõi sức khỏe:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.theo_doi_suc_khoe}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Tiện ích khác:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.tien_ich_khac}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hiển thị thông báo:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.hien_thi_thong_bao}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Cảm biến:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.cam_bien}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+
+
+
+                                            </div>
+
+                                            {/* Kết nối Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('connectivity')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Kết nối</h4>
+                                                    {isOpen.connectivity ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.connectivity ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Định vị:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.dinh_vi}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                </ul>
+
+
+                                            </div>
+
+                                            {/* Thiết kế & Chất liệu Section */}
+                                            <div className="box-specifi" style={styles.boxSpecifi}>
+                                                <a href="javascript:;" onClick={() => toggleDropdown('design')} style={styles.link}>
+                                                    <h4 style={styles.h4}>Thiết kế & Chất liệu</h4>
+                                                    {isOpen.design ? <RiArrowDropUpLine style={styles.icon} /> : <RiArrowDropDownLine style={styles.icon} />}
+                                                </a>
+                                                <ul className="text-specifi" style={isOpen.design ? { ...styles.textSpecifi, ...styles.activeTextSpecifi } : styles.textSpecifi}>
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Sản xuất tại:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.san_xuat_tai}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Ngôn ngữ:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.ngon_ngu}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Hãng sản xuất:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.hang_san_xuat}</span>
+                                                        </aside>
+                                                    </li>
+                                                    <div style={styles.itemSeparator} />
+                                                    <li style={styles.textSpecifiItem}>
+                                                        <aside style={styles.itemLabel}>Thời điểm ra mắt:</aside>
+                                                        <aside style={styles.itemValue}>
+                                                            <span style={styles.itemValueSpan}>{productData.sanPham?.thong_so_dong_ho?.thoi_diem_ra_mat}</span>
+                                                        </aside>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                ) : null}
                             </div>
+
+
                             {/* Reviews Tab */}
                             <div id="des-details2" className={`tab-pane ${activeTab === 'des-details2' ? 'active' : ''}`}>
                                 <div className="row">
@@ -257,7 +1529,7 @@ const ShopDetails = () => {
                                                     <div className="review-top-wrap">
                                                         <div className="review-left">
                                                             <div className="review-name">
-                                                                <h4>White Lewis</h4>
+                                                                <h4 style={styles.h4}>White Lewis</h4>
                                                             </div>
                                                             <div className="review-rating">
                                                                 <IoMdStar className="star-filled" />
@@ -284,7 +1556,7 @@ const ShopDetails = () => {
                                                     <div className="review-top-wrap">
                                                         <div className="review-left">
                                                             <div className="review-name">
-                                                                <h4>John Doe</h4>
+                                                                <h4 style={styles.h4}>John Doe</h4>
                                                             </div>
                                                             <div className="review-rating">
                                                                 <IoMdStar className="star-filled" />
@@ -307,7 +1579,7 @@ const ShopDetails = () => {
                                     </div>
                                     <div className="col-lg-5">
                                         <div className="ratting-form-wrapper pl-50">
-                                            <h3>Add a Review</h3>
+                                            <h4 style={styles.h4}>Add a Review</h4>
                                             <div className="ratting-form">
                                                 <form action="#">
                                                     <div className="star-box">
@@ -378,7 +1650,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -414,7 +1686,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -449,7 +1721,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -485,7 +1757,7 @@ const ShopDetails = () => {
                                             </div>
                                         </div>
                                         <div className="product-content text-center">
-                                            <h3><a href="/chi-tiet-san-pham">Product Title Here</a></h3>
+                                            <h4 style={styles.h4}><a href="/chi-tiet-san-pham">Product Title Here</a></h4>
                                             <div className="product-rating">
                                                 <IoMdStar className="star-filled" />
                                                 <IoMdStar className="star-filled" />
@@ -510,3 +1782,22 @@ const ShopDetails = () => {
 };
 export default ShopDetails;
 
+// Hàm để lấy màu sắc nếu không có trong CSS
+function getBackgroundColor(color) {
+    switch (color) {
+        case 'black':
+            return '#000000';
+        case 'blue':
+            return '#4798f3';
+        case 'maroon':
+            return '#736751';
+        case 'gray':
+            return '#c0c0c0';
+        case 'green':
+            return '#139c57';
+        case 'yellow':
+            return '#e28b37';
+        default:
+            return '#000000'; // Màu mặc định nếu không có trong danh sách
+    }
+}

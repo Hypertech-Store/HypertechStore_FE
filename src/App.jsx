@@ -5,7 +5,16 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer position="top-right"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        theme="light"
+        transition:Bounce />
       <Router />
     </>
   )
