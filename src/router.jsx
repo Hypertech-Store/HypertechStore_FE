@@ -20,12 +20,12 @@ import Cart from "./pages/client/cart";
 import Checkout from "./pages/client/checkout";
 
 // Admin pages
-import AdminLogin from "./pages/admin/login";
+// import AdminLogin from "./pages/admin/login";
 import Dashboard from "./pages/admin/dashboard";
 import StaffList from "./pages/admin/staff/staff-list";
 import StaffAdd from "./pages/admin/staff/staff-add";
 import StaffEdit from "./pages/admin/staff/staff-edit";
-// import ListProduct from "./pages/admin/product/listProduct";
+import ListProduct from "./pages/admin/product/listProduct";
 
 // PrivateRoute Component
 // import PrivateRoute from "../src/components/layout/PrivateRoute.jsx"; // Import the PrivateRoute component
@@ -35,16 +35,19 @@ const Router = () => {
     <Routes>
 
       {/* Admin Routes */}
-      <Route path="/login" element={<AdminLogin />} />
-      {/* Wrap /admin routes with PrivateRoute */}
+      {/* <Route path="/login" element={<AdminLogin />} /> */}
+
+      {/* Wrap /admin with PrivateRoute */}
       {/* <Route element={<PrivateRoute />}> */}
       <Route path="/admin" element={<LayoutAdmin />}>
         <Route index element={<Dashboard />} />
+        <Route path="danh-sach-san-pham" element={<ListProduct />} />
         <Route path="danh-sach-nhan-vien" element={<StaffList />} />
         <Route path="them-nhan-vien" element={<StaffAdd />} />
         <Route path="sua-nhan-vien/:id" element={<StaffEdit />} />
-        {/* Add more protected routes under /admin as needed */}
       </Route>
+      {/* </Route> */}
+
       {/* </Route> */}
 
       {/* Client Routes */}

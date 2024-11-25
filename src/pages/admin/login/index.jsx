@@ -1,54 +1,74 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import background from "../../../assets/img/illustrations/boy-with-rocket-light.png";
 
 const LoginPage = () => {
     document.title = "Hypertech Store - Đăng nhập hệ thống Admin";
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    // Danh sách tài khoản tự tạo
-    const users = [
-        { email: "admin@hypertech.com", password: "admin123", role: 0 }, // Admin
-        { email: "staff@hypertech.com", password: "staff123", role: 1 }, // Staff
-    ];
-
-    // Handle login with local user data
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/api/quan-tri-viens/login", {
+                email: email,
+                mat_khau: password,
+            });
 
-        // Tìm người dùng trong danh sách cục bộ
-        const user = users.find((user) => user.email === email);
+            console.log("API Response:", response.data);
 
-        if (user) {
-            if (user.password === password) {
-                // Kiểm tra vai trò của người dùng
-                if (user.role === 0 || user.role === 1) {
-                    localStorage.setItem("customRole", user.role === 0 ? "admin" : "staff"); // Lưu role vào localStorage
+            const { quantrivien, message } = response.data;
 
-                    toast.success("Đăng nhập thành công", {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: true,
-                    });
+            // Kiểm tra vai trò người dùng
+            if (quantrivien.role === 0 || quantrivien.role === 1) {
+                // Lưu thông tin vào sessionStorage
+                sessionStorage.setItem("customRole", quantrivien.role);
+                sessionStorage.setItem("userName", quantrivien.ten_dang_nhap);
+                sessionStorage.setItem("userAvatar", quantrivien.anh_nguoi_dung || "default-avatar.png");
 
-                    setTimeout(() => {
-                        navigate("/admin"); // Chuyển hướng đến /admin
-                    }, 2000);
-                } else {
-                    setErrorMessage("Access denied. Only admins and staff can log in.");
-                }
+                console.log(sessionStorage);
+
+                // Hiển thị thông báo thành công
+                toast.success(message, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                });
+
+                // Điều hướng sau khi toast hiển thị
+                setTimeout(() => {
+                    console.log("Navigating to /admin...");
+                    navigate("/admin");
+                }, 2500);
             } else {
-                setErrorMessage("Invalid email or password.");
+                setErrorMessage("Quyền truy cập bị từ chối. Chỉ quản trị viên và nhân viên mới được phép.");
             }
-        } else {
-            setErrorMessage("User not found.");
+        } catch (error) {
+            console.error("Error during login:", error);
+            // Hiển thị thông báo lỗi
+            if (error.response && error.response.data) {
+                setErrorMessage(error.response.data.message || "Đăng nhập thất bại.");
+            } else {
+                setErrorMessage("Đã xảy ra lỗi. Vui lòng thử lại.");
+            }
         }
     };
+
+
+
+    // Toggle password visibility
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
+
+
 
     return (
         <div className="authentication-wrapper authentication-cover">
@@ -70,15 +90,12 @@ const LoginPage = () => {
                 {/* Login */}
                 <div className="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
                     <div className="w-px-400 mx-auto mt-12 pt-5">
-                        <h4 className="mb-1">Welcome to hypertech! 👋</h4>
+                        <h4 className="mb-1">Chào mừng đến với hypertech! 👋</h4>
                         <p className="mb-6">
-                            Please sign in to your account and start the adventure
+                            Vui lòng đăng nhập vào tài khoản của bạn và bắt đầu cuộc phiêu lưu
                         </p>
-                        {errorMessage && (
-                            <div className="alert alert-danger" role="alert">
-                                {errorMessage}
-                            </div>
-                        )}
+
+                        {/* Form login */}
                         <form onSubmit={handleLogin} className="mb-6">
                             <div className="mb-6">
                                 <label htmlFor="email" className="form-label">
@@ -97,27 +114,31 @@ const LoginPage = () => {
                             </div>
                             <div className="mb-6 form-password-toggle">
                                 <label className="form-label" htmlFor="password">
-                                    Password
+                                    Mật khẩu
                                 </label>
                                 <div className="input-group input-group-merge">
                                     <input
-                                        type="password"
+                                        type={passwordVisible ? 'text' : 'password'} // Conditionally change input type
                                         id="password"
                                         className="form-control"
                                         name="password"
-                                        placeholder="Nhâp mật khẩu"
+                                        placeholder="Nhập mật khẩu"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <span className="input-group-text cursor-pointer">
-                                        <i className="bx bx-hide" />
+                                    <span
+                                        className="input-group-text cursor-pointer"
+                                        onClick={togglePasswordVisibility} // Toggle password visibility
+                                    >
+                                        <i className={passwordVisible ? 'bx bx-show' : 'bx bx-hide'} />
                                     </span>
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary d-grid w-100">
-                                Sign in
+                                Đăng nhập
                             </button>
                         </form>
+
                     </div>
                 </div>
                 {/* /Login */}

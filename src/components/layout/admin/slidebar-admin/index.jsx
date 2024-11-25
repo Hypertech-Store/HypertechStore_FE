@@ -45,7 +45,7 @@ const SliderBar = () => {
 
     return (
         <>
-            <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme" style={{ "max-width": "285px" }}>
+            <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme" style={{ "max-width": "300px" }}>
                 <div className="app-brand demo ">
                     <a href="index-2.html" className="app-brand-link">
                         <span className="app-brand-logo demo">
@@ -87,11 +87,9 @@ const SliderBar = () => {
                         {menuState["products"] && (
                             <ul className="menu-sub">
                                 <li className="menu-item">
-                                    <a href="app-ecommerce-product-list.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Product List">
-                                            Danh sách sản phẩm
-                                        </div>
-                                    </a>
+                                    <Link to="danh-sach-san-pham" className="menu-link">
+                                        <div className="text-truncate" data-i18n="List">Danh sách</div>
+                                    </Link>
                                 </li>
                                 <li className="menu-item">
                                     <a href="app-ecommerce-product-add.html" className="menu-link">

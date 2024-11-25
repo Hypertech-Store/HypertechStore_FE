@@ -6,34 +6,43 @@ import Swal from 'sweetalert2'
 const Cart = () => {
     const [cartId, setCartId] = useState(null);
     const userId = localStorage.getItem('userId');
+    const [total, setTotal] = useState(0);
     const [quantities, setQuantities] = useState([]);  // Array to store product quantities
     const [products, setProducts] = useState([]);  // Array to store product data
     // State để theo dõi loại vận chuyển được chọn
     const [shippingMethod, setShippingMethod] = useState(null); // null là không có lựa chọn nào
 
-    // Hàm tính tổng tiền sản phẩm
-    const totalProductPrice = products.reduce((acc, product, index) => acc + (product.price * quantities[index]), 0);
+    // Tính tổng tiền sản phẩm
+    const totalProductPrice = products.reduce((acc, product, index) => acc + (product.totalPrice), 0);
 
-    // Hàm tính phí vận chuyển dựa trên lựa chọn
+    // Tính phí vận chuyển
     const shippingCost = shippingMethod === 'standard' ? 54000 : (shippingMethod === 'express' ? 35000 : 0);
 
-    // Tổng tiền
+    // Tính tổng tiền (sản phẩm + phí vận chuyển)
     const grandTotal = totalProductPrice + shippingCost;
 
-    // Fetch cart data when the component mounts
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/gio-hang/${userId}`)
             .then(response => {
                 const cartData = response.data.gio_hang.chi_tiet_gio_hangs;
-                setCartId(response.data.gio_hang.id); // Lưu gio_hang_id vào state
+                console.log(response);
+                setCartId(response.data.gio_hang.id);
 
-                const productList = cartData.map(item => ({
-                    image: item.san_pham.duong_dan_anh,
-                    name: item.san_pham.ten_san_pham,
-                    price: parseFloat(item.san_pham.gia),
-                    quantity: item.so_luong,
-                    id: item.san_pham.id,
-                }));
+                const productList = cartData.map(item => {
+                    return {
+                        id: item.san_pham.id,
+                        bien_the_san_pham_id: item.bien_the_san_pham?.id,
+                        image: item.san_pham.duong_dan_anh,
+                        name: item.san_pham.ten_san_pham,
+                        productPrice: parseFloat(item.chi_tiet_san_pham.gia_goc),
+                        quantity: item.so_luong,
+                        variantName: item.bien_the_san_pham?.ten_bien_the || 'Không có biến thể',
+                        variantValue: item.bien_the_san_pham?.gia_tri_bien_the || 'Không có giá trị',
+                        salePrice: item.chi_tiet_san_pham.gia_sau_sale,
+                        totalPrice: item.chi_tiet_san_pham.tong_tien,
+                        giaSaleVariant: item.chi_tiet_san_pham.gia_sau_sale_them_gia_bien_the
+                    };
+                });
 
                 setProducts(productList);
                 setQuantities(productList.map(product => product.quantity));
@@ -41,34 +50,87 @@ const Cart = () => {
             .catch(error => {
                 console.error('Error fetching cart data:', error);
             });
-    }, [userId]);  // Thực thi 1 lần khi component được mount
+    }, [userId]);
 
-
-    const handleIncrement = (index) => {
-        const newQuantities = [...quantities];
-        newQuantities[index] += 1;
-        setQuantities(newQuantities);
-
-        // Cập nhật số lượng sản phẩm qua API
-        const productId = products[index]?.id;
-        if (productId) {
-            updateProductQuantity(productId, newQuantities[index]);
-        }
-    };
-
-    const handleDecrement = (index) => {
-        const newQuantities = [...quantities];
-        if (newQuantities[index] > 1) {
-            newQuantities[index] -= 1;
-            setQuantities(newQuantities);
-
-            // Cập nhật số lượng sản phẩm qua API
-            const productId = products[index]?.id;
-            if (productId) {
-                updateProductQuantity(productId, newQuantities[index]);
+    const handleIncrement = async (index) => {
+        try {
+            const newQuantities = [...quantities];
+            newQuantities[index] += 1;
+    
+            const product = products[index];
+            if (!product) {
+                toast.error('Không thể tìm thấy sản phẩm.');
+                return;
             }
+    
+            const { id: productId, bien_the_san_pham_id, giaSaleVariant, productPrice, salePrice } = product;
+    
+            // Cập nhật số lượng trong state
+            setQuantities(newQuantities);
+    
+            // Lấy giá sản phẩm, ưu tiên giá biến thể (giaSaleVariant)
+            const price = giaSaleVariant || salePrice || productPrice;
+    
+            // Tính lại tổng tiền cho sản phẩm sau khi thay đổi số lượng
+            const newTotalPrice = price * newQuantities[index];
+            const updatedProducts = [...products];
+            updatedProducts[index].totalPrice = newTotalPrice;
+    
+            // Tính lại tổng tiền giỏ hàng
+            const updatedTotal = updatedProducts.reduce((acc, item) => acc + item.totalPrice, 0);
+            setTotal(updatedTotal); // setTotal là state để lưu tổng tiền của giỏ hàng
+    
+            // Cập nhật số lượng trong server
+            await updateProductQuantity(productId, bien_the_san_pham_id, newQuantities[index], giaSaleVariant);
+    
+            toast.success('Cập nhật số lượng thành công!');
+        } catch (error) {
+            console.error('Lỗi khi tăng số lượng:', error);
+            toast.error('Lỗi khi tăng số lượng sản phẩm.');
         }
     };
+    
+    const handleDecrement = async (index) => {
+        try {
+            const newQuantities = [...quantities];
+            if (newQuantities[index] > 1) {
+                newQuantities[index] -= 1;
+    
+                const product = products[index];
+                if (!product) {
+                    toast.error('Không thể tìm thấy sản phẩm.');
+                    return;
+                }
+    
+                const { id: productId, bien_the_san_pham_id, giaSaleVariant, productPrice, salePrice } = product;
+    
+                // Cập nhật số lượng trong state
+                setQuantities(newQuantities);
+    
+                // Lấy giá sản phẩm, ưu tiên giá biến thể (giaSaleVariant)
+                const price = giaSaleVariant || salePrice || productPrice;
+    
+                // Tính lại tổng tiền cho sản phẩm sau khi thay đổi số lượng
+                const newTotalPrice = price * newQuantities[index];
+                const updatedProducts = [...products];
+                updatedProducts[index].totalPrice = newTotalPrice;
+    
+                // Tính lại tổng tiền giỏ hàng
+                const updatedTotal = updatedProducts.reduce((acc, item) => acc + item.totalPrice, 0);
+                setTotal(updatedTotal); // setTotal là state để lưu tổng tiền của giỏ hàng
+    
+                // Cập nhật số lượng trong server
+                await updateProductQuantity(productId, bien_the_san_pham_id, newQuantities[index], giaSaleVariant);
+    
+                toast.success('Cập nhật số lượng thành công!');
+            } else {
+                toast.warning('Số lượng tối thiểu là 1.');
+            }
+        } catch (error) {
+            console.error('Lỗi khi giảm số lượng:', error);
+            toast.error('Lỗi khi giảm số lượng sản phẩm.');
+        }
+    };    
 
     const handleRemoveProduct = (index) => {
         const productId = products[index]?.id; // Đảm bảo rằng 'id' tồn tại trước khi xóa
@@ -140,13 +202,13 @@ const Cart = () => {
         });
     };
 
-
-
-    const updateProductQuantity = (productId, quantity) => {
+    const updateProductQuantity = (productId, bien_the_san_pham_id, quantity, gia_sau_sale_them_gia_bien_the) => {
         const payload = {
             gio_hang_id: cartId,  // Giỏ hàng của người dùng
             san_pham_id: productId,  // ID sản phẩm
-            so_luong: quantity  // Số lượng mới
+            bien_the_san_pham_id: bien_the_san_pham_id,
+            so_luong: quantity,  // Số lượng mới
+            gia_sau_sale_them_gia_bien_the: parseFloat(gia_sau_sale_them_gia_bien_the),
         };
 
         // Gửi yêu cầu POST để cập nhật số lượng sản phẩm
@@ -162,11 +224,6 @@ const Cart = () => {
                 console.error('Error updating product quantity:', error.response?.data || error.message);
             });
     };
-
-
-
-
-
 
     return (
         <>
@@ -219,7 +276,7 @@ const Cart = () => {
                                                             </td>
                                                             <td className="product-price-cart">
                                                                 <span className="amount">
-                                                                    {new Intl.NumberFormat('vi-VN').format(product.price)} VNĐ
+                                                                    {new Intl.NumberFormat('vi-VN').format(product.salePrice)} VNĐ
                                                                 </span>
                                                             </td>
                                                             <td className="product-quantity">
@@ -229,9 +286,45 @@ const Cart = () => {
                                                                     <button onClick={() => handleIncrement(index)} className="inc qtybutton">+</button>
                                                                 </div>
                                                             </td>
-                                                            <td className="product-quantity"></td>
+                                                            <td className="product-quantity" style={{ textAlign: "center", verticalAlign: "middle" }}>
+                                                                <div className="pro-details-content" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                                                    <div className="pro-details-color-wrap" style={{ marginRight: "10px" }}>
+                                                                        <div className="pro-details-color-content">
+                                                                            <ul>
+                                                                                <li
+                                                                                    style={{
+                                                                                        backgroundColor: getBackgroundColor(product.variantName),
+                                                                                        borderRadius: "50%",  // Làm cho phần tử có hình tròn
+                                                                                        color: "transparent",  // Ẩn văn bản
+                                                                                        padding: "10px",  // Thêm padding để phần tử có kích thước
+                                                                                        width: "15px",      // Đặt chiều rộng
+                                                                                        height: "15px"      // Đặt chiều cao
+                                                                                    }}
+                                                                                >
+
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="pro-details-size">
+                                                                        <div className="pro-details-size-content">
+                                                                            <ul>
+                                                                                <li
+                                                                                    style={{
+                                                                                        border: "1px solid #ccc",  // Thêm viền cho thẻ span
+                                                                                        backgroundColor: "#f0f0f0", // Thêm màu nền cho thẻ span
+                                                                                        padding: "2px 7px",        // Thêm khoảng cách bên trong thẻ span
+                                                                                        borderRadius: "5px",        // Làm cho viền thẻ span có độ cong
+                                                                                    }}
+                                                                                ><span>{product.variantValue || "Không có biến thể"}</span></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
                                                             <td className="product-subtotal">
-                                                                {new Intl.NumberFormat('vi-VN').format(product.price * quantities[index])} VNĐ
+                                                                {new Intl.NumberFormat('vi-VN').format(product.totalPrice)} VNĐ
                                                             </td>
                                                             <td className="product-remove">
                                                                 <a onClick={() => handleRemoveProduct(index)}><TiTimes /></a>
@@ -343,3 +436,38 @@ const Cart = () => {
 };
 
 export default Cart;
+
+function getBackgroundColor(color) {
+    switch (color.toLowerCase()) {
+        case 'black':
+            return '#000000'; // Màu đen
+        case 'blue':
+            return '#4798f3'; // Màu xanh dương
+        case 'maroon':
+            return '#736751'; // Màu nâu đỏ
+        case 'gray':
+            return '#c0c0c0'; // Màu xám
+        case 'green':
+            return '#139c57'; // Màu xanh lá cây
+        case 'yellow':
+            return '#e28b37'; // Màu vàng
+        case 'red':
+            return '#e28b37'; // Màu đỏ
+        case 'white':
+            return '#ffffff'; // Màu trắng
+        case 'silver':
+            return '#c0c0c0'; // Màu bạc
+        case 'gold':
+            return '#d4af37'; // Màu vàng kim loại
+        case 'green':
+            return '#004b49'; // Màu xanh đêm (Apple)
+        case 'purple':
+            return '#6a0dad'; // Màu tím đậm
+        case 'aqua':
+            return '#00ffff'; // Màu aqua
+        default:
+            return '#000000'; // Màu mặc định nếu không có trong danh sách
+    }
+}
+
+

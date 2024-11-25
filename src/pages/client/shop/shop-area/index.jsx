@@ -306,6 +306,7 @@ const Shop = () => {
                                                                     <img className="default-img" src={product.duong_dan_anh} alt={product.ten_san_pham} />
                                                                 </a>
                                                                 {label && (
+
                                                                     <span className="pink">
                                                                         {/* Kiểm tra nếu sản phẩm đang sale, hiển thị phần trăm giảm giá */}
                                                                         {saleProduct && saleProduct.sale_theo_phan_tram && (

@@ -16,7 +16,13 @@ const HeaderClient = () => {
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [isSearchContentOpen, setIsSearchContentOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path); // Chuyển hướng đến đường dẫn được truyền vào
+  };
+  
 
   useEffect(() => {
     // Kiểm tra xem có token trong localStorage không để xác định trạng thái đăng nhập
@@ -92,9 +98,9 @@ const HeaderClient = () => {
                 <nav>
                   <ul>
                     <li><a href="/">Trang chủ</a></li>
-                    <li><a href="cua-hang">Cửa hàng</a></li>
-                    <li><a href="bai-viet">Bài viết</a></li>
-                    <li><a href="lien-he">Liên hệ</a></li>
+                    <li><a href="cua-hang" onClick={() => handleNavigate('/cua-hang')}>Cửa hàng</a></li>
+                    <li><a href="bai-viet" onClick={() => handleNavigate('/bai-viet')}>Bài viết</a></li>
+                    <li><a href="lien-he" onClick={() => handleNavigate('/lien-he')}>Liên hệ</a></li>
                   </ul>
                 </nav>
               </div>
