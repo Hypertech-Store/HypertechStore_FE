@@ -33,8 +33,8 @@ const ShopDetails = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [activeTab, setActiveTab] = useState('des-details1'); // Default tab state
     const [isExpanded, setIsExpanded] = useState(false);
-    const [selectedColor, setSelectedColor] = useState(null);
-    const [selectedSize, setSelectedSize] = useState(null);
+    const [selectedAttributes, setSelectedAttributes] = useState({});
+    const [allAttributeIds, setAllAttributeIds] = useState([]);
     const [quantity, setQuantity] = useState(1);  // Để theo dõi số lượng
 
 
@@ -92,74 +92,90 @@ const ShopDetails = () => {
         design: false,
     });
 
-    const handleColorChange = (color) => {
-        setSelectedColor(color);
-        if (selectedSize) {
-            saveSelection(color, selectedSize);
-        }
+    // Hàm thay đổi giá trị thuộc tính
+    // const handleAttributeChange = (attribute, value) => {
+    //     setSelectedAttributes(prevState => {
+    //         const newState = { ...prevState, [attribute]: value };
+
+    //         // Log ra đối tượng selectedAttributes sau khi cập nhật
+    //         console.log("Selected Attributes: ", newState);
+
+    //         return newState;
+    //     });
+    // };
+
+    const handleAttributeChange = (attribute, value, attributeId) => {
+        setSelectedAttributes(prevState => {
+            // Nếu giá trị thuộc tính đã được chọn, reset mảng ID về mảng rỗng trước khi thêm ID mới
+            let updatedAttributeIds = [];
+
+            // Nếu người dùng chọn một giá trị thuộc tính mới, thêm ID vào mảng
+            updatedAttributeIds.push(attributeId);
+
+            // Tạo state mới với mảng attributeIds chứa chỉ ID mới
+            const newState = {
+                ...prevState,
+                [attribute]: value,
+                [`${attribute}_ids`]: updatedAttributeIds
+            };
+
+            // Gộp tất cả các mảng attribute_ids thành một mảng duy nhất
+            const allAttributeIds = Object.values(newState).filter(value => Array.isArray(value)).flat();
+            
+            setAllAttributeIds(allAttributeIds);
+
+            console.log("Selected Attributes: ", newState);
+            console.log("All Combined Attribute IDs: ", allAttributeIds);
+
+            return newState;
+        });
     };
 
-    const handleSizeChange = (size) => {
-        setSelectedSize(size);
-        if (selectedColor) {
-            saveSelection(selectedColor, size);
-        }
-    };
 
-    const saveSelection = (color, size) => {
-        console.log('Lưu trữ dữ liệu:', { color, size });
-
-    };
 
     const handleAddToCartWithVariant = async () => {
-        if (!selectedColor || !selectedSize) {
-            toast.error('Vui lòng chọn màu và dung lượng!');
-            return;
-        }
-
         try {
-            // 1. Kiểm tra biến thể trước khi thêm vào giỏ hàng
-            const variantResponse = await axios.post('http://127.0.0.1:8000/api/bien-the-san-pham/kiem-tra-bien-the', {
-                ten_bien_the: selectedColor,
-                gia_tri_bien_the: selectedSize
-            });
+            console.log("Mảng biến thể", allAttributeIds);
 
-            // Kiểm tra nếu không có id hoặc không thành công
-            if (!variantResponse.data.data.id) {
-                console.log('Biến thể sản phẩm không tồn tại!');
-                return;
-            }
+            const variantResponse = await axios.post('http://127.0.0.1:8000/api/bien-the-san-pham/kiem-tra-bien-the', {
+                attributes: allAttributeIds
+            });
+            
+            
+            console.log(variantResponse);
 
             const priceAfterDiscount = productData?.sale_theo_phan_tram
                 ? productData?.sanPham?.gia * (1 - parseFloat(productData?.sale_theo_phan_tram) / 100)
                 : productData?.sanPham?.gia;
+            console.log(priceAfterDiscount);
 
-            const giaSanPham = (Math.floor(priceAfterDiscount) + Math.floor(variantResponse.data.data.gia)) * quantity;
 
-            console.log('Variant ID:', variantResponse.data.data.id);
-            console.log('khach_hang_id', userId);
-            // console.log('gio_hang_id', cartResponse);
-            console.log('san_pham_id', productId);
-            console.log('so_luong', quantity);
+            const giaSanPham = (Math.floor(priceAfterDiscount) + Math.floor(variantResponse.data.bien_the_san_phams[0]?.gia)) * quantity;
+
+            console.log('Variant ID:', variantResponse.data.bien_the_san_phams.id);
+            // console.log('khach_hang_id', userId);
+            // // console.log('gio_hang_id', cartResponse);
+            // console.log('san_pham_id', productId);
+            // console.log('so_luong', quantity);
             console.log('gia', giaSanPham);
             // Tiến hành thêm vào giỏ hàng nếu biến thể hợp lệ
-            const payload = {
-                khach_hang_id: userId,
-                san_pham_id: productId,
-                bien_the_san_pham_id: variantResponse.data.data.id,
-                so_luong: quantity,
-                gia: giaSanPham
-            };
+            // const payload = {
+            //     khach_hang_id: userId,
+            //     san_pham_id: productId,
+            //     bien_the_san_pham_id: variantResponse.data.data.id,
+            //     so_luong: quantity,
+            //     gia: giaSanPham
+            // };
 
             // 2. Gửi yêu cầu thêm sản phẩm vào giỏ hàng
-            const addToCartResponse = await axios.post('http://127.0.0.1:8000/api/gio-hang/them-san-pham', payload);
+            // const addToCartResponse = await axios.post('http://127.0.0.1:8000/api/gio-hang/them-san-pham', payload);
 
-            if (addToCartResponse.status === 200) {
-                toast.success('Sản phẩm đã được thêm vào giỏ hàng!');
-            } else {
-                toast.error('Đã có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
-                console.error('Error:', addToCartResponse.data.message || 'Failed to add product.');
-            }
+            // if (addToCartResponse.status === 200) {
+            //     toast.success('Sản phẩm đã được thêm vào giỏ hàng!');
+            // } else {
+            //     toast.error('Đã có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
+            //     console.error('Error:', addToCartResponse.data.message || 'Failed to add product.');
+            // }
         } catch (error) {
             toast.error('Đã có lỗi xảy ra. Vui lòng thử lại!');
             console.error('Error:', error);
@@ -383,59 +399,48 @@ const ShopDetails = () => {
                                 )}
 
                                 <div className="pro-details-size-color mt-3">
-                                    {/* Color Selection */}
-                                    <div className="pro-details-color-wrap">
-                                        <span>Color</span>
-                                        <div className="pro-details-color-content">
-                                            <ul>
-                                                {Array.from(new Set(productData?.bienTheSanPhams?.map(variant => variant.ten_bien_the))) // Loại bỏ màu trùng lặp
-                                                    .map((color, index) => {
-                                                        const colorClass = color.toLowerCase();
-                                                        const isSelected = selectedColor === color;  // Kiểm tra xem màu có được chọn không
-                                                        return (
-                                                            <li
-                                                                key={index}
-                                                                onClick={() => handleColorChange(color)}
-                                                                style={{
-                                                                    backgroundColor: getBackgroundColor(colorClass),  // (tuỳ chọn) Thêm màu nền
-                                                                    border: isSelected ? '2px solid #000' : 'none',  // Hiển thị viền khi chọn
-                                                                    cursor: 'pointer',  // Thêm con trỏ để người dùng biết có thể click
-                                                                    transform: isSelected ? 'scale(1.1)' : 'scale(1)',  // Phóng to màu khi chọn
-                                                                    transition: 'transform 0.2s ease',  // Thêm hiệu ứng chuyển động mượt mà
-                                                                }}
-                                                            />
-                                                        );
-                                                    })}
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    {/* Duyệt qua grouped_attributes */}
+                                    {Object.keys(productData?.grouped_attributes)?.map((attribute, index) => {
+                                        const attributeData = productData?.grouped_attributes[attribute];
+                                        const isColor = attribute === 'Màu sắc';  // Kiểm tra thuộc tính là Màu sắc hay không
 
-                                    {/* Storage Size Selection */}
-                                    <div className="pro-details-size">
-                                        <span>Dung lượng</span>
-                                        <div className="pro-details-size-content">
-                                            <ul>
-                                                {Array.from(new Set(productData?.bienTheSanPhams?.map(variant => variant.gia_tri_bien_the))) // Loại bỏ dung lượng trùng lặp
-                                                    .map((size, index) => {
-                                                        const isSelected = selectedSize === size;  // Kiểm tra xem dung lượng có được chọn không
-                                                        return (
-                                                            <li
-                                                                key={index}
-                                                                onClick={() => handleSizeChange(size)}
-                                                            >
-                                                                <span style={{
-                                                                    border: isSelected ? '2px solid #000' : 'none',  // Hiển thị viền khi chọn
-                                                                    cursor: 'pointer',  // Thêm con trỏ để người dùng biết có thể click
-                                                                }}>{size}</span>
-                                                            </li>
-                                                        );
-                                                    })}
-                                            </ul>
-                                        </div>
-                                    </div>
+                                        return (
+                                            <div className={isColor ? "pro-details-color-wrap" : "pro-details-size"} key={index}>
+                                                {/* Hiển thị tên thuộc tính */}
+                                                <span style={{ marginRight: '10px' }}>{attribute}</span>
+
+                                                {/* Duyệt qua các giá trị của thuộc tính */}
+                                                <div className={isColor ? "pro-details-color-content" : "pro-details-size-content"}>
+                                                    <ul>
+                                                        {attributeData?.ten_gia_tri?.map((value, valueIndex) => {
+                                                            const isSelected = selectedAttributes[attribute] === value;  // Kiểm tra xem thuộc tính có được chọn hay không
+                                                            const attributeId = attributeData?.gia_tri_thuoc_tinh_id[valueIndex]; // Lấy ID của giá trị thuộc tính
+
+                                                            return (
+                                                                <li
+                                                                    key={valueIndex}
+                                                                    onClick={() => handleAttributeChange(attribute, value, attributeId)}  // Gọi hàm thay đổi giá trị thuộc tính, truyền cả ID
+                                                                    style={{
+                                                                        backgroundColor: isColor ? getBackgroundColor(value.toLowerCase()) : 'transparent',
+                                                                        border: isSelected ? '2px solid #000' : 'none',  // Hiển thị viền khi chọn
+                                                                        cursor: 'pointer',
+                                                                        transform: isSelected ? 'scale(0.9)' : 'scale(0.8)',  // Phóng to khi chọn
+                                                                        transition: 'transform 0.2s ease',  // Thêm hiệu ứng chuyển động
+                                                                        color: isColor ? 'transparent' : 'black',  // Ẩn chữ khi là màu sắc
+                                                                        textIndent: isColor ? '-9999px' : '0',  // Đẩy chữ ra ngoài nếu là màu sắc
+                                                                        padding: isColor ? '10px' : 'auto',  // Cung cấp padding nếu là màu sắc
+                                                                    }}
+                                                                >
+                                                                    {value}
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-
-
 
 
                                 {/* Quantity Selection */}
