@@ -14,7 +14,12 @@ function App() {
         pauseOnFocusLoss
         draggable
         theme="light"
-        transition:Bounce />
+        transition:Bounce 
+        style={{
+          right: '2px',  // Dịch sang bên phải
+          top: '-1.5px'     // Căn lên một chút
+        }}
+        />
       <Router />
     </>
   )

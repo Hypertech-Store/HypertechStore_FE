@@ -1,447 +1,952 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { Link } from 'react-router-dom';
-
-// // Import các tệp CSS (nếu bạn sử dụng Webpack hoặc Vite, bạn có thể import trực tiếp)
-// import '../../../../assets/vendor/fonts/boxicons.css';
-// import '../../../../assets/vendor/fonts/fontawesome.css';
-// import '../../../../assets/vendor/fonts/flag-icons.css';
-import '../../../../assets/vendor/css/rtl/core.css';
-// import '../../../../assets/vendor/css/rtl/theme-default.css';
-// import '../../../../assets/css/demo.css';
-// import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css';
-// import '../../../../assets/vendor/libs/typeahead-js/typeahead.css';
-// import '../../../../assets/vendor/libs/apex-charts/apex-charts.css';
-
-
-// // Import các thư viện JavaScript
-// import '../../../../assets/vendor/libs/jquery/jquery.js';
-// import '../../../../assets/vendor/libs/popper/popper.js';
-// import '../../../../assets/vendor/js/bootstrap.js';
-// import '../../../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js';
-// import '../../../../assets/vendor/libs/hammer/hammer.js';
-// // import '../../../../assets/vendor/libs/i18n/i18n.js';
-// import '../../../../assets/vendor/libs/typeahead-js/typeahead.js';
-// import '../../../../assets/vendor/js/menu.js';
-
-// // Vendors JS
-// import '../../../../assets/vendor/libs/apex-charts/apexcharts.js';
-// import '../../../../assets/vendor/js/helpers.js';
-// import '../../../../assets/js/config.js';
-// import '../../../../assets/js/main.js';
-// import '../../../../assets/js/dashboards-analytics.js';
-import logo from "../../../../assets/img/logo/logo1.png";
-const SliderBar = () => {
-    const [menuState, setMenuState] = useState({}); // Trạng thái động cho menu
-
-
-
-    const toggleMenu = (menuKey) => {
-        setMenuState((prevState) => ({
-            ...prevState,
-            [menuKey]: !prevState[menuKey], // Đảo trạng thái menu cụ thể
-        }));
-    };
-
-    return (
-        <>
-            <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme" style={{ "max-width": "300px" }}>
-                <div className="app-brand demo ">
-                    <a href="index-2.html" className="app-brand-link">
-                        <span className="app-brand-logo demo">
-                            <img src={logo} alt="Hypertech Logo" style={{ width: '40px', height: '35px' }} />
-                        </span>
-                        <span className="app-brand-text demo menu-text fw-bold ms-2">hypertech</span>
-                    </a>
-
-                    <a href="javascript:void(0);" className="layout-menu-toggle menu-link text-large ms-auto">
-                        <i className="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center" />
-                    </a>
+const SlidebarAdmin = () => {
+  return (
+    <>
+      <nav className="navbar navbar-vertical navbar-expand-lg">
+        <div className="collapse navbar-collapse" id="navbarVerticalCollapse">
+          {/* scrollbar removed*/}
+          <div className="navbar-vertical-content">
+            <ul className="navbar-nav flex-column" id="navbarVerticalNav">
+              <li className="nav-item">
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link label-1 active"
+                    href="/admin"
+                    role="button"
+                    data-bs-toggle
+                    aria-expanded="false"
+                  >
+                    <div className="d-flex align-items-center">
+                      <span className="nav-link-icon">
+                        <span data-feather="pie-chart" />
+                      </span>
+                      <span className="nav-link-text-wrapper">
+                        <span className="nav-link-text">Dashboard</span>
+                      </span>
+                    </div>
+                  </a>
                 </div>
-                <div className="menu-inner-shadow" />
-                <ul className="menu-inner py-1">
-                    {/* Dashboards */}
-                    <li className="menu-item active open">
-                        <a href="" className="menu-link">
-                            <i className="menu-icon tf-icons bx bx-home-smile" />
-                            <div className="text-truncate" data-i18n="Dashboards">Dashboards</div>
-                        </a>
-                    </li>
-                    {/* Apps & Pages */}
-                    <li className="menu-header small text-uppercase">
-                        <span className="menu-header-text" data-i18n="Apps & Pages">Manager</span>
-                    </li>
-
-                    {/* Quản lý sản phẩm */}
-                    <li className={`menu-item ${menuState["products"] ? "open" : ""}`}>
+              </li>
+              <li className="nav-item">
+                {/* label*/}
+                <p className="navbar-vertical-label">Apps</p>
+                <hr className="navbar-vertical-line" />
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link dropdown-indicator label-1"
+                    href="#nv-e-commerce"
+                    role="button"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    aria-controls="nv-e-commerce"
+                  >
+                    <div className="d-flex align-items-center">
+                      <div className="dropdown-indicator-icon-wrapper">
+                        <span className="fas fa-caret-right dropdown-indicator-icon" />
+                      </div>
+                      <span className="nav-link-icon">
+                        <span data-feather="shopping-cart" />
+                      </span>
+                      <span className="nav-link-text">E-commerce</span>
+                    </div>
+                  </a>
+                  <div className="parent-wrapper label-1">
+                    <ul
+                      className="nav collapse parent"
+                      data-bs-parent="#navbarVerticalCollapse"
+                      id="nv-e-commerce"
+                    >
+                      <li className="collapsed-nav-item-title d-none">
+                        E commerce
+                      </li>
+                      <li className="nav-item">
                         <a
-                            href="javascript:void(0);"
-                            className="menu-link menu-toggle"
-                            onClick={() => toggleMenu("products")}
+                          className="nav-link dropdown-indicator"
+                          href="#nv-admin"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          aria-controls="nv-admin"
                         >
-                            <i className="menu-icon tf-icons bx bx-cart-alt" />
-                            <div className="text-truncate" data-i18n="eCommerce">
-                                Quản lý sản phẩm
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
                             </div>
+                            <span className="nav-link-text">Products</span>
+                          </div>
                         </a>
-                        {menuState["products"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <Link to="danh-sach-san-pham" className="menu-link">
-                                        <div className="text-truncate" data-i18n="List">Danh sách</div>
-                                    </Link>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="app-ecommerce-product-add.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Add Product">
-                                            Thêm sản phẩm
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a
-                                        href="app-ecommerce-category-list.html"
-                                        className="menu-link"
-                                    >
-                                        <div className="text-truncate" data-i18n="Edit Product">
-                                            Sửa sản phẩm
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
-
-                    {/* Quản lý danh mục */}
-                    <li className={`menu-item ${menuState["categories"] ? "open" : ""}`}>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent show"
+                            data-bs-parent="#e-commerce"
+                            id="nv-admin"
+                          >
+                            <li className="nav-item">
+                              <Link className="nav-link" to="them-san-pham">
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Add product
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <Link
+                                className="nav-link"
+                                to="danh-sach-san-pham"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    List Products
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li className="nav-item">
                         <a
-                            href="javascript:void(0);"
-                            className="menu-link menu-toggle"
-                            onClick={() => toggleMenu("categories")}
+                          className="nav-link dropdown-indicator"
+                          href="#category"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          aria-controls="category"
                         >
-                            <i className="menu-icon tf-icons bx bx-cube" />
-                            <div className="text-truncate" data-i18n="eCommerce">
-                                Quản lý danh mục
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
                             </div>
+                            <span className="nav-link-text">Category</span>
+                          </div>
                         </a>
-                        {menuState["categories"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <a href="app-ecommerce-product-list.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Product List">
-                                            Danh sách danh mục
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="app-ecommerce-product-add.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Add Product">
-                                            Thêm danh mục
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a
-                                        href="app-ecommerce-category-list.html"
-                                        className="menu-link"
-                                    >
-                                        <div className="text-truncate" data-i18n="Edit Product">
-                                            Sửa danh mục
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
-
-                    {/* Quản lý nhân viên */}
-                    <li className={`menu-item ${menuState["employees"] ? "open" : ""}`}>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent show"
+                            data-bs-parent="#e-commerce"
+                            id="category"
+                          >
+                            <li className="nav-item">
+                              <Link className="nav-link" to="them-danh-muc">
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Add category
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <Link
+                                className="nav-link"
+                                to="danh-sach-danh-muc"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    List category
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li className="nav-item">
                         <a
-                            href="javascript:void(0);"
-                            className="menu-link menu-toggle"
-                            onClick={() => toggleMenu("employees")}
+                          className="nav-link dropdown-indicator"
+                          href="#subcategory"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          aria-controls="category"
                         >
-                            <i className="menu-icon tf-icons bx bx-user" />
-                            <div className="text-truncate" data-i18n="Users">
-                                Quản lý nhân viên
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
                             </div>
+                            <span className="nav-link-text">SubCategory</span>
+                          </div>
                         </a>
-                        {menuState["employees"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <Link to="danh-sach-nhan-vien" className="menu-link">
-                                        <div className="text-truncate" data-i18n="List">Danh sách</div>
-                                    </Link>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="/admin/them-nhan-vien" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Add">Thêm nhân viên</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
-
-                    {/* Quản lý hóa đơn */}
-                    <li className={`menu-item ${menuState["invoice"] ? "open" : ""}`}>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent show"
+                            data-bs-parent="#e-commerce"
+                            id="subcategory"
+                          >
+                            <li className="nav-item">
+                              <Link className="nav-link" to="them-danh-muc-con">
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Add subcategory
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <Link
+                                className="nav-link"
+                                to="danh-sach-danh-muc-con"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    List subcategory
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li className="nav-item">
                         <a
-                            href="javascript:void(0);"
-                            className="menu-link menu-toggle"
-                            onClick={() => toggleMenu("invoice")}
+                          className="nav-link dropdown-indicator"
+                          href="#variable"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          aria-controls="category"
                         >
-                            <i className="menu-icon tf-icons bx bx-food-menu" />
-                            <div className="text-truncate" data-i18n="Invoice">Quản lý hóa đơn</div>
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
+                            </div>
+                            <span className="nav-link-text">Variables</span>
+                          </div>
                         </a>
-                        {menuState["invoice"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <a href="app-invoice-list.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="List">List</div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="app-invoice-preview.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Preview">Preview</div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="app-invoice-edit.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Edit">Edit</div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="app-invoice-add.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Add">Add</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
-
-                    {/* Quản lý đơn hàng */}
-                    <li className={`menu-item ${menuState["order"] ? "open" : ""}`}>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent show"
+                            data-bs-parent="#e-commerce"
+                            id="variable"
+                          >
+                            <li className="nav-item">
+                              <Link className="nav-link" to="them-danh-muc-con">
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Add variable
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="danh-sach-danh-muc-con"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    List variable
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link dropdown-indicator label-1"
+                    href="#account"
+                    role="button"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    aria-controls="account"
+                  >
+                    <div className="d-flex align-items-center">
+                      <div className="dropdown-indicator-icon-wrapper">
+                        <span className="fas fa-caret-right dropdown-indicator-icon" />
+                      </div>
+                      <span className="nav-link-icon">
+                        <span data-feather="user" />
+                      </span>
+                      <span className="nav-link-text">Accounts</span>
+                    </div>
+                  </a>
+                  <div className="parent-wrapper label-1">
+                    <ul
+                      className="nav collapse parent"
+                      data-bs-parent="#navbarVerticalCollapse"
+                      id="account"
+                    >
+                      <li className="collapsed-nav-item-title d-none">
+                        Accounts
+                      </li>
+                      <li className="nav-item">
                         <a
-                            href="javascript:void(0);"
-                            className="menu-link menu-toggle"
-                            onClick={() => toggleMenu("order")}
+                          className="nav-link dropdown-indicator"
+                          href="#nv-admin"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          aria-controls="nv-admin"
                         >
-                            <i className="menu-icon tf-icons bx bx-package" />
-                            <div className="text-truncate" data-i18n="Order">Quản lý đơn hàng</div>
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
+                            </div>
+                            <span className="nav-link-text">
+                              Administrators
+                            </span>
+                          </div>
                         </a>
-                        {menuState["order"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <a href="app-ecommerce-order-list.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Order List">
-                                            Order List
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a
-                                        href="app-ecommerce-order-details.html"
-                                        className="menu-link"
-                                    >
-                                        <div className="text-truncate" data-i18n="Order Details">
-                                            Order Details
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
-
-
-                    <li className="menu-header small text-uppercase">
-                        <span className="menu-header-text" data-i18n="Apps & Pages">Manager</span>
-                    </li>
-
-                    <li className="menu-item">
-                        <a href="app-ecommerce-settings-shipping.html" className="menu-link">
-                            <i className="menu-icon tf-icons bx bxs-ship" />
-                            <div className="text-truncate" data-i18n="Shipping & Delivery">Vận chuyển &amp; Giao hàng</div>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent show"
+                            data-bs-parent="#e-commerce"
+                            id="nv-admin"
+                          >
+                            <li className="nav-item">
+                              <Link className="nav-link" to="them-san-pham">
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Add admin
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a className="nav-link" href="danh-sach-quan-tri">
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    List admin
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link dropdown-indicator"
+                          href="#category"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          aria-controls="category"
+                        >
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
+                            </div>
+                            <span className="nav-link-text">Customer</span>
+                          </div>
                         </a>
-                    </li>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent show"
+                            data-bs-parent="#e-commerce"
+                            id="category"
+                          >
+                            <li className="nav-item">
+                              <Link
+                                className="nav-link"
+                                to="danh-sach-khach-hang"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    List customer
+                                  </span>
+                                </div>
+                              </Link>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <li className="nav-item">
+                  {/* parent pages*/}
+                  <div className="nav-item-wrapper">
+                    <a
+                      className="nav-link label-1"
+                      href="khuyen-mai"
+                      role="button"
+                      data-bs-toggle
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="gift" />
+                        </span>
+                        <span className="nav-link-text">Deals</span>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  {/* parent pages*/}
+                  <div className="nav-item-wrapper">
+                    <a
+                      className="nav-link label-1"
+                      href="don-hang"
+                      role="button"
+                      data-bs-toggle
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="package" />
+                        </span>
+                        <span className="nav-link-text">Orders</span>
+                      </div>
+                    </a>
+                  </div>
+                </li>
 
-
-
-                    <li className="menu-item">
-                        <a href="wizard-ex-create-deal.html" className="menu-link">
-                            <i className="menu-icon tf-icons bx bxs-discount" />
-                            <div className="text-truncate" data-i18n="Create Deal">Quản lý voucher</div>
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link label-1"
+                    href="tin-nhan"
+                    role="button"
+                    data-bs-toggle
+                    aria-expanded="false"
+                  >
+                    <div className="d-flex align-items-center">
+                      <span className="nav-link-icon">
+                        <span data-feather="message-square" />
+                      </span>
+                      <span className="nav-link-text-wrapper">
+                        <span className="nav-link-text">Chat</span>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link dropdown-indicator label-1"
+                    href="#nv-email"
+                    role="button"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    aria-controls="nv-email"
+                  >
+                    <div className="d-flex align-items-center">
+                      <div className="dropdown-indicator-icon-wrapper">
+                        <span className="fas fa-caret-right dropdown-indicator-icon" />
+                      </div>
+                      <span className="nav-link-icon">
+                        <span data-feather="mail" />
+                      </span>
+                      <span className="nav-link-text">Email</span>
+                    </div>
+                  </a>
+                  <div className="parent-wrapper label-1">
+                    <ul
+                      className="nav collapse parent"
+                      data-bs-parent="#navbarVerticalCollapse"
+                      id="nv-email"
+                    >
+                      <li className="collapsed-nav-item-title d-none">Email</li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="apps/email/inbox.html">
+                          <div className="d-flex align-items-center">
+                            <span className="nav-link-text">Inbox</span>
+                          </div>
                         </a>
-                    </li>
-
-                    <li className="menu-item">
-                        <a href="app-ecommerce-settings-checkout.html" className="menu-link">
-                            <i className="menu-icon tf-icons bx bx-wallet" />
-
-                            <div className="text-truncate" data-i18n="Checkout">Phương thức thanh toán</div>
+                        {/* more inner pages*/}
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          href="apps/email/email-detail.html"
+                        >
+                          <div className="d-flex align-items-center">
+                            <span className="nav-link-text">Email detail</span>
+                          </div>
                         </a>
-                    </li>
-
-                    <li className="menu-item">
-                        <a href="app-ecommerce-manage-reviews.html" className="menu-link">
-                            <i className="menu-icon tf-icons bx bx-comment-check" />
-                            <div className="text-truncate" data-i18n="Manage Reviews">Xem xét đánh giá</div>
+                        {/* more inner pages*/}
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="apps/email/compose.html">
+                          <div className="d-flex align-items-center">
+                            <span className="nav-link-text">Compose</span>
+                          </div>
                         </a>
-                    </li>
-
-                    <li className="menu-item">
-                        <a href="app-chat.html" className="menu-link">
-                            <i className="menu-icon tf-icons bx bx-chat" />
-                            <div className="text-truncate" data-i18n="Chat"> Quản lý tin nhắn</div>
+                        {/* more inner pages*/}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link dropdown-indicator label-1"
+                    href="#nv-events"
+                    role="button"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    aria-controls="nv-events"
+                  >
+                    <div className="d-flex align-items-center">
+                      <div className="dropdown-indicator-icon-wrapper">
+                        <span className="fas fa-caret-right dropdown-indicator-icon" />
+                      </div>
+                      <span className="nav-link-icon">
+                        <span data-feather="bookmark" />
+                      </span>
+                      <span className="nav-link-text">Events</span>
+                    </div>
+                  </a>
+                  <div className="parent-wrapper label-1">
+                    <ul
+                      className="nav collapse parent"
+                      data-bs-parent="#navbarVerticalCollapse"
+                      id="nv-events"
+                    >
+                      <li className="collapsed-nav-item-title d-none">
+                        Events
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          href="apps/events/create-an-event.html"
+                        >
+                          <div className="d-flex align-items-center">
+                            <span className="nav-link-text">
+                              Create an event
+                            </span>
+                          </div>
                         </a>
-                    </li>
-
-
-                    <li className="menu-header small text-uppercase">
-                        <span className="menu-header-text" data-i18n="Apps & Pages">Manager</span>
-                    </li>
-
-                    <li className={`menu-item ${menuState["role"] ? "open" : ""}`}>
-                        <a href="javascript:void(0);" className="menu-link menu-toggle" onClick={() => toggleMenu("role")}>
-                            <i className="menu-icon tf-icons bx bx-check-shield" />
-                            <div className="text-truncate" data-i18n="Roles & Permissions">Vài trò &amp; quyền</div>
+                        {/* more inner pages*/}
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          href="apps/events/event-detail.html"
+                        >
+                          <div className="d-flex align-items-center">
+                            <span className="nav-link-text">Event detail</span>
+                          </div>
                         </a>
-                        {menuState["role"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <a href="app-access-roles.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Roles">Roles</div>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="app-access-permission.html" className="menu-link">
-                                        <div className="text-truncate" data-i18n="Permission">Permission</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
+                        {/* more inner pages*/}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li className="nav-item">
+                {/* label*/}
+                <p className="navbar-vertical-label">Pages</p>
+                <hr className="navbar-vertical-line" />
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link label-1"
+                    href="pages/notifications.html"
+                    role="button"
+                    data-bs-toggle
+                    aria-expanded="false"
+                  >
+                    <div className="d-flex align-items-center">
+                      <span className="nav-link-icon">
+                        <span data-feather="bell" />
+                      </span>
+                      <span className="nav-link-text-wrapper">
+                        <span className="nav-link-text">Notifications</span>
+                      </span>
+                    </div>
+                  </a>
+                </div>
 
-                    <li className={`menu-item ${menuState["authencation"] ? "open" : ""}`}>
-                        <a href="javascript:void(0);" className="menu-link menu-toggle" onClick={() => toggleMenu("authencation")}>
-                            <i className="menu-icon tf-icons bx bx-lock-open-alt" />
-                            <div className="text-truncate" data-i18n="Authentications">Xác thực</div>
+                {/* parent pages*/}
+                <div className="nav-item-wrapper">
+                  <a
+                    className="nav-link dropdown-indicator label-1"
+                    href="#nv-authentication"
+                    role="button"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    aria-controls="nv-authentication"
+                  >
+                    <div className="d-flex align-items-center">
+                      <div className="dropdown-indicator-icon-wrapper">
+                        <span className="fas fa-caret-right dropdown-indicator-icon" />
+                      </div>
+                      <span className="nav-link-icon">
+                        <span data-feather="lock" />
+                      </span>
+                      <span className="nav-link-text">Authentication</span>
+                    </div>
+                  </a>
+                  <div className="parent-wrapper label-1">
+                    <ul
+                      className="nav collapse parent"
+                      data-bs-parent="#navbarVerticalCollapse"
+                      id="nv-authentication"
+                    >
+                      <li className="collapsed-nav-item-title d-none">
+                        Authentication
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link dropdown-indicator"
+                          href="#nv-simple"
+                          data-bs-toggle="collapse"
+                          aria-expanded="false"
+                          aria-controls="nv-simple"
+                        >
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
+                            </div>
+                            <span className="nav-link-text">Simple</span>
+                          </div>
                         </a>
-                        {menuState["authencation"] && (
-                            <ul className="menu-sub">
-                                <li className="menu-item">
-                                    <a href="javascript:void(0);" className="menu-link menu-toggle">
-                                        <div className="text-truncate" data-i18n="Login">Login</div>
-                                    </a>
-                                    <ul className="menu-sub">
-                                        <li className="menu-item">
-                                            <a href="auth-login-basic.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Basic">Basic</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-login-cover.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Cover">Cover</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="javascript:void(0);" className="menu-link menu-toggle">
-                                        <div className="text-truncate" data-i18n="Register">Register</div>
-                                    </a>
-                                    <ul className="menu-sub">
-                                        <li className="menu-item">
-                                            <a href="auth-register-basic.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Basic">Basic</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-register-cover.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Cover">Cover</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-register-multisteps.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Multi-steps">Multi-steps</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="javascript:void(0);" className="menu-link menu-toggle">
-                                        <div className="text-truncate" data-i18n="Verify Email">Verify Email</div>
-                                    </a>
-                                    <ul className="menu-sub">
-                                        <li className="menu-item">
-                                            <a href="auth-verify-email-basic.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Basic">Basic</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-verify-email-cover.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Cover">Cover</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="javascript:void(0);" className="menu-link menu-toggle">
-                                        <div className="text-truncate" data-i18n="Reset Password">Reset Password</div>
-                                    </a>
-                                    <ul className="menu-sub">
-                                        <li className="menu-item">
-                                            <a href="auth-reset-password-basic.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Basic">Basic</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-reset-password-cover.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Cover">Cover</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="javascript:void(0);" className="menu-link menu-toggle">
-                                        <div className="text-truncate" data-i18n="Forgot Password">Forgot Password</div>
-                                    </a>
-                                    <ul className="menu-sub">
-                                        <li className="menu-item">
-                                            <a href="auth-forgot-password-basic.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Basic">Basic</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-forgot-password-cover.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Cover">Cover</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="javascript:void(0);" className="menu-link menu-toggle">
-                                        <div className="text-truncate" data-i18n="Two Steps">Two Steps</div>
-                                    </a>
-                                    <ul className="menu-sub">
-                                        <li className="menu-item">
-                                            <a href="auth-two-steps-basic.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Basic">Basic</div>
-                                            </a>
-                                        </li>
-                                        <li className="menu-item">
-                                            <a href="auth-two-steps-cover.html" className="menu-link" target="_blank">
-                                                <div className="text-truncate" data-i18n="Cover">Cover</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
-                </ul>
-            </aside>
-            {/* / Menu */}
-        </>
-    )
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent"
+                            data-bs-parent="#authentication"
+                            id="nv-simple"
+                          >
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/sign-in.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">Sign in</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/sign-up.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">Sign up</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/sign-out.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Sign out
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/forgot-password.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Forgot password
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/reset-password.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Reset password
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/lock-screen.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Lock screen
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/simple/2FA.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">2FA</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link dropdown-indicator"
+                          href="#nv-split"
+                          data-bs-toggle="collapse"
+                          aria-expanded="false"
+                          aria-controls="nv-split"
+                        >
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
+                            </div>
+                            <span className="nav-link-text">Split</span>
+                          </div>
+                        </a>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent"
+                            data-bs-parent="#authentication"
+                            id="nv-split"
+                          >
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/sign-in.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">Sign in</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/sign-up.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">Sign up</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/sign-out.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Sign out
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/forgot-password.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Forgot password
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/reset-password.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Reset password
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/lock-screen.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Lock screen
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/split/2FA.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">2FA</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link dropdown-indicator"
+                          href="#nv-Card"
+                          data-bs-toggle="collapse"
+                          aria-expanded="false"
+                          aria-controls="nv-Card"
+                        >
+                          <div className="d-flex align-items-center">
+                            <div className="dropdown-indicator-icon-wrapper">
+                              <span className="fas fa-caret-right dropdown-indicator-icon" />
+                            </div>
+                            <span className="nav-link-text">Card</span>
+                          </div>
+                        </a>
+                        {/* more inner pages*/}
+                        <div className="parent-wrapper">
+                          <ul
+                            className="nav collapse parent"
+                            data-bs-parent="#authentication"
+                            id="nv-Card"
+                          >
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/sign-in.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">Sign in</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/sign-up.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">Sign up</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/sign-out.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Sign out
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/forgot-password.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Forgot password
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/reset-password.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Reset password
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/lock-screen.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">
+                                    Lock screen
+                                  </span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                            <li className="nav-item">
+                              <a
+                                className="nav-link"
+                                href="pages/authentication/card/2FA.html"
+                              >
+                                <div className="d-flex align-items-center">
+                                  <span className="nav-link-text">2FA</span>
+                                </div>
+                              </a>
+                              {/* more inner pages*/}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="navbar-vertical-footer">
+          <button className="btn navbar-vertical-toggle border-0 fw-semibold w-100 white-space-nowrap d-flex align-items-center">
+            <span className="uil uil-left-arrow-to-left fs-8" />
+            <span className="uil uil-arrow-from-right fs-8" />
+            <span className="navbar-vertical-footer-text ms-2">
+              Collapsed View
+            </span>
+          </button>
+        </div>
+      </nav>
+    </>
+  );
 };
-
-export default SliderBar;
+export default SlidebarAdmin;

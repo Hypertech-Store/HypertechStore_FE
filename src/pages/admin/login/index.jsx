@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import backgroundImage from '../../../assets/img/bg/30.png';
+import logo from "../../../assets/img/icons/logo1.png";
 import "react-toastify/dist/ReactToastify.css";
-import background from "../../../assets/img/illustrations/boy-with-rocket-light.png";
 
 const LoginPage = () => {
     document.title = "Hypertech Store - Đăng nhập hệ thống Admin";
@@ -12,6 +13,19 @@ const LoginPage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
+
+    // Kiểm tra nếu người dùng đã đăng nhập
+    useEffect(() => {
+        const adminId = sessionStorage.getItem("adminId");
+        if (adminId === null) {
+            // Nếu userId không tồn tại (chưa đăng nhập), không làm gì
+            console.log("User is not logged in.");
+        } else {
+            // Nếu userId tồn tại (đã đăng nhập), điều hướng đến trang admin
+            navigate("/admin");
+        }
+    }, [navigate]);
+    
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -25,25 +39,21 @@ const LoginPage = () => {
 
             const { quantrivien, message } = response.data;
 
-            // Kiểm tra vai trò người dùng
             if (quantrivien.role === 0 || quantrivien.role === 1) {
-                // Lưu thông tin vào sessionStorage
                 sessionStorage.setItem("customRole", quantrivien.role);
-                sessionStorage.setItem("userName", quantrivien.ten_dang_nhap);
-                sessionStorage.setItem("userAvatar", quantrivien.anh_nguoi_dung || "default-avatar.png");
+                sessionStorage.setItem("adminId", quantrivien.id);
+                sessionStorage.setItem("adminName", quantrivien.ten_dang_nhap);
+                sessionStorage.setItem("adminAvatar", quantrivien.anh_nguoi_dung || "default-avatar.png");
 
                 console.log(sessionStorage);
 
-                // Hiển thị thông báo thành công
                 toast.success(message, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
                 });
 
-                // Điều hướng sau khi toast hiển thị
                 setTimeout(() => {
-                    console.log("Navigating to /admin...");
                     navigate("/admin");
                 }, 2500);
             } else {
@@ -51,7 +61,6 @@ const LoginPage = () => {
             }
         } catch (error) {
             console.error("Error during login:", error);
-            // Hiển thị thông báo lỗi
             if (error.response && error.response.data) {
                 setErrorMessage(error.response.data.message || "Đăng nhập thất bại.");
             } else {
@@ -60,90 +69,84 @@ const LoginPage = () => {
         }
     };
 
-
-
-    // Toggle password visibility
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-
-
-
     return (
-        <div className="authentication-wrapper authentication-cover">
-            <ToastContainer />
-            <div className="authentication-inner row m-0">
-                {/* Left Text */}
-                <div className="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
-                    <div className="w-100 d-flex justify-content-center">
-                        <img
-                            src={background}
-                            className="img-fluid"
-                            alt="Login image"
-                            width={650}
-                            style={{ height: "86vh" }}
-                        />
-                    </div>
+        <main className="main" id="top">
+            <div className="row vh-100 g-0">
+                <div className="col-lg-6 position-relative d-none d-lg-block">
+                    <div className="bg-holder" style={{ backgroundImage: `url(${backgroundImage})` }} />
                 </div>
-                {/* /Left Text */}
-                {/* Login */}
-                <div className="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
-                    <div className="w-px-400 mx-auto mt-12 pt-5">
-                        <h4 className="mb-1">Chào mừng đến với hypertech! 👋</h4>
-                        <p className="mb-6">
-                            Vui lòng đăng nhập vào tài khoản của bạn và bắt đầu cuộc phiêu lưu
-                        </p>
-
-                        {/* Form login */}
-                        <form onSubmit={handleLogin} className="mb-6">
-                            <div className="mb-6">
-                                <label htmlFor="email" className="form-label">
-                                    Email
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Nhập email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    autoFocus
-                                />
+                <div className="col-lg-6">
+                    <div className="row flex-center h-100 g-0 px-4 px-sm-0">
+                        <div className="col col-sm-6 col-lg-7 col-xl-6">
+                            <a className="d-flex flex-center text-decoration-none mb-4" href="/">
+                                <img src={logo} alt="phoenix" width={58} />
+                            </a>
+                            <div className="text-center mb-7">
+                                <h3 className="text-body-highlight">Sign In</h3>
+                                <p className="text-body-tertiary">Get access to your account</p>
                             </div>
-                            <div className="mb-6 form-password-toggle">
-                                <label className="form-label" htmlFor="password">
-                                    Mật khẩu
-                                </label>
-                                <div className="input-group input-group-merge">
-                                    <input
-                                        type={passwordVisible ? 'text' : 'password'} // Conditionally change input type
-                                        id="password"
-                                        className="form-control"
-                                        name="password"
-                                        placeholder="Nhập mật khẩu"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                    <span
-                                        className="input-group-text cursor-pointer"
-                                        onClick={togglePasswordVisibility} // Toggle password visibility
-                                    >
-                                        <i className={passwordVisible ? 'bx bx-show' : 'bx bx-hide'} />
-                                    </span>
+                            <div className="position-relative">
+                                <hr className="bg-body-secondary mt-5 mb-4" />
+                                <div className="divider-content-center">or use email</div>
+                            </div>
+                            <form onSubmit={handleLogin}>
+                                <div className="mb-3 text-start">
+                                    <label className="form-label" htmlFor="email">Email address</label>
+                                    <div className="form-icon-container">
+                                        <input
+                                            className="form-control form-icon-input"
+                                            id="email"
+                                            type="email"
+                                            placeholder="name@example.com"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
+                                        <span className="fas fa-user text-body fs-9 form-icon" />
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="submit" className="btn btn-primary d-grid w-100">
-                                Đăng nhập
-                            </button>
-                        </form>
-
+                                <div className="mb-3 text-start">
+                                    <label className="form-label" htmlFor="password">Password</label>
+                                    <div className="form-icon-container">
+                                        <input
+                                            className="form-control form-icon-input pe-6"
+                                            id="password"
+                                            type={passwordVisible ? "text" : "password"}
+                                            placeholder="Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                        <span className="fas fa-key text-body fs-9 form-icon" />
+                                        <button
+                                            type="button"
+                                            className="btn px-3 py-0 h-100 position-absolute top-0 end-0 fs-7 text-body-tertiary"
+                                            onClick={togglePasswordVisibility}
+                                        >
+                                            <span className={passwordVisible ? "uil uil-eye-slash" : "uil uil-eye"} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="row flex-between-center mb-7">
+                                    <div className="col-auto">
+                                        <div className="form-check mb-0">
+                                            <input className="form-check-input" id="basic-checkbox" type="checkbox" />
+                                            <label className="form-check-label mb-0" htmlFor="basic-checkbox">Remember me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {errorMessage && <p className="text-danger">{errorMessage}</p>}
+                                <button type="submit" className="btn btn-primary w-100 mb-3">Sign In</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                {/* /Login */}
             </div>
-        </div>
+        </main>
     );
 };
 
